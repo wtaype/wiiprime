@@ -273,13 +273,13 @@
 .wiheader_left {
   display: flex;
   align-items: center;
-  gap: 3vw;
+  gap: 2vh;
 }
 
 .wilogo {
   display: flex;
   align-items: center;
-  gap: 0.5vw;
+  gap: 0.3vh;
   font-size: var(--fz_c6);
   font-weight: 700;
   color: var(--mco);
@@ -805,4 +805,8 @@ cursor:pointer;
 .bt_salir:hover{
 transform:translateY(-.2vh);
 transition:var(--tr_s);
+}
+
+a{
+  text-decoration: none;
 }

@@ -5,14 +5,14 @@ export let app = 'WiiPrime'
 export let lanzamiento = 2024;
 export let autor = '@wilder.taype';
 export let link = 'https://wtaype.github.io/';
-export let version = 'v9';
+export let version = 'v10';
 
 /** ACTUALIZACION TAG version dia hora   [START]  
-git add . ; git commit -m "Actualizacion Principal v9.10.39"
+git add . ; git commit -m "Actualizacion Principal v10.10.39"
 git push origin main 
 
-// Actualizar despues de main- 
-git tag v9 -m "Version v9" ; git push origin v9
+// Actualizar main luego esto, pero si es mucho, solo esto. 
+git tag v10 -m "Version v10" ; git push origin v10
 
  ACTUALIZACION TAG[END] */ 
 

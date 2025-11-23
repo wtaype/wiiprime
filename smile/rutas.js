@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { app } from './footer.js';
 import { Notificacion, wiPath, wiAnimate } from './widev.js';
 
 // =============================================
@@ -44,7 +45,7 @@ class WiRouter {
 
       // Actualizar título
       const pageName = normalizedPath.replace('/', '').replace(/^(\w)/, c => c.toUpperCase()) || 'Hora';
-      document.title = `${pageName} - Wihope`;
+      document.title = `${pageName} - ${app}`;
 
       // Inicializar módulo
       if (module.init) module.init();

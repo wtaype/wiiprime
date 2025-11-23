@@ -12,9 +12,12 @@ import './footer.js';
 
 // ✅ REGISTRAR RUTAS CON LAZY LOADING
 rutas.register('/hora', () => import('./pages/hora.js'));
-rutas.register('/calendario', () => import('./pages/calendario.js'));
-rutas.register('/calculadora', () => import('./pages/calculadora.js'));
-rutas.register('/cronometro', () => import('./pages/cronometro.js'));
+rutas.register('/asia', () => import('./pages/asia.js'));
+rutas.register('/europa', () => import('./pages/europa.js'));
+rutas.register('/america', () => import('./pages/america.js'));
+rutas.register('/oceania', () => import('./pages/oceania.js'));
+rutas.register('/africa', () => import('./pages/africa.js'));
+
 
 // =============================================
 // INICIALIZACIÓN INMEDIATA
@@ -27,4 +30,4 @@ console.log('🚀 Sistema SPA inicializado');
 console.log('📍 Rutas disponibles:', Object.keys(rutas.ruta));
 
 
-
+ 

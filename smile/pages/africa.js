@@ -1,24 +1,24 @@
 import $ from 'jquery';
 
 // =============================================
-// MÓDULO DE CALCULADORA
+// MÓDULO DE CRONÓMETRO
 // =============================================
 
 export const render = async () => {
   return `
-    <div class="wicalculator">
-      <div class="wicalculator_header">
-        <h2>Calculadora</h2>
-        <p class="wicalculator_subtitle">Calculadora próximamente disponible</p>
+    <div class="wistopwatch">
+      <div class="wistopwatch_header">
+        <h2>Cronómetro</h2>
+        <p class="wistopwatch_subtitle">Cronómetro próximamente disponible</p>
       </div>
       
-      <div class="wicalculator_placeholder">
-        <i class="fas fa-calculator" style="font-size: 8vw; color: var(--mco); opacity: 0.3;"></i>
+      <div class="wistopwatch_placeholder">
+        <i class="fas fa-stopwatch" style="font-size: 8vw; color: var(--mco); opacity: 0.3;"></i>
         <p style="font-size: var(--fz_c6); color: var(--tx); margin-top: 2vh;">
           Esta sección está en desarrollo
         </p>
         <p style="font-size: var(--fz_c2); color: var(--tx); opacity: 0.7; margin-top: 1vh;">
-          Pronto tendrás una calculadora científica completa
+          Pronto podrás usar un cronómetro con vueltas y temporizador
         </p>
       </div>
     </div>
@@ -26,7 +26,7 @@ export const render = async () => {
 };
 
 export const init = () => {
-  console.log('🔢 Módulo de Calculadora inicializado');
+  console.log('⏱️ Módulo de  inicializado');
 };
 
 export const cleanup = () => {

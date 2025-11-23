@@ -123,7 +123,7 @@ export const init = () => {
     savels('clockSize', size, 720);
   });
   
-  console.log('🕐 Módulo de Hora inicializado');
+  console.log('🕐 Módulo de  inicializado');
 };
 
 // Limpiar al salir del módulo

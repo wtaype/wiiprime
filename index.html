@@ -4,57 +4,47 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/smile.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wihope</title>
+  <title>WiiPrime</title>
   <link rel="stylesheet" href="./smile/main.css" />
+  <script type="module" src="./smile/main.js" defer></script> 
 </head>
 
 <body>
-  <!-- CONTAINER PRINCIPAL 100vh -->
   <div class="wicontainer">
-   
-    <!-- HEADER 6vh -->
     <header class="wiheader">
-      <!-- LADO IZQUIERDO: Logo + Navegación -->
       <div class="wiheader_left">
-        <div class="wilogo">
-          <i class="fas fa-clock"></i>
-          <span>wihope</span>
-        </div>
+
+        <a class="wilogo" href="/"> <i class="fas fa-clock"></i> WiiPrime</a>
+
         <nav class="winav">
           <a href="/" class="winav_item active" data-page="hora">
-            <i class="fas fa-clock"></i>
-            <span>Hora</span>
+            <i class="fas fa-globe"></i> <span>Principal</span>
           </a>
-          <a href="/calendario" class="winav_item" data-page="calendario">
-            <i class="fas fa-calendar-alt"></i>
-            <span>Calendario</span>
+          <a href="/asia" class="winav_item" data-page="asia">
+            <i class="fas fa-torii-gate"></i> <span>Asia</span>
           </a>
-          <a href="/calculadora" class="winav_item" data-page="calculadora">
-            <i class="fas fa-calculator"></i>
-            <span>Calculadora</span>
+          <a href="/europa" class="winav_item" data-page="europa">
+            <i class="fas fa-landmark"></i> <span>Europa</span>
           </a>
-          <a href="/cronometro" class="winav_item" data-page="cronometro">
-            <i class="fas fa-stopwatch"></i>
-            <span>Cronómetro</span>
+          <a href="/america" class="winav_item" data-page="america">
+            <i class="fas fa-flag-usa"></i> <span>América</span>
+          </a>
+          <a href="/oceania" class="winav_item" data-page="oceania">
+            <i class="fas fa-umbrella-beach"></i> <span>Oceania</span>
+          </a>
+          <a href="/africa" class="winav_item" data-page="africa">
+            <i class="fas fa-gopuram"></i> <span>África</span>
           </a>
         </nav>
-      </div>
 
-      <!-- LADO DERECHO: Temas + Auth -->
-      <div class="wiheader_right">
-        <div class="witemas"></div>
-        <div class="wiauth"></div>
-      </div>
+      </div><!-- LADO IZQUIERDO: Logo + Navegación -->
+      
+      <div class="wiheader_right"> <div class="witemas"></div> <div class="wiauth"></div> </div> <!-- LADO DERECHO: Temas + Auth -->
     </header>
 
     <!-- CONTENIDO PRINCIPAL DINÁMICO -->
-    <main class="wimain" id="wiMainContent">
-      <!-- El contenido se cargará dinámicamente aquí -->
-    </main>
-
+    <main class="wimain" id="wiMainContent"> <!-- El contenido se cargará dinámicamente aquí --></main>
   </div>
-
-  <script type="module" src="/smile/main.js"></script>
 </body>
 
 </html>
