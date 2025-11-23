@@ -9,6 +9,174 @@ export const wiTema = (() => {
  return {set};
 })();
 
+
+// BANDERAS 
+export function flagUrl(countryCode) {
+  if (!countryCode || countryCode.length !== 2) return null;
+  return `https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/${countryCode.toLowerCase()}.svg`;
+}
+
+export function hasFlag(countryCode) {
+  // Validación básica de códigos de país (2 letras)
+  return countryCode && 
+         countryCode.length === 2 && 
+         /^[A-Za-z]{2}$/.test(countryCode);
+}
+
+// ...existing code...
+
+// ==============================
+// 🌍 BASE DE DATOS DE CIUDADES POR CONTINENTE
+// ==============================
+export const wiCiudades = {
+  principales: [
+    { ciudad: 'Lima', pais: 'Perú', codigo: 'PE', zona: 'America/Lima', capital: true },
+    { ciudad: 'Nueva York', pais: 'Estados Unidos', codigo: 'US', zona: 'America/New_York', capital: false },
+    { ciudad: 'Tokio', pais: 'Japón', codigo: 'JP', zona: 'Asia/Tokyo', capital: true },
+    { ciudad: 'Londres', pais: 'Reino Unido', codigo: 'GB', zona: 'Europe/London', capital: true }
+  ],
+  
+  asia: [
+    { ciudad: 'Tokio', pais: 'Japón', codigo: 'JP', zona: 'Asia/Tokyo', capital: true },
+    { ciudad: 'Seúl', pais: 'Corea del Sur', codigo: 'KR', zona: 'Asia/Seoul', capital: true },
+    { ciudad: 'Pekín', pais: 'China', codigo: 'CN', zona: 'Asia/Shanghai', capital: true },
+    { ciudad: 'Bangkok', pais: 'Tailandia', codigo: 'TH', zona: 'Asia/Bangkok', capital: true },
+    { ciudad: 'Singapur', pais: 'Singapur', codigo: 'SG', zona: 'Asia/Singapore', capital: true },
+    { ciudad: 'Dubái', pais: 'Emiratos Árabes', codigo: 'AE', zona: 'Asia/Dubai', capital: false },
+    { ciudad: 'Mumbai', pais: 'India', codigo: 'IN', zona: 'Asia/Kolkata', capital: false },
+    { ciudad: 'Manila', pais: 'Filipinas', codigo: 'PH', zona: 'Asia/Manila', capital: true },
+    { ciudad: 'Yakarta', pais: 'Indonesia', codigo: 'ID', zona: 'Asia/Jakarta', capital: true }
+  ],
+  
+  europa: [
+    { ciudad: 'Londres', pais: 'Reino Unido', codigo: 'GB', zona: 'Europe/London', capital: true },
+    { ciudad: 'París', pais: 'Francia', codigo: 'FR', zona: 'Europe/Paris', capital: true },
+    { ciudad: 'Berlín', pais: 'Alemania', codigo: 'DE', zona: 'Europe/Berlin', capital: true },
+    { ciudad: 'Madrid', pais: 'España', codigo: 'ES', zona: 'Europe/Madrid', capital: true },
+    { ciudad: 'Roma', pais: 'Italia', codigo: 'IT', zona: 'Europe/Rome', capital: true },
+    { ciudad: 'Ámsterdam', pais: 'Países Bajos', codigo: 'NL', zona: 'Europe/Amsterdam', capital: true },
+    { ciudad: 'Estocolmo', pais: 'Suecia', codigo: 'SE', zona: 'Europe/Stockholm', capital: true },
+    { ciudad: 'Moscú', pais: 'Rusia', codigo: 'RU', zona: 'Europe/Moscow', capital: true },
+    { ciudad: 'Atenas', pais: 'Grecia', codigo: 'GR', zona: 'Europe/Athens', capital: true }
+  ],
+  
+  america: [
+    { ciudad: 'Nueva York', pais: 'Estados Unidos', codigo: 'US', zona: 'America/New_York', capital: false },
+    { ciudad: 'Los Ángeles', pais: 'Estados Unidos', codigo: 'US', zona: 'America/Los_Angeles', capital: false },
+    { ciudad: 'Ciudad de México', pais: 'México', codigo: 'MX', zona: 'America/Mexico_City', capital: true },
+    { ciudad: 'São Paulo', pais: 'Brasil', codigo: 'BR', zona: 'America/Sao_Paulo', capital: false },
+    { ciudad: 'Buenos Aires', pais: 'Argentina', codigo: 'AR', zona: 'America/Argentina/Buenos_Aires', capital: true },
+    { ciudad: 'Lima', pais: 'Perú', codigo: 'PE', zona: 'America/Lima', capital: true },
+    { ciudad: 'Bogotá', pais: 'Colombia', codigo: 'CO', zona: 'America/Bogota', capital: true },
+    { ciudad: 'Toronto', pais: 'Canadá', codigo: 'CA', zona: 'America/Toronto', capital: false },
+    { ciudad: 'Santiago', pais: 'Chile', codigo: 'CL', zona: 'America/Santiago', capital: true }
+  ],
+  
+  oceania: [
+    { ciudad: 'Sídney', pais: 'Australia', codigo: 'AU', zona: 'Australia/Sydney', capital: false },
+    { ciudad: 'Melbourne', pais: 'Australia', codigo: 'AU', zona: 'Australia/Melbourne', capital: false },
+    { ciudad: 'Auckland', pais: 'Nueva Zelanda', codigo: 'NZ', zona: 'Pacific/Auckland', capital: false },
+    { ciudad: 'Brisbane', pais: 'Australia', codigo: 'AU', zona: 'Australia/Brisbane', capital: false },
+    { ciudad: 'Perth', pais: 'Australia', codigo: 'AU', zona: 'Australia/Perth', capital: false },
+    { ciudad: 'Wellington', pais: 'Nueva Zelanda', codigo: 'NZ', zona: 'Pacific/Auckland', capital: true },
+    { ciudad: 'Canberra', pais: 'Australia', codigo: 'AU', zona: 'Australia/Sydney', capital: true },
+    { ciudad: 'Suva', pais: 'Fiyi', codigo: 'FJ', zona: 'Pacific/Fiji', capital: true },
+    { ciudad: 'Port Moresby', pais: 'Papúa Nueva Guinea', codigo: 'PG', zona: 'Pacific/Port_Moresby', capital: true }
+  ],
+  
+  africa: [
+    { ciudad: 'El Cairo', pais: 'Egipto', codigo: 'EG', zona: 'Africa/Cairo', capital: true },
+    { ciudad: 'Lagos', pais: 'Nigeria', codigo: 'NG', zona: 'Africa/Lagos', capital: false },
+    { ciudad: 'Ciudad del Cabo', pais: 'Sudáfrica', codigo: 'ZA', zona: 'Africa/Johannesburg', capital: false },
+    { ciudad: 'Nairobi', pais: 'Kenia', codigo: 'KE', zona: 'Africa/Nairobi', capital: true },
+    { ciudad: 'Casablanca', pais: 'Marruecos', codigo: 'MA', zona: 'Africa/Casablanca', capital: false },
+    { ciudad: 'Johannesburgo', pais: 'Sudáfrica', codigo: 'ZA', zona: 'Africa/Johannesburg', capital: false },
+    { ciudad: 'Argel', pais: 'Argelia', codigo: 'DZ', zona: 'Africa/Algiers', capital: true },
+    { ciudad: 'Adís Abeba', pais: 'Etiopía', codigo: 'ET', zona: 'Africa/Addis_Ababa', capital: true },
+    { ciudad: 'Dakar', pais: 'Senegal', codigo: 'SN', zona: 'Africa/Dakar', capital: true }
+  ]
+};
+
+// ==============================
+// 🕐 OBTENER HORA DE CIUDAD VÍA API
+// ==============================
+export const wiHoraCiudad = (zona) => {
+  try {
+    const ahora = new Date();
+    
+    // Formatear hora según zona horaria
+    const formatter = new Intl.DateTimeFormat('es-ES', {
+      timeZone: zona,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    });
+    
+    const fechaFormatter = new Intl.DateTimeFormat('es-ES', {
+      timeZone: zona,
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+    
+    // Obtener GMT offset
+    const gmtFormatter = new Intl.DateTimeFormat('es-ES', {
+      timeZone: zona,
+      timeZoneName: 'shortOffset'
+    });
+    const gmtParts = gmtFormatter.formatToParts(ahora);
+    const gmtOffset = gmtParts.find(p => p.type === 'timeZoneName')?.value || 'GMT+00:00';
+    
+    // Calcular semana del año
+    const inicioAño = new Date(ahora.getFullYear(), 0, 1);
+    const diferenciaDias = Math.floor((ahora - inicioAño) / (24 * 60 * 60 * 1000));
+    const semana = Math.ceil((diferenciaDias + inicioAño.getDay() + 1) / 7);
+    
+    // Calcular estación usando Tiempo()
+    const estacion = Tiempo(ahora).estacion;
+    
+    return {
+      hora: formatter.format(ahora),
+      fecha: fechaFormatter.format(ahora),
+      gmt: gmtOffset,
+      semana,
+      diaSemana: ahora.getDay(),
+      diaAño: diferenciaDias,
+      estacion,
+      timestamp: Math.floor(ahora.getTime() / 1000),
+      dst: false // Simplificado
+    };
+  } catch (error) {
+    console.error('Error al calcular hora:', error);
+    return null;
+  }
+};
+
+// ==============================
+// 🔍 BUSCADOR DE CIUDADES
+// ==============================
+export const wiBuscarCiudad = (termino, continente = null) => {
+  const buscar = termino.toLowerCase().trim();
+  const fuente = continente ? wiCiudades[continente] : Object.values(wiCiudades).flat();
+  
+  return fuente.filter(c => 
+    c.ciudad.toLowerCase().includes(buscar) || 
+    c.pais.toLowerCase().includes(buscar)
+  );
+};
+
+// ==============================
+// ☀️ DETECTAR DÍA/NOCHE SEGÚN HORA
+// ==============================
+export const wiEsDia = (hora) => {
+  const h = typeof hora === 'string' ? parseInt(hora.split(':')[0]) : hora;
+  return h >= 6 && h < 19;
+};
+
+// ...existing code...
+
 // ==============================
 // 🔥 FECHA CON HORA ACTUAL PARA FIRESTORE
 // ==============================
