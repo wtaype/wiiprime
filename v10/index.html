@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/wiiprime/v10/smile.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wihope</title>
+  <script type="module" crossorigin src="/wiiprime/v10/assets/main-CBy4Jd8h.js"></script>
+  <link rel="modulepreload" crossorigin href="/wiiprime/v10/assets/vendor-B2AETYxa.js">
+  <link rel="modulepreload" crossorigin href="/wiiprime/v10/assets/firebase-oQ0U6Yya.js">
+  <link rel="stylesheet" crossorigin href="/wiiprime/v10/assets/main-BA5DXHdA.css">
+</head>
+
+<body>
+  <!-- CONTAINER PRINCIPAL 100vh -->
+  <div class="wicontainer">
+   
+    <!-- HEADER 6vh -->
+    <header class="wiheader">
+      <!-- LADO IZQUIERDO: Logo + Navegación -->
+      <div class="wiheader_left">
+        <div class="wilogo">
+          <i class="fas fa-clock"></i>
+          <span>wihope</span>
+        </div>
+        <nav class="winav">
+          <a href="/" class="winav_item active" data-page="hora">
+            <i class="fas fa-clock"></i>
+            <span>Hora</span>
+          </a>
+          <a href="/calendario" class="winav_item" data-page="calendario">
+            <i class="fas fa-calendar-alt"></i>
+            <span>Calendario</span>
+          </a>
+          <a href="/calculadora" class="winav_item" data-page="calculadora">
+            <i class="fas fa-calculator"></i>
+            <span>Calculadora</span>
+          </a>
+          <a href="/cronometro" class="winav_item" data-page="cronometro">
+            <i class="fas fa-stopwatch"></i>
+            <span>Cronómetro</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- LADO DERECHO: Temas + Auth -->
+      <div class="wiheader_right">
+        <div class="witemas"></div>
+        <div class="wiauth"></div>
+      </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL DINÁMICO -->
+    <main class="wimain" id="wiMainContent">
+      <!-- El contenido se cargará dinámicamente aquí -->
+    </main>
+
+  </div>
+
+</body>
+
+</html>
