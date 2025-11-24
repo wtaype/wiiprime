@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { wiCiudades, wiHoraCiudad, flagUrl, wiEsDia, savels, getls, Saludar } from '../widev.js';
+import { wiCiudades, infoCiudad, wiFlag, esNoche, savels, getls, Saludar } from '../widev.js';
 
 let clockIntervals = [];
 let clockFormat = getls('wiClockFormat') || '24'; // ✅ Default 24h
@@ -44,7 +44,7 @@ const convertirA12h = (hora24) => {
 
 const actualizarReloj = (ciudad, $card) => {
   try {
-    const data = wiHoraCiudad(ciudad.zona);
+    const data = infoCiudad(ciudad.zona);
     if (!data) return;
     
     // 🚀 Guardar hora de Lima como referencia
@@ -58,7 +58,7 @@ const actualizarReloj = (ciudad, $card) => {
     // ✅ Mostrar hora según formato seleccionado
     const hora = clockFormat === '12' ? convertirA12h(data.hora) : data.hora;
     
-    const esDia = wiEsDia(data.hora);
+    const esDia = esNoche(data.hora);
     const diferencia = ciudad.ciudad !== 'Lima' ? calcularDiferenciaHoraria(data.hora) : '';
     
     $card.find('.wihora_time').text(hora);
@@ -76,7 +76,7 @@ export const render = async () => {
   const ciudades = wiCiudades.principales;
   
   // 🦍 Obtener saludo inicial con "Gorila"
-  const limaData = wiHoraCiudad('America/Lima');
+  const limaData = infoCiudad('America/Lima');
   const saludoInicial = limaData ? Saludar(limaData.hora) : '¡Hola!';
   
   return `
@@ -97,7 +97,7 @@ export const render = async () => {
         ${ciudades.map(c => `
           <div class="wihora_card" data-zona="${c.zona}">
             <div class="wihora_card_header">
-              <img src="${flagUrl(c.codigo)}" alt="${c.pais}" class="wihora_flag" />
+              <img src="${wiFlag(c.codigo)}" alt="${c.pais}" class="wihora_flag" />
               <div class="wihora_location">
                 <h3 class="wihora_ciudad">${c.ciudad}</h3>
                 <p class="wihora_pais">${c.pais}</p>

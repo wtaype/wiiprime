@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { wiCiudades, wiHoraCiudad, flagUrl, wiEsDia, wiBuscarCiudad, getls, savels } from '../widev.js';
+import { wiCiudades, infoCiudad, wiFlag, esNoche, buscarCiudad, getls, savels } from '../widev.js';
 
 let clockIntervals = [];
 let clockFormat = getls('wiClockFormat') || '24';
@@ -46,7 +46,7 @@ const calcularDiferenciaHoraria = (horaActual) => {
 
 const actualizarReloj = (ciudad, $card) => {
   try {
-    const data = wiHoraCiudad(ciudad.zona);
+    const data = infoCiudad(ciudad.zona);
     if (!data) return;
     
     // Actualizar hora de Lima como referencia
@@ -55,7 +55,7 @@ const actualizarReloj = (ciudad, $card) => {
     }
     
     const hora = clockFormat === '12' ? convertirA12h(data.hora) : data.hora;
-    const esDia = wiEsDia(data.hora);
+    const esDia = esNoche(data.hora);
     const diferencia = calcularDiferenciaHoraria(data.hora);
     const estado = esDia ? 'Día' : 'Noche';
     
@@ -72,7 +72,7 @@ const actualizarReloj = (ciudad, $card) => {
 
 // 🚀 Obtener hora de Lima al inicio
 const inicializarLimaHora = () => {
-  const limaData = wiHoraCiudad('America/Lima');
+  const limaData = infoCiudad('America/Lima');
   if (limaData) limaHora = limaData.hora;
 };
 
@@ -91,7 +91,7 @@ const renderCiudades = () => {
   return ciudadesPagina.map(c => `
     <div class="wicont_card" data-zona="${c.zona}">
       <div class="wicont_card_header">
-        <img src="${flagUrl(c.codigo)}" alt="${c.pais}" class="wicont_flag" />
+        <img src="${wiFlag(c.codigo)}" alt="${c.pais}" class="wicont_flag" />
         <div class="wicont_location">
           <h3 class="wicont_ciudad">${c.ciudad}</h3>
           <p class="wicont_pais">${c.pais}</p>
@@ -213,7 +213,7 @@ export const init = () => {
   // 🔍 Búsqueda
   $('#searchAsia').on('input', function() {
     const termino = $(this).val().trim();
-    ciudadesFiltradas = termino ? wiBuscarCiudad(termino, 'asia') : [...wiCiudades.asia];
+    ciudadesFiltradas = termino ? buscarCiudad(termino, 'asia') : [...wiCiudades.asia];
     paginaActual = 1;
     
     clockIntervals.forEach(clearInterval);

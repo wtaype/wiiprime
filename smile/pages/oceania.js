@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { wiCiudades, wiHoraCiudad, flagUrl, wiEsDia, wiBuscarCiudad, getls, savels } from '../widev.js';
+import { wiCiudades, infoCiudad, wiFlag, esNoche, buscarCiudad, getls, savels } from '../widev.js';
 
 let clockIntervals = [];
 let clockFormat = getls('wiClockFormat') || '24';
@@ -38,11 +38,11 @@ const calcularDiferenciaHoraria = (horaActual) => {
 
 const actualizarReloj = (ciudad, $card) => {
   try {
-    const data = wiHoraCiudad(ciudad.zona);
+    const data = infoCiudad(ciudad.zona);
     if (!data) return;
     if (ciudad.ciudad === 'Lima') limaHora = data.hora;
     const hora = clockFormat === '12' ? convertirA12h(data.hora) : data.hora;
-    const esDia = wiEsDia(data.hora);
+    const esDia = esNoche(data.hora);
     const diferencia = calcularDiferenciaHoraria(data.hora);
     const estado = esDia ? 'Día' : 'Noche';
     $card.find('.wicont_time').text(hora);
@@ -57,7 +57,7 @@ const actualizarReloj = (ciudad, $card) => {
 };
 
 const inicializarLimaHora = () => {
-  const limaData = wiHoraCiudad('America/Lima');
+  const limaData = infoCiudad('America/Lima');
   if (limaData) limaHora = limaData.hora;
 };
 
@@ -69,7 +69,7 @@ const renderCiudades = () => {
   return ciudadesPagina.map(c => `
     <div class="wicont_card" data-zona="${c.zona}">
       <div class="wicont_card_header">
-        <img src="${flagUrl(c.codigo)}" alt="${c.pais}" class="wicont_flag" />
+        <img src="${wiFlag(c.codigo)}" alt="${c.pais}" class="wicont_flag" />
         <div class="wicont_location">
           <h3 class="wicont_ciudad">${c.ciudad}</h3>
           <p class="wicont_pais">${c.pais}</p>
@@ -121,7 +121,7 @@ export const init = () => {
   iniciarRelojes();
   $('#searchOceania').on('input', function() {
     const termino = $(this).val().trim();
-    ciudadesFiltradas = termino ? wiBuscarCiudad(termino, 'oceania') : [...wiCiudades.oceania];
+    ciudadesFiltradas = termino ? buscarCiudad(termino, 'oceania') : [...wiCiudades.oceania];
     paginaActual = 1;
     clockIntervals.forEach(clearInterval);
     clockIntervals = [];

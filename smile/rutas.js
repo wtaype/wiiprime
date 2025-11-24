@@ -1,17 +1,15 @@
 import $ from 'jquery';
-import { app } from './footer.js';
-import { Notificacion, wiPath, wiAnimate } from './widev.js';
+import { Notificacion, wiPath, wiAnimate} from './widev.js';
 
-// =============================================
-// SISTEMA DE ROUTING SPA - ULTRA OPTIMIZADO
-// =============================================
-
+let app = 'WiiPrime';
 class WiRouter {
   constructor() {
     this.ruta = {};
+    this.defaultRoute = '/hora';
     this.currentRoute = null;
     this.contentContainer = '#wiMainContent';
     this.isNavigating = false;
+    this.prefetchCache = new Set();
   }
 
   register(path, module) {
@@ -22,11 +20,12 @@ class WiRouter {
     if (this.isNavigating) return;
     this.isNavigating = true;
 
-    // Usar wiPath.clean para normalizar
-    const normalizedPath = wiPath.clean(path);
+    let normalizedPath = wiPath.clean(path);
+    if (normalizedPath === '/') normalizedPath = this.defaultRoute;
 
-    if (!this.ruta[normalizedPath]) {
-      console.warn(`Ruta no encontrada: ${normalizedPath}`);
+    const moduleLoader = this.ruta[normalizedPath];
+    if (!moduleLoader) {
+      console.warn(`❌ Ruta no encontrada: ${normalizedPath}`);
       Notificacion('Página no encontrada', 'error', 2000);
       this.isNavigating = false;
       return;
@@ -35,33 +34,26 @@ class WiRouter {
     try {
       this.updateActiveNav(normalizedPath);
 
-      // Cargar módulo
-      const moduleLoader = this.ruta[normalizedPath];
+      // ✅ Cargar módulo (lazy o ya cargado)
       const module = typeof moduleLoader === 'function' ? await moduleLoader() : moduleLoader;
+      
       const content = await module.render();
-
-      // Usar wiAnimate.fade para transición
       await wiAnimate.fade(this.contentContainer, content);
 
-      // Actualizar título
       const pageName = normalizedPath.replace('/', '').replace(/^(\w)/, c => c.toUpperCase()) || 'Hora';
       document.title = `${pageName} - ${app}`;
 
-      // Inicializar módulo
       if (module.init) module.init();
 
-      // Actualizar URL usando wiPath.update
       if (addToHistory) {
-        wiPath.update(normalizedPath);
+        const urlPath = normalizedPath === this.defaultRoute ? '/' : normalizedPath;
+        wiPath.update(urlPath, document.title);
       }
 
       this.currentRoute = normalizedPath;
-    } catch (error) {
-      console.error('Error al navegar:', error);
-      Notificacion('Error al cargar la página', 'error', 2000);
-    } finally {
-      this.isNavigating = false;
-    }
+      console.log(`✅ ${normalizedPath}`);
+    } catch (error) {console.error('❌ Error:', error); Notificacion('Error al cargar la página', 'error', 2000); } 
+    finally {this.isNavigating = false;}
   }
 
   updateActiveNav(path) {
@@ -71,46 +63,36 @@ class WiRouter {
   }
 
   async prefetch(path) {
-    const normalizedPath = wiPath.clean(path);
+    let normalizedPath = wiPath.clean(path);
+    if (normalizedPath === '/') normalizedPath = this.defaultRoute;
     
-    if (!this.ruta[normalizedPath] || typeof this.ruta[normalizedPath] !== 'function') {
-      return;
-    }
+    if (this.prefetchCache.has(normalizedPath) || typeof this.ruta[normalizedPath] !== 'function') return;
 
-    console.log(`⚡ Prefetching: ${normalizedPath}`);
+    console.log(`⚡ ${normalizedPath}`);
     try {
       const module = await this.ruta[normalizedPath]();
       this.ruta[normalizedPath] = module;
-    } catch (e) {
-      console.warn(`Error prefetching ${normalizedPath}`, e);
-    }
+      this.prefetchCache.add(normalizedPath);
+    } catch (e) {console.warn(`❌ Prefetch error: ${normalizedPath}`); }
   }
 
   init() {
-    // Clicks en navegación
     $(document).on('click', '.winav_item', (e) => {
       e.preventDefault();
       const page = $(e.currentTarget).data('page');
-      const path = page === 'hora' ? '/' : `/${page}`;
-      this.navigate(path);
+      this.navigate(page === 'hora' ? '/' : `/${page}`);
     });
 
-    // Prefetch al pasar el mouse
     $(document).on('mouseenter', '.winav_item', (e) => {
       const page = $(e.currentTarget).data('page');
-      const path = page === 'hora' ? '/' : `/${page}`;
-      this.prefetch(path);
+      this.prefetch(page === 'hora' ? '/' : `/${page}`);
     });
 
-    // Botón atrás/adelante
     window.addEventListener('popstate', (e) => {
-      const path = e.state?.path || wiPath.clean(window.location.pathname);
-      this.navigate(path, false);
+      this.navigate(e.state?.path || wiPath.current, false);
     });
 
-    // Cargar ruta inicial
-    const initialPath = wiPath.clean(window.location.pathname);
-    this.navigate(initialPath, false);
+    this.navigate(wiPath.current, false);
   }
 }
 
