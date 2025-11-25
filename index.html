@@ -4,16 +4,14 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/wiiprime/smile.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WiiPrime</title> 
+  <title>WiiPrime</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500&family=Rubik:wght@300..900&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="/wiiprime/assets/main-C8Fl1__e.js"></script>
+  <script type="module" crossorigin src="/wiiprime/assets/main-Dg70dbQ7.js"></script>
   <link rel="modulepreload" crossorigin href="/wiiprime/assets/vendor-B2AETYxa.js">
-  <link rel="modulepreload" crossorigin href="/wiiprime/assets/firebase-oQ0U6Yya.js">
-  <link rel="stylesheet" crossorigin href="/wiiprime/assets/main-BbDdTfcI.css">
+  <link rel="stylesheet" crossorigin href="/wiiprime/assets/main-H8j9288o.css">
 </head>
-
 <body>
   <div class="wicontainer">
     <header class="wiheader">
@@ -50,12 +48,23 @@
 
       </div><!-- LADO IZQUIERDO: Logo + Navegación -->
       
-      <div class="wiheader_right"> <div class="witemas"></div> <div class="wiauth"></div> </div> <!-- LADO DERECHO: Temas + Auth -->
+      <div class="wiheader_right"> 
+        <div id="wiTema">
+          <div class="tema mtha" data-ths="Cielo|#0EBEFF"></div>
+          <div class="tema" data-ths="Dulce|#FF5C69"></div>
+          <div class="tema" data-ths="Paz|#29C72E"></div>
+          <div class="tema" data-ths="Mora|#7000FF"></div>
+          <div class="tema" data-ths="Futuro|#21273B"></div>
+        </div>
+        <div class="wiauth"></div> 
+      </div> <!-- LADO DERECHO: Temas + Auth -->
     </header>
 
     <!-- CONTENIDO PRINCIPAL DINÁMICO -->
     <main class="wimain" id="wiMainContent"> <!-- El contenido se cargará dinámicamente aquí --></main>
   </div>
 </body>
-
+<script>
+(()=>{const d=document,h=d.documentElement,w=d.querySelector('#wiTema');if(!w)return;const ts=[...w.querySelectorAll('.tema')],m=d.querySelector('meta[name="theme-color"]')||d.head.appendChild(Object.assign(d.createElement('meta'),{name:'theme-color'})),st=t=>{const[n,c]=t.dataset.ths.split('|');h.dataset.theme=n;m.content=c;localStorage.wiTema=t.dataset.ths;ts.forEach(x=>x.classList.toggle('mtha',x===t))};w.addEventListener('click',e=>e.target.matches('.tema')&&st(e.target),{passive:!0});const i=w.querySelector(`[data-ths="${localStorage.wiTema}"]`)||ts[0];i&&st(i)})();
+</script> 
 </html>
