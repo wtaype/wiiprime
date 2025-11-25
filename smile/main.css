@@ -39,6 +39,11 @@
   --error: #ff3849;
   --warning: #ffa726;
   --info: #00a8e6; 
+  --Cielo:#0EBEFF;
+  --Dulce:#FF5C69;
+  --Paz:#29C72E;
+  --Mora:#7000FF;
+  --Futuro:#21273B;
 }
 
 /* =============================================
@@ -254,7 +259,7 @@
 }
 
 /* === SELECTOR DE TEMAS === */
-.witemas {
+#wiTema {
   display: flex;
   gap: 0.2vh;
   padding: 0.5vh 0.8vw;
@@ -303,7 +308,7 @@
   font-size: var(--fz_m3);
 }
 
-.witemas:hover, .wibtn_auth:hover {
+#wiTema:hover, .wibtn_auth:hover {
   transform: translateY(-0.2vh);
   transition: var(--tr_m);
 }
@@ -314,6 +319,12 @@
   border-color: var(--mco);
   box-shadow: 0 0.4vh 1vh rgba(0,0,0,0.15);  
 }
+/* === TEMAS - COLORES DE FONDO === */
+.tema[data-ths^="Cielo"] { background: var(--Cielo); }
+.tema[data-ths^="Dulce"] { background: var(--Dulce); }
+.tema[data-ths^="Paz"] { background: var(--Paz); }
+.tema[data-ths^="Mora"] { background: var(--Mora); }
+.tema[data-ths^="Futuro"] { background: var(--Futuro); }
 
 /* =============================================
    MAIN - CONTENIDO PRINCIPAL

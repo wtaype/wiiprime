@@ -1,14 +1,4 @@
 import $ from 'jquery'; 
-import { collection, query, where, getDocs, setDoc, doc, serverTimestamp } from 'firebase/firestore';
-
-// PRINCIPALES TEMAS V10.1
-export const wiTema=(()=>{
-const tms=[['Cielo','#0EBEFF'],['Dulce','#FF5C69'],['Paz','#29C72E'],['Mora','#7000FF'],['Futuro','#21273B']],
-set=e=>{const[n,c]=$(e).data('tema').split('|');$('html').attr('data-theme',n);($('meta[name="theme-color"]')[0]||$('<meta name="theme-color">').appendTo('head')[0]).content=c;savels('wiTema',`${n}|${c}`,720);$('.mtha').removeClass('mtha');$(e).addClass('mtha')},
-ini=()=>{$('.witemas').html(tms.map(([n,c])=>`<div class="tema" data-tema="${n}|${c}" style="background:${c}"></div>`).join(''));const s=getls('wiTema'),e=$(`[data-tema="${s}"]`)[0]||$('.tema').first()[0];e&&set(e);$(document).off('click.witema').on('click.witema','.tema',x=>set(x.currentTarget))};
-$('.witemas').length?ini():new MutationObserver(m=>m.some(({addedNodes:n})=>[...n].some(e=>e.querySelector?.('.witemas')))&&(ini(),!0)).observe(document.body,{childList:1,subtree:1});
-return{set}
-})();
 
 // BANDERAS V10.1
 export const wiFlag=(cod)=>{
@@ -26,8 +16,7 @@ export const wiCiudades = {
     { ciudad: 'Nueva York', pais: 'Estados Unidos', codigo: 'US', zona: 'America/New_York', capital: false },
     { ciudad: 'Tokio', pais: 'Japón', codigo: 'JP', zona: 'Asia/Tokyo', capital: true },
     { ciudad: 'Londres', pais: 'Reino Unido', codigo: 'GB', zona: 'Europe/London', capital: true }
-  ],
-  
+  ],  
   asia: [
     { ciudad: 'Tokio', pais: 'Japón', codigo: 'JP', zona: 'Asia/Tokyo', capital: true },
     { ciudad: 'Seúl', pais: 'Corea del Sur', codigo: 'KR', zona: 'Asia/Seoul', capital: true },
@@ -44,8 +33,7 @@ export const wiCiudades = {
     { ciudad: 'Tel Aviv', pais: 'Israel', codigo: 'IL', zona: 'Asia/Jerusalem', capital: false },
     { ciudad: 'Hanói', pais: 'Vietnam', codigo: 'VN', zona: 'Asia/Ho_Chi_Minh', capital: true },
     { ciudad: 'Estambul', pais: 'Turquía', codigo: 'TR', zona: 'Europe/Istanbul', capital: false }
-  ],
-  
+  ],  
   europa: [
     { ciudad: 'Londres', pais: 'Reino Unido', codigo: 'GB', zona: 'Europe/London', capital: true },
     { ciudad: 'París', pais: 'Francia', codigo: 'FR', zona: 'Europe/Paris', capital: true },
@@ -62,8 +50,7 @@ export const wiCiudades = {
     { ciudad: 'Copenhague', pais: 'Dinamarca', codigo: 'DK', zona: 'Europe/Copenhagen', capital: true },
     { ciudad: 'Dublín', pais: 'Irlanda', codigo: 'IE', zona: 'Europe/Dublin', capital: true },
     { ciudad: 'Bruselas', pais: 'Bélgica', codigo: 'BE', zona: 'Europe/Brussels', capital: true }
-  ],
-  
+  ],  
   america: [
     { ciudad: 'Nueva York', pais: 'Estados Unidos', codigo: 'US', zona: 'America/New_York', capital: false },
     { ciudad: 'Los Ángeles', pais: 'Estados Unidos', codigo: 'US', zona: 'America/Los_Angeles', capital: false },
@@ -80,8 +67,7 @@ export const wiCiudades = {
     { ciudad: 'Caracas', pais: 'Venezuela', codigo: 'VE', zona: 'America/Caracas', capital: true },
     { ciudad: 'Quito', pais: 'Ecuador', codigo: 'EC', zona: 'America/Guayaquil', capital: true },
     { ciudad: 'La Paz', pais: 'Bolivia', codigo: 'BO', zona: 'America/La_Paz', capital: true }
-  ],
-  
+  ],  
   oceania: [
     { ciudad: 'Sídney', pais: 'Australia', codigo: 'AU', zona: 'Australia/Sydney', capital: false },
     { ciudad: 'Melbourne', pais: 'Australia', codigo: 'AU', zona: 'Australia/Melbourne', capital: false },
@@ -99,7 +85,6 @@ export const wiCiudades = {
     { ciudad: 'Nouméa', pais: 'Nueva Caledonia', codigo: 'NC', zona: 'Pacific/Noumea', capital: true },
     { ciudad: 'Papeete', pais: 'Polinesia Francesa', codigo: 'PF', zona: 'Pacific/Tahiti', capital: true }
   ],
-  
   africa: [
     { ciudad: 'El Cairo', pais: 'Egipto', codigo: 'EG', zona: 'Africa/Cairo', capital: true },
     { ciudad: 'Lagos', pais: 'Nigeria', codigo: 'NG', zona: 'Africa/Lagos', capital: false },
@@ -126,18 +111,15 @@ export const infoCiudad = (zona) => {
     const fmtHora = new Intl.DateTimeFormat('es-ES', { timeZone: zona, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
     const fmtFecha = new Intl.DateTimeFormat('es-ES', { timeZone: zona, weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     const fmtGmt = new Intl.DateTimeFormat('es-ES', { timeZone: zona, timeZoneName: 'shortOffset' });
-    const gmtOffset = fmtGmt.formatToParts(ahora).find(p => p.type === 'timeZoneName')?.value || 'GMT+00:00';
-    
+    const gmtOffset = fmtGmt.formatToParts(ahora).find(p => p.type === 'timeZoneName')?.value || 'GMT+00:00';    
     // Detectar hemisferio por zona horaria
     const zonasSur = ['America/Lima','America/Santiago','America/Argentina/Buenos_Aires','America/Montevideo','America/Sao_Paulo','America/La_Paz','America/Asuncion','America/Guayaquil','America/Caracas','Australia/Sydney','Australia/Melbourne','Australia/Brisbane','Australia/Perth','Australia/Adelaide','Australia/Hobart','Pacific/Auckland','Africa/Johannesburg','Africa/Cairo'];
-    const esSur = zonasSur.some(z => zona.includes(z.split('/')[1]));
-    
+    const esSur = zonasSur.some(z => zona.includes(z.split('/')[1]));    
     // Calcular estación por hemisferio
     const mes = ahora.getMonth();
     const estacionesNorte = ['Invierno','Invierno','Primavera','Primavera','Primavera','Verano','Verano','Verano','Otoño','Otoño','Otoño','Invierno'];
     const estacionesSur = ['Verano','Verano','Otoño','Otoño','Otoño','Invierno','Invierno','Invierno','Primavera','Primavera','Primavera','Verano'];
-    const estacion = esSur ? estacionesSur[mes] : estacionesNorte[mes];
-    
+    const estacion = esSur ? estacionesSur[mes] : estacionesNorte[mes];    
     // Detectar cambio horario (DST) comparando enero vs julio
     const enero = new Date(ahora.getFullYear(), 0, 1);
     const julio = new Date(ahora.getFullYear(), 6, 1);
@@ -246,11 +228,9 @@ export function wiTip(elm, txt, tipo = 'top', tiempo = 1800) {
   const {left, top, width} = $elm[0].getBoundingClientRect();
   const tipW = $tip.outerWidth(), tipH = $tip.outerHeight();
   let x = left + width/2 - tipW/2, y = top - tipH - 8;
-  x = Math.max(8, Math.min(x, innerWidth - tipW - 8));
-  
+  x = Math.max(8, Math.min(x, innerWidth - tipW - 8));  
   $tip.css({left: x, top: y});
   setTimeout(() => {$tip.addClass('show'); if (tiempo > 0) setTimeout(() => $tip.removeClass('show').delay(200).queue(() => $tip.remove()), tiempo);}, 10);
-  
   return $elm;
 }
 
@@ -258,11 +238,9 @@ export function wiTip(elm, txt, tipo = 'top', tiempo = 1800) {
 export const wiIp = (geo) => {
   const cch = getls('wiIp');
   if (cch) return typeof geo === 'function' ? geo(cch) : geo === 'ciudad' ? `${cch.city}, ${cch.country}` : cch[geo];
-  
   return $.getJSON('https://ipinfo.io/json?token=3868948e170a74', data => {
     const ua = navigator.userAgent;
     const [lat, lng] = (data.loc || '0,0').split(',').map(Number);
-    
     const ipData = {
       ip: data.ip, city: data.city, region: data.region, country: data.country, postal: data.postal, lat, lng,
       browser: /Edg/i.test(ua) ? 'Edge' : /Chrome/i.test(ua) ? 'Chrome' : /Firefox/i.test(ua) ? 'Firefox' : /Safari/i.test(ua) && !/Chrome/i.test(ua) ? 'Safari' : /Opera|OPR/i.test(ua) ? 'Opera' : 'Otro',
@@ -273,84 +251,39 @@ export const wiIp = (geo) => {
       time: new Date().toLocaleString('es-ES'), utcOffset: new Date().getTimezoneOffset() / -60,
       online: navigator.onLine
     };
-    
     savels('wiIp', ipData, 24);
     return typeof geo === 'function' ? geo(ipData) : geo === 'ciudad' ? `${ipData.city}, ${ipData.country}` : ipData[geo];
   }).fail(() => cch?.[geo] || null);
 };
 
-// === PATH VELOCIDAD V10.1 ===
-export const wiPath = {
-  clean: p => {const b = import.meta?.env?.BASE_URL || '/'; return b !== '/' && p?.startsWith(b) ? p.slice(b.length - 1) || '/' : p || '/'},
-  update: (p, t = '') => {const c = wiPath.clean(p); history.pushState({path: c}, t, c); t && (document.title = t)},
-  params: () => Object.fromEntries(new URLSearchParams(location.search)),
-  setParams: p => {const u = new URL(location); Object.entries(p).forEach(([k, v]) => u.searchParams.set(k, v)); history.pushState({}, '', u)},
-  delParam: k => {const u = new URL(location); u.searchParams.delete(k); history.pushState({}, '', u)},
-  clearParams: () => history.pushState({}, '', location.pathname),
-  get current() {return this.clean(location.pathname)}
-};
-
-// === CARGA SMART FAST V10.1 ===
-export const wiSmart = (() => {
-  const ld = new Set(), q = [], evs = ['mousemove', 'scroll', 'touchstart', 'keydown'];
-  let ls = false;
-  const load = async (fn, nm) => {
-    if (ld.has(nm)) return;
-    ld.add(nm); console.log(`⚡ ${nm}`);
-    try { await fn(); console.log(`✅ ${nm}`); } catch (e) { console.warn(`❌ ${nm}`, e); ld.delete(nm); }
-  };  
-  const trig = () => { if (!q.length) return; console.log(`🚀 ${q.length} módulos`); q.forEach(([fn, nm]) => load(fn, nm)); q.length = 0; stop(); };
-  const start = () => { if (ls) return; ls = true; evs.forEach(e => document.addEventListener(e, trig, { once: 1, passive: 1 })); };
-  const stop = () => { ls = false; evs.forEach(e => document.removeEventListener(e, trig)); };  
-  return (fn, nm = 'module', { delay = 0, priority = false } = {}) => 
-    priority ? setTimeout(() => load(fn, nm), delay) : (q.push([fn, nm]), start());
-})();
-
-// === ANIMACIÓN CARGA V10.1 ===
-export const wiAnimate = {
-  async fade(s, c, d = 150) {const $e = $(s); await $e.animate({ opacity: 0 }, d).promise(); $e.html(c); await $e.animate({ opacity: 1 }, d).promise()},
-  async slide(s, sh = null) {const $e = $(s); if (sh === null) sh = !$e.is(':visible'); return sh ? $e.slideDown().promise() : $e.slideUp().promise()},
-  shake(s) {$(s).addClass('shake'); setTimeout(() => $(s).removeClass('shake'), 500)},
-  pulse(s) {$(s).addClass('pulse'); setTimeout(() => $(s).removeClass('pulse'), 500)}
-};
-
-// === MODALES V10.3 ===
+// === MODALES V10.4 ===
 export const abrirModal = id => {
-  const $m = $(`#${id}`);
-  if (!$m.length) return console.warn(`❌ Modal #${id} no existe`);
-  $m.addClass('active');
-  $('body').addClass('modal-open');
+  const $m = $(`#${id}`); if (!$m.length) return console.warn(`Modal #${id} no existe`);
+  $m.addClass('active'); $('body').addClass('modal-open');
   setTimeout(() => $m.find('input,select,textarea,button').filter(':visible:first').trigger('focus'), 20);
 };
 export const cerrarModal = id => {
-  $(`#${id}`).removeClass('active');
-  if (!$('.wiModal.active').length) $('body').removeClass('modal-open');
+  $(`#${id}`).removeClass('active'); if (!$('.wiModal.active').length) $('body').removeClass('modal-open');
 };
 export const cerrarTodos = () => {
-  $('.wiModal').removeClass('active');$('body').removeClass('modal-open');
+  $('.wiModal').removeClass('active');  $('body').removeClass('modal-open');
 };
-
-// 🎨 CSS MODALES GENÉRICOS V10.3
 (() => {
-  const cs = `.wiModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:10000;justify-content:center;align-items:center;backdrop-filter:saturate(120%) blur(2px)}.wiModal.active{display:flex}@keyframes mf{from{opacity:0}to{opacity:1}}.wiModal{animation:mf .25s ease}body.modal-open{overflow:hidden}.modalBody{position:relative;background:var(--F);border-radius:1vh;box-shadow:var(--bsh);width:92%;max-width:600px;max-height:90vh;overflow:auto;animation:mp .22s ease;z-index:10001}@keyframes mp{from{transform:translateY(10px) scale(.98);opacity:.6}to{transform:translateY(0) scale(1);opacity:1}}.modalX{z-index:10002;background:0 0;border:0;color:var(--mco);font-size:1.4rem;cursor:pointer;transition:transform .15s,opacity .15s;text-shadow:0 1px 2px rgba(0,0,0,.15);position:absolute;top:12px;right:12px}.modalX:hover{transform:scale(1.08);opacity:.95}`;
-  
-  const $t = $('.wiModalCss');
-  $t.length ? $t.text(cs) : $('head').append(`<style class="wiModalCss">${cs}</style>`);
-  
-  $(document).off('.wim')
-    .on('click.wim', '.modalX', cerrarTodos)
-    .on('click.wim', '.wiModal', e => $(e.target).is('.wiModal') && cerrarTodos())
-    .on('keydown.wim', e => e.key === 'Escape' && cerrarTodos());
+  $('.wiModalCss').length ? $('.wiModalCss').text('.wiModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:10000;justify-content:center;align-items:center;backdrop-filter:saturate(120%) blur(2px)}.wiModal.active{display:flex}@keyframes mf{from{opacity:0}to{opacity:1}}.wiModal{animation:mf .25s ease}body.modal-open{overflow:hidden}.modalBody{position:relative;background:var(--F);border-radius:1vh;box-shadow:var(--bsh);width:92%;max-width:600px;max-height:90vh;overflow:auto;animation:mp .22s ease;z-index:10001}@keyframes mp{from{transform:translateY(10px) scale(.98);opacity:.6}to{transform:translateY(0) scale(1);opacity:1}}.modalX{z-index:10002;background:0 0;border:0;color:var(--mco);font-size:1.4rem;cursor:pointer;transition:transform .15s,opacity .15s;text-shadow:0 1px 2px rgba(0,0,0,.15);position:absolute;top:12px;right:12px}.modalX:hover{transform:scale(1.08);opacity:.95}') : $('head').append('<style class="wiModalCss">.wiModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:10000;justify-content:center;align-items:center;backdrop-filter:saturate(120%) blur(2px)}.wiModal.active{display:flex}@keyframes mf{from{opacity:0}to{opacity:1}}.wiModal{animation:mf .25s ease}body.modal-open{overflow:hidden}.modalBody{position:relative;background:var(--F);border-radius:1vh;box-shadow:var(--bsh);width:92%;max-width:600px;max-height:90vh;overflow:auto;animation:mp .22s ease;z-index:10001}@keyframes mp{from{transform:translateY(10px) scale(.98);opacity:.6}to{transform:translateY(0) scale(1);opacity:1}}.modalX{z-index:10002;background:0 0;border:0;color:var(--mco);font-size:1.4rem;cursor:pointer;transition:transform .15s,opacity .15s;text-shadow:0 1px 2px rgba(0,0,0,.15);position:absolute;top:12px;right:12px}.modalX:hover{transform:scale(1.08);opacity:.95}</style>');
+  $(document).on('click', '.modalX', cerrarTodos)
+    .on('click', '.wiModal.active', function(e) { if (e.target === this) cerrarTodos(); })
+    .on('keydown', e => { if (e.key === 'Escape' && $('.wiModal.active').length) cerrarTodos(); });
 })();
-// === [END] MODALES V10.3 ===
+// === [END] MODALES V10.4 ===
 
+// GUARDAR FECHAS BASE DE DATOS V10.1
 export const savebd = (fecha) => {
   const [año, mes, dia] = fecha.split('-').map(Number);
   const ahora = new Date();
   const fechaObj = new Date(año, mes - 1, dia, ahora.getHours(), ahora.getMinutes(), ahora.getSeconds());
   return Timestamp.fromDate(fechaObj);
 };
-
+// OBTENER FECHAS BASE DE DATOS V10.1
 export const getbd = (tm) => {
   if (!tm) return '';
   const dt = tm.toDate?.()
@@ -358,58 +291,26 @@ export const getbd = (tm) => {
   return isNaN(dt) ? '' : `${dt.getDate().toString().padStart(2,'0')}/${(dt.getMonth()+1).toString().padStart(2,'0')}/${dt.getFullYear()}`;
 };
 
-// ==== 📋 COPIAR PORTAPAPELES ==== 
+// === COPIAR TEXTOS V10.2 ===
 export const wicopy = (txt, elm = null, msg = '¡Copiado!') => {
-  let cnt;
-
-  // resolver texto
-  if (txt instanceof $) {                          // jQuery
-    cnt = txt.text() || txt.val() || '';
-  } else if (txt && (txt.nodeType === 1 || txt.nodeType === 3)) { // DOM
-    cnt = txt.textContent || txt.value || '';
-  } else if (typeof txt === 'string' && /^[.#\[]/.test(txt) && $(txt).length) { // selector
-    const $el = $(txt);
-    cnt = $el.text() || $el.val() || '';
+  const getCnt = () => txt instanceof $ ? txt.text() || txt.val() || '' : txt?.nodeType ? txt.textContent || txt.value || '' : typeof txt === 'string' && txt.trim().match(/^[.#\[]/) && $(txt).length ? $(txt).text() || $(txt).val() || '' : String(txt ?? '');
+  const cnt = getCnt();
+  const fin = () => elm ? wiTip(elm, msg, 'success', 1500) : console.log(`✅ ${msg}: ${cnt}`);
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(cnt).then(fin).catch(() => {
+      const $t = $('<textarea>').val(cnt).css({position:'absolute',left:'-9999px'}).appendTo('body');
+      $t[0].select(); document.execCommand('copy'); $t.remove(); fin();
+    });
   } else {
-    cnt = String(txt ?? '');
+    const $t = $('<textarea>').val(cnt).css({position:'absolute',left:'-9999px'}).appendTo('body');
+    $t[0].select(); document.execCommand('copy'); $t.remove(); fin();
   }
-
-  const fin = () => elm ? witip(elm, msg, 'success', 1500) : Notificacion(msg, 'success', 1500);
-
-  const copTa = () => {
-    const $t = $('<textarea>').val(cnt).appendTo('body');
-    $t[0].select();
-    document.execCommand('copy');
-    $t.remove();
-    fin();
-  };
-
-  // api moderna + fallback
-  navigator.clipboard?.writeText
-    ? navigator.clipboard.writeText(cnt).then(fin).catch(copTa)
-    : copTa();
 };
 
-export const adrm = (a, b) => {
-    $(a).addClass(b).siblings().removeClass(b);
-}; 
-
-export function adtm(se,cl,ti,tf){
-  $(se).text(ti).addClass(cl).delay(1800).queue(q=>$(se).text(tf).removeClass(cl).dequeue())
-} 
-
-export const adup = (x, y) => {
-  $(x).addClass('updating').text(y);
-  setTimeout(() => $(x).removeClass('updating'), 500);
-};
-
-export const mis10 = (texto) => {
-  if (texto.length <= 10) {
-    return texto;
-  }
-  return texto.substring(0, 10) + '...';
-};
-
-// Primer letra mayusculas + mayusculas todo
-export const Capi = ltr => ltr[0].toUpperCase() + ltr.slice(1);
-export const Mayu = ltr => ltr.toUpperCase();
+// === [START] FUNCIONES GENIALES V10.1 ===
+export const Mayu = (ltr) => ltr.toUpperCase();
+export const Capi = (ltr) => ltr[0].toUpperCase() + ltr.slice(1);
+export const adrm = (a, b) => $(a).addClass(b).siblings().removeClass(b);
+export const mis10 = (txt) => txt.length <= 10 ? txt : txt.substring(0, 10) + '...';
+export const adtm = (se, cl, ti, tf) => $(se).text(ti).addClass(cl).delay(1800).queue(q => $(se).text(tf).removeClass(cl).dequeue());
+export const adup = (x, y) => ($(x).addClass('updating').text(y), setTimeout(() => $(x).removeClass('updating'), 500));
