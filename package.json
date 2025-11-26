@@ -10,7 +10,9 @@
     "dev:live": "vite --host"
   },
   "devDependencies": {
-    "vite": "^7.2.4"
+    "@swc/core": "^1.15.3",
+    "vite": "^7.2.4",
+    "vite-plugin-compression": "^0.5.1"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.1.0",
