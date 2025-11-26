@@ -5,17 +5,15 @@ export default defineConfig(({ mode }) => ({
   base: mode === 'production' ? '/wiiprime/' : '/',
   build: {
     outDir: 'dist',
-    minify: 'esbuild', // ⚡ JS minificado
-    cssMinify: true, // ⚡ CSS minificado
+    minify: 'esbuild',
     sourcemap: false,
-    cssCodeSplit: true,
     rollupOptions: {
       input: { main: resolve(__dirname, 'index.html') },
       output: {
         manualChunks: {
           vendor: ['jquery'],
           firebase: ['firebase/app', 'firebase/auth', 'firebase/firestore'],
-          icons: ['@fortawesome/fontawesome-free']
+          icons: ['@fortawesome/fontawesome-free'] // ⚡ Separar FontAwesome
         }
       },
       plugins: [{
