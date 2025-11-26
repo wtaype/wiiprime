@@ -14,5 +14,5 @@ wiSmart({
     'https://fonts.googleapis.com/css2?family=Rubik:wght@300..900&display=swap',
     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css',
   ],
-  js: ['./footer.js']
+  js: [() => import('./footer.js')]
 });
