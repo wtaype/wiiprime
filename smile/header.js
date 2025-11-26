@@ -3,7 +3,8 @@ import { auth, db } from '../firebase/init.js';
 import { doc, getDoc} from 'firebase/firestore';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { getls, savels, removels, Mensaje } from './widev.js';
-import './wiauth.js';
+import { wiSmart } from './wii.js';
+wiSmart({js: ['./wiauth.js']});
 
 export const header = (() => {
  // 🚀 CARGA INSTANTÁNEA
