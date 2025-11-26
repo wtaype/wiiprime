@@ -25,9 +25,10 @@ export const wiSmart = (() => {
     const clave = `${tipo}:${item}`;
     if (cargados.has(clave)) return; 
     cargados.add(clave);
-    tipo === 'css' 
-      ? !$(`link[href="${url}"]`).length && $('<link>', { rel: 'stylesheet', href: url }).appendTo('head') 
-      : typeof item === 'function' && item().catch?.(e => console.error('wiSmart js error:', e));
+    if (tipo === 'css') {
+      const url = item;
+      !$(`link[href="${url}"]`).length && $('<link>', { rel: 'stylesheet', href: url }).appendTo('head');
+    } else{typeof item === 'function' && item().catch?.(e => console.error('wiSmart js error:', e));}
   };
   const procesar = (obj) => {
     $.each(obj, (tipo, items) => $.each($.isArray(items) ? items : [items], (i, it) => cargar(tipo, it)));
