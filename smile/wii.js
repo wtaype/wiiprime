@@ -18,14 +18,16 @@ git tag v15 -m "Version v15" ; git push origin v15
 git tag -d v15 ; git tag v15 -m "Version v15 actualizada" ; git push origin v15 --force
  ACTUALIZACION TAG[END] */ 
 
- // ===  ⚡ CARGA INTELIGENTE v12 ===
+// ===  ⚡ CARGA INTELIGENTE v13 ===
 export const wiSmart = (() => {
-  const cargados = new Set(), cache = getls('wiSmart'); //Primero cache
+  const cargados = new Set(), cache = getls('wiSmart');
   const cargar = (tipo, url) => {
     const clave = `${tipo}:${url}`;
     if (cargados.has(clave)) return;
     cargados.add(clave);
-    tipo === 'css' ? !$(`link[href="${url}"]`).length && $('<link>', { rel: 'stylesheet', href: url }).appendTo('head') : import(/* @vite-ignore */ url);
+    tipo === 'css' 
+      ? !$(`link[href="${url}"]`).length && $('<link>', { rel: 'stylesheet', href: url }).appendTo('head') 
+      : import(/* @vite-ignore */ url.startsWith('http') || url.startsWith('/') ? url : new URL(url, import.meta.url).href);
   };
   const procesar = (objeto) => {
     $.each(objeto, (tipo, urls) => $.each($.isArray(urls) ? urls : [urls], (i, url) => cargar(tipo, url)));
