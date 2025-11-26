@@ -6,16 +6,16 @@ export let app = 'WiiPrime'
 export let lanzamiento = 2024;
 export let autor = '@wilder.taype';
 export let link = 'https://wtaype.github.io/';
-export let version = 'v14';
+export let version = 'v15';
 
 /** ACTUALIZACIÓN PRINCIPAL ONE DEV [START]  (1)
-git add . ; git commit -m "Actualizacion Principal v14.10.10" ; git push origin main
+git add . ; git commit -m "Actualizacion Principal v15.10.10" ; git push origin main
 
 // Actualizar main luego esto, pero si es mucho, solo esto. (2)
-git tag v14 -m "Version v14" ; git push origin v14
+git tag v15 -m "Version v15" ; git push origin v15
 
 // En caso de emergencia, para actualizar el Tag existente. (3)
-git tag -d v14 ; git tag v14 -m "Version v14 actualizada" ; git push origin v14 --force
+git tag -d v15 ; git tag v15 -m "Version v15 actualizada" ; git push origin v15 --force
  ACTUALIZACION TAG[END] */ 
 
  // ===  ⚡ CARGA INTELIGENTE v12 ===
@@ -31,5 +31,5 @@ export const wiSmart = (() => {
     $.each(objeto, (tipo, urls) => $.each($.isArray(urls) ? urls : [urls], (i, url) => cargar(tipo, url)));
     savels('wiSmart', 1);
   };
-  return (objeto) => cache ? procesar(objeto) : $(document).one('touchstart scroll click mousemove', () => procesar(objeto));
+  return (objeto) => cache ? procesar(objeto) : $(document).one('scroll click', () => procesar(objeto));
 })();
