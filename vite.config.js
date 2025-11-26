@@ -5,13 +5,10 @@ export default defineConfig(({ mode }) => ({
   base: mode === 'production' ? '/wiiprime/' : '/',
   build: {
     outDir: 'dist',
-    minify: 'esbuild', // ⚡ JS minificado
-    cssMinify: 'lightningcss', // ⚡ CSS minificado
+    minify: 'esbuild', // ⚡ Minifica JS + HTML automáticamente
+    cssMinify: true, // ⚡ CSS minificado (método default)
     sourcemap: false,
     cssCodeSplit: true,
-    chunkSizeWarningLimit: 1000,
-    assetsInlineLimit: 4096,
-    reportCompressedSize: false,
     rollupOptions: {
       input: { main: resolve(__dirname, 'index.html') },
       output: {
@@ -21,18 +18,10 @@ export default defineConfig(({ mode }) => ({
           icons: ['@fortawesome/fontawesome-free']
         }
       },
-      plugins: [
-        {
-          name: 'html-minify',
-          transformIndexHtml(html) {
-            return html
-              .replace(/>\s+</g, '><') // ⚡ Elimina espacios entre tags
-              .replace(/\s+/g, ' ') // ⚡ Espacios múltiples a uno
-              .replace(/<!--.*?-->/g, '') // ⚡ Elimina comentarios HTML
-              .trim();
-          }
-        }
-      ]
+      plugins: [{
+        name: 'minify-html',
+        transformIndexHtml: (html) => html.replace(/>\s+</g, '><').replace(/\s{2,}/g, ' ').replace(/<!--.*?-->/gs, '').trim()
+      }]
     }
   }, 
   publicDir: 'public'
