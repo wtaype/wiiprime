@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import { savels, getls} from './widev.js';
 
 // INFORMACIÓN DEL APP 
 export let app = 'WiiPrime'
@@ -17,60 +18,18 @@ git tag v14 -m "Version v14" ; git push origin v14
 git tag -d v14 ; git tag v14 -m "Version v14 actualizada" ; git push origin v14 --force
  ACTUALIZACION TAG[END] */ 
 
-// === PATH VELOCIDAD V10.1 ===
-export const wiPath = {
-  clean(p) {const b = import.meta?.env?.BASE_URL || '/'; return b !== '/' && p.startsWith(b) ? p.slice(b.length - 1) || '/' : p || '/'},
-  update(p, t = '', dr = '/') {history.pushState({ path: p }, t, p === dr ? '/' : p); t && (document.title = t)},
-  params: () => Object.fromEntries(new URLSearchParams(location.search)),
-  setParams(p) {const u = new URL(location); Object.entries(p).forEach(([k, v]) => u.searchParams.set(k, v)); history.pushState({}, '', u)},
-  get current() {return this.clean(location.pathname)}
-};
-
-// === ANIMACIÓN CARGA V10.1 ===
-export const wiAnimate = {
-  async fade(s, c, d = 150) {const $e = $(s); await $e.animate({ opacity: 0 }, d).promise(); $e.html(c); await $e.animate({ opacity: 1 }, d).promise()},
-  async slide(s, sh = null) {const $e = $(s); if (sh === null) sh = !$e.is(':visible'); return sh ? $e.slideDown().promise() : $e.slideUp().promise()},
-  shake(s) {$(s).addClass('shake'); setTimeout(() => $(s).removeClass('shake'), 500)},
-  pulse(s) {$(s).addClass('pulse'); setTimeout(() => $(s).removeClass('pulse'), 500)}
-};
-
-// === CARGA SMART FAST V10.1 ===
+ // ===  ⚡ CARGA INTELIGENTE v12 ===
 export const wiSmart = (() => {
-  const ld = new Set(), q = [], evs = ['mousemove', 'scroll', 'touchstart', 'keydown'];
-  let ls = false;
-  const ck = 'wiSmart';
-  const getCache = () => { try { return new Set(JSON.parse(localStorage.getItem(ck) || '[]')); } catch { return new Set(); } };
-  const setCache = (nm) => { const c = getCache(); c.add(nm); localStorage.setItem(ck, JSON.stringify([...c])); };
-  const load = async (fn, nm, dly) => {
-    if (ld.has(nm)) return;
-    ld.add(nm); console.log(`⚡ ${nm}`);
-    try { await fn(); console.log(`✅ ${nm}`); setCache(nm); } 
-    catch (e) { console.warn(`❌ ${nm}`, e); ld.delete(nm); }
+  const cargados = new Set(), cache = getls('wiSmart'); //Primero cache
+  const cargar = (tipo, url) => {
+    const clave = `${tipo}:${url}`;
+    if (cargados.has(clave)) return;
+    cargados.add(clave);
+    tipo === 'css' ? !$(`link[href="${url}"]`).length && $('<link>', { rel: 'stylesheet', href: url }).appendTo('head') : import(/* @vite-ignore */ url);
   };
-  const trig = () => { 
-    if (!q.length) return; 
-    console.log(`🚀 ${q.length} módulos`); 
-    q.forEach(([fn, nm, dly]) => dly ? setTimeout(() => load(fn, nm), dly) : load(fn, nm)); 
-    q.length = 0; 
-    stop(); 
+  const procesar = (objeto) => {
+    $.each(objeto, (tipo, urls) => $.each($.isArray(urls) ? urls : [urls], (i, url) => cargar(tipo, url)));
+    savels('wiSmart', 1);
   };
-  const start = () => { if (ls) return; ls = true; evs.forEach(e => document.addEventListener(e, trig, { once: true, passive: true })); };
-  const stop = () => { ls = false; evs.forEach(e => document.removeEventListener(e, trig)); };
-  return (fn, nm = 'module', dly = 0) => { 
-    const cache = getCache();
-    if (cache.has(nm)) { console.log(`💾 ${nm}`); return load(fn, nm, 0); }
-    q.push([fn, nm, dly]); 
-    start(); 
-  };
+  return (objeto) => cache ? procesar(objeto) : $(document).one('touchstart scroll click mousemove', () => procesar(objeto));
 })();
-
-// NOTIFICACIONES V10.1
-export function Notificacion(msg, tipo = 'error', tiempo = 3000) {
-  const ico = {success:'fa-check-circle',error:'fa-times-circle',warning:'fa-exclamation-triangle',info:'fa-info-circle'}[tipo];
-  if (!$('#notificationsContainer').length) $('body').append('<div id="notificationsContainer" style="position:fixed;top:1rem;right:1rem;z-index:9999;display:flex;flex-direction:column;gap:.5rem;"></div>');
-  const $not = $(`<div class="notification notif-${tipo}" style="background:var(--F);border-left:4px solid var(--${tipo});box-shadow:0 4px 12px rgba(0,0,0,.1);border-radius:8px;padding:1rem;display:flex;align-items:center;gap:.5rem;opacity:0;transform:translateX(20px);transition:all .3s ease;"><i class="fas ${ico}" style="color:var(--${tipo});"></i><span style="flex:1;color:var(--tx);">${msg}</span><button style="background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--tx);">&times;</button></div>`);
-  $('#notificationsContainer').append($not);requestAnimationFrame(() => $not.css({opacity:1,transform:'translateX(0)'}));
-  const cerrar = () => {$not.css({opacity:0,transform:'translateX(20px)'});setTimeout(() => $not.remove(), 300);};
-  $not.find('button').on('click', cerrar);
-  setTimeout(cerrar, tiempo);
-}

@@ -1,12 +1,38 @@
 import $ from 'jquery'; 
 
-// BANDERAS V10.1
-export const wiFlag=(cod)=>{
-if(!cod||cod.length!==2)return null;
-const cch=getls('wiFlags');
-if(cch?.[cod])return cch[cod];
-const url=`https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/${cod.toLowerCase()}.svg`;
-savels('wiFlags',{...(cch||{}),[cod]:url},168);  return url;
+// GUARDANDO DE LOCAL v10.1
+export function savels(clave, valor, horas = 24) {
+  try {
+    if (!clave || typeof clave !== 'string') return false;
+    localStorage.setItem(clave, JSON.stringify({ value: valor, expiry: Date.now() + horas * 3600000 }));
+    return true;
+  } catch(e) { console.error('esv:', e); return false; }
+}
+
+// OBTENIENDO DE LOCAL v10.1
+export function getls(clave) {
+  try {
+    if (!clave || typeof clave !== 'string') return null;
+    const item = localStorage.getItem(clave);
+    if (!item) return null;
+    const parsed = JSON.parse(item);
+    if (!parsed || Date.now() > parsed.expiry) return localStorage.removeItem(clave), null;
+    return parsed.value;
+  } catch(e) { console.error('egt:', e); localStorage.removeItem(clave); return null; }
+}
+
+// ELIMINANDO DE LOCAL v10.1
+export function removels(...claves) {
+  claves.forEach(clave => clave && typeof clave === 'string' && localStorage.removeItem(clave));
+}
+
+// BANDERAS V11
+export const wiFlag = (cod) => {
+  if (!cod || cod.length !== 2) return null;
+  const cache = getls('wiFlags') || {};
+  const url = cache[cod] || `https://cdn.jsdelivr.net/gh/lipis/flag-icons/flags/4x3/${cod.toLowerCase()}.svg`;
+  if (!cache[cod]) savels('wiFlags', { ...cache, [cod]: url }, 168);
+  return url;
 };
 
 // CIUDADES DEL MUNDO V10.1
@@ -148,6 +174,23 @@ export const buscarCiudad = (termino, continente = null) => {
   return fue.filter(c => c.ciudad.toLowerCase().includes(bus) || c.pais.toLowerCase().includes(bus));
 };
 
+// === PATH VELOCIDAD V10.1 ===
+export const wiPath = {
+  clean(p) {const b = import.meta?.env?.BASE_URL || '/'; return b !== '/' && p.startsWith(b) ? p.slice(b.length - 1) || '/' : p || '/'},
+  update(p, t = '', dr = '/') {history.pushState({ path: p }, t, p === dr ? '/' : p); t && (document.title = t)},
+  params: () => Object.fromEntries(new URLSearchParams(location.search)),
+  setParams(p) {const u = new URL(location); Object.entries(p).forEach(([k, v]) => u.searchParams.set(k, v)); history.pushState({}, '', u)},
+  get current() {return this.clean(location.pathname)}
+};
+
+// === ANIMACIÓN CARGA V10.1 ===
+export const wiAnimate = {
+  async fade(s, c, d = 150) {const $e = $(s); await $e.animate({ opacity: 0 }, d).promise(); $e.html(c); await $e.animate({ opacity: 1 }, d).promise()},
+  async slide(s, sh = null) {const $e = $(s); if (sh === null) sh = !$e.is(':visible'); return sh ? $e.slideDown().promise() : $e.slideUp().promise()},
+  shake(s) {$(s).addClass('shake'); setTimeout(() => $(s).removeClass('shake'), 500)},
+  pulse(s) {$(s).addClass('pulse'); setTimeout(() => $(s).removeClass('pulse'), 500)}
+};
+
 // HORAS DEL DÍA V10.1
 export const esNoche = (hora) => {
   const h = typeof hora === 'string' ? parseInt(hora.split(':')[0]) : hora;
@@ -182,7 +225,6 @@ export function Notificacion(msg, tipo = 'error', tiempo = 3000) {
   setTimeout(cerrar, tiempo);
 }
 
-
 // MENSAJE DE BIENVENIDA V10.1
 export const Mensaje = (msg, tipo = 'success') => {
   $('.alert-box').remove();
@@ -191,31 +233,6 @@ export const Mensaje = (msg, tipo = 'success') => {
   setTimeout(() => $alerta.fadeOut(300, () => $alerta.remove()), 3000);
 };
 
-// GUARDANDO DE LOCAL v10.1
-export function savels(clave, valor, horas = 24) {
-  try {
-    if (!clave || typeof clave !== 'string') return false;
-    localStorage.setItem(clave, JSON.stringify({ value: valor, expiry: Date.now() + horas * 3600000 }));
-    return true;
-  } catch(e) { console.error('eSavels:', e); return false; }
-}
-
-// OBTENIENDO DE LOCAL v10.1
-export function getls(clave) {
-  try {
-    if (!clave || typeof clave !== 'string') return null;
-    const item = localStorage.getItem(clave);
-    if (!item) return null;
-    const parsed = JSON.parse(item);
-    if (!parsed || Date.now() > parsed.expiry) return localStorage.removeItem(clave), null;
-    return parsed.value;
-  } catch(e) { console.error('eGetls:', e); localStorage.removeItem(clave); return null; }
-}
-
-// ELIMINANDO DE LOCAL v10.1
-export function removels(...claves) {
-  claves.forEach(clave => clave && typeof clave === 'string' && localStorage.removeItem(clave));
-}
 
 // TOOLTIP V10.1
 export function wiTip(elm, txt, tipo = 'top', tiempo = 1800) {

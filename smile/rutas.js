@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { Notificacion, wiPath, wiAnimate} from './wii.js';
+import { Notificacion, wiPath, wiAnimate} from './widev.js';
 
 let app = 'WiiPrime';
 class WiRouter {
