@@ -196,6 +196,7 @@
   cursor: pointer;
   transition: all var(--tr_f);
 }
+.wilogo a{color:var(--bg2)}
 
 .wilogo i {
   font-size: var(--fz_l1);
