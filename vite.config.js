@@ -5,8 +5,8 @@ export default defineConfig(({ mode }) => ({
   base: mode === 'production' ? '/wiiprime/' : '/',
   build: {
     outDir: 'dist',
-    minify: 'esbuild', // ⚡ Minifica JS + HTML automáticamente
-    cssMinify: true, // ⚡ CSS minificado (método default)
+    minify: 'esbuild', // ⚡ JS minificado
+    cssMinify: true, // ⚡ CSS minificado
     sourcemap: false,
     cssCodeSplit: true,
     rollupOptions: {
@@ -20,7 +20,19 @@ export default defineConfig(({ mode }) => ({
       },
       plugins: [{
         name: 'minify-html',
-        transformIndexHtml: (html) => html.replace(/>\s+</g, '><').replace(/\s{2,}/g, ' ').replace(/<!--.*?-->/gs, '').trim()
+        generateBundle(_, bundle) {
+          for (const fileName in bundle) {
+            const file = bundle[fileName];
+            if (fileName.endsWith('.html') && file.type === 'asset') {
+              file.source = file.source
+                .replace(/\n\s*/g, '')
+                .replace(/>\s+</g, '><')
+                .replace(/\s{2,}/g, ' ')
+                .replace(/<!--.*?-->/g, '')
+                .trim();
+            }
+          }
+        }
       }]
     }
   }, 
