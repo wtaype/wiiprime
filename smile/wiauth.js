@@ -1,5 +1,4 @@
 import $ from 'jquery';
-import '@fortawesome/fontawesome-free/css/all.min.css';
 import { auth, db } from '../firebase/init.js';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, sendEmailVerification, sendPasswordResetEmail } from 'firebase/auth';
 import { setDoc, getDoc, doc, query, where, getDocs, collection, serverTimestamp } from 'firebase/firestore';

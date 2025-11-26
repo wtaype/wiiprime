@@ -31,5 +31,5 @@ export const wiSmart = (() => {
     $.each(objeto, (tipo, urls) => $.each($.isArray(urls) ? urls : [urls], (i, url) => cargar(tipo, url)));
     savels('wiSmart', 1);
   };
-  return (objeto) => cache ? procesar(objeto) : $(document).one('scroll click', () => procesar(objeto));
+  return (objeto) => cache ? procesar(objeto) : $(document).one('touchstart scroll click mousemove', () => procesar(objeto));
 })();
