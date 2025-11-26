@@ -1,0 +1,6 @@
+import{g as r,$ as t,M as m,r as l,w as u,s as g}from"./main-3kWMMow7.js";import{i as b,g as f,a as d,o as w,s as h,b as S,d as y}from"./firebase-BMV8jcj0.js";import"./vendor-B2AETYxa.js";const A={apiKey:"AIzaSyAw1I8I84eHjOk69UoAaM74k3OUAJMlET8",authDomain:"wiiprime.firebaseapp.com",projectId:"wiiprime",storageBucket:"wiiprime.firebasestorage.app",messagingSenderId:"560186875326",appId:"1:560186875326:web:1e8d7104fc7e53878b2def"},c=b(A),p=f(c),I=d(c);u({js:["./wiauth.js"]});const M=(()=>{(function(){let a=r("wiSmile");a?e(a):s()})();function s(){t(".wiauth").html('<button class="wibtn_auth registrar"><i class="fas fa-user-plus"></i><span>Registrar</span></button><button class="wibtn_auth login"><i class="fas fa-sign-in-alt"></i><span>Login</span></button>')}function e(a){m("Bienvenido "+a.nombre),t(".wiauth").html(`
+      <div class="sesion">
+        <img src="${a.imagen||"./smile.png"}" alt="${a.nombre}"><span>${a.nombre}</span>
+      </div>
+      <button class="bt_salir"><i class="fas fa-sign-out-alt"></i> <span> Salir </span></button>
+    `)}w(p,async a=>{if(!a)return l("wiSmile"),s();let n=r("wiSmile");if(!(n&&n.usuario===a.displayName))try{let i=(await S(y(I,"smiles",a.displayName))).data();i&&(g("wiSmile",i,450),e(i))}catch(o){console.error(o)}}),t(document).on("click",".bt_salir",async()=>{await h(p),l("wiSmile"),s()})})();export{M as header};
