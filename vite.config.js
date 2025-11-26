@@ -13,21 +13,15 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           vendor: ['jquery'],
           firebase: ['firebase/app', 'firebase/auth', 'firebase/firestore'],
-          icons: ['@fortawesome/fontawesome-free'] // ⚡ Separar FontAwesome
+          icons: ['@fortawesome/fontawesome-free'] // ⚡  FontAwesome
         }
       },
       plugins: [{
         name: 'minify-html',
-        generateBundle(_, bundle) {
-          for (const fileName in bundle) {
-            const file = bundle[fileName];
-            if (fileName.endsWith('.html') && file.type === 'asset') {
-              file.source = file.source
-                .replace(/\n\s*/g, '')
-                .replace(/>\s+</g, '><')
-                .replace(/\s{2,}/g, ' ')
-                .replace(/<!--.*?-->/g, '')
-                .trim();
+        generateBundle(_, b) {
+          for (const f in b) {
+            if (f.endsWith('.html') && b[f].type === 'asset') {
+              b[f].source = b[f].source.replace(/\n\s*/g, '').replace(/>\s+</g, '><').replace(/\s{2,}/g, ' ').replace(/<!--.*?-->/g, '').trim();
             }
           }
         }
