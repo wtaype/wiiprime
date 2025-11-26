@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import { rutas } from './rutas.js';
-import('./header.js');
+// import('./header.js');
 import { wiSmart } from './wii.js';
 wiSmart(() => import('@fortawesome/fontawesome-free/css/all.min.css'), 'Iconos');
 wiSmart(() => import('./footer.js'), 'Footer', 500);
