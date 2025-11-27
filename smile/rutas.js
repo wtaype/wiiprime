@@ -83,11 +83,6 @@ class WiRouter {
       this.navigate(page === 'hora' ? '/' : `/${page}`);
     });
 
-    $(document).on('click', '.winav_item', (e) => {
-      const page = $(e.currentTarget).data('page');
-      this.prefetch(page === 'hora' ? '/' : `/${page}`);
-    });
-
     window.addEventListener('popstate', (e) => {
       this.navigate(e.state?.path || wiPath.current, false);
     });
