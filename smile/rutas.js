@@ -68,7 +68,7 @@ class WiRouter {
     
     if (this.prefetchCache.has(normalizedPath) || typeof this.ruta[normalizedPath] !== 'function') return;
 
-    console.log(`⚡ ${normalizedPath}`);
+    console.log(`${normalizedPath}`);
     try {
       const module = await this.ruta[normalizedPath]();
       this.ruta[normalizedPath] = module;
