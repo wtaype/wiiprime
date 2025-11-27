@@ -5,8 +5,17 @@ export default defineConfig(({ mode }) => ({
   base: mode === 'production' ? '/wiiprime/' : '/',
   build: {
     outDir: 'dist',
-    minify: 'esbuild',
+    minify: 'terser',          // 🔧 más agresivo que esbuild para JS
     sourcemap: false,
+    terserOptions: {
+      format: { comments: false },
+      compress: {
+        passes: 2,
+        drop_console: false,   // ← mantiene tus console.log
+        drop_debugger: true
+      },
+      mangle: true
+    },
     rollupOptions: {
       input: { main: resolve(__dirname, 'index.html') },
       output: {
