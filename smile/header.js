@@ -1,47 +1,30 @@
 import $ from 'jquery';
-import { auth, db } from '../firebase/init.js';
-import { doc, getDoc} from 'firebase/firestore';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { getls, savels, removels, Mensaje } from './widev.js';
-import { wiSmart } from './wii.js';
+import { wiSmart } from './wii.js'; 
 wiSmart({js: [() => import('./wiauth.js')]});
+import { getls, savels, removels, Mensaje } from './widev.js';
+
+export function personal(wi) {
+  Mensaje?.('Bienvenido '+wi.nombre);
+  $('.wiauth').html(`
+    <div class="sesion">
+      <img src="${wi.imagen||'./smile.png'}" alt="${wi.nombre}"><span>${wi.nombre}</span>
+    </div>
+    <button class="bt_salir"><i class="fas fa-sign-out-alt"></i> <span> Salir </span></button>
+  `);
+} // Funcion para Auth personal 
 
 export const header = (() => {
- // 🚀 CARGA INSTANTÁNEA
-  (function () {
-    let wi = getls('wiSmile'); wi ? personal(wi) : publico(); //Validando si tiene cache 
-  })();
+  let wi = getls('wiSmile'); wi ? cargandoPersonal(wi) : publico(); //Cache Primero
 
   function publico() {
     $('.wiauth').html(`<button class="wibtn_auth registrar"><i class="fas fa-user-plus"></i><span>Registrar</span></button><button class="wibtn_auth login"><i class="fas fa-sign-in-alt"></i><span>Login</span></button>`);
   }
-  
-  function personal(wi) {
-    Mensaje('Bienvenido '+wi.nombre);
-    $('.wiauth').html(`
-      <div class="sesion">
-        <img src="${wi.imagen||'./smile.png'}" alt="${wi.nombre}"><span>${wi.nombre}</span>
-      </div>
-      <button class="bt_salir"><i class="fas fa-sign-out-alt"></i> <span> Salir </span></button>
-    `);
+
+  async function cargandoPersonal(wi) {
+    personal(wi);
+    const [{ auth }, { onAuthStateChanged, signOut }] = await Promise.all([import('../firebase/init.js'), import('firebase/auth')]);
+    onAuthStateChanged(auth, user => {if (!user) return removels('wiSmile'), publico();}); //Detecta si hay auth
+
+    $(document).on('click', '.bt_salir', async () => {await signOut(auth); removels('wiSmile'); publico();});
   }
-  // ⚡ VALIDACIÓN FIREBASE
-  onAuthStateChanged(auth, async user => {
-    if (!user) return removels('wiSmile'), publico();
-
-    let wi = getls('wiSmile');
-    if (wi && wi.usuario === user.displayName) return;
-
-    try {
-      let snap = await getDoc(doc(db, 'smiles', user.displayName)); let widatos = snap.data();
-      if (widatos) savels('wiSmile', widatos, 450), personal(widatos);
-    } catch (e){console.error(e);}
-  });
-
-  // CERRAR SESIÓN
-  $(document).on('click', '.bt_salir', async () => {
-    await signOut(auth); removels('wiSmile'); publico();
-  });
-
 })();
- 

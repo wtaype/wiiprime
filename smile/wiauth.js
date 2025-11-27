@@ -5,8 +5,7 @@ import { setDoc, getDoc, doc, query, where, getDocs, collection, serverTimestamp
 import { wiTip, Mensaje, savels, wiSpin, abrirModal, cerrarModal } from './widev.js';
 
 export function wiAuth() {
-
-const cfg = { db: 'smiles', ls: 'wiAuthIn', rol: 'usuario' };
+const cfg = { db: 'smiles', rol: 'usuario' };
 
 const crearModal = (id, titulo, campos) => `<div id="${id}" class="wiModal authMod"><div class="modalBody"><button class="modalX">&times;</button><div class="modalMain"><div class="logo"><img src="./smile.png"></div><h2>${titulo}</h2><form id="${id.replace('Modal','Form')}">${campos}</form></div></div></div>`;
 
@@ -119,19 +118,19 @@ const eventos = () => {
         return [res === true, $campo[0], res !== true ? res : ''];
       })
     ];
-    
     for (const [valido, elem, msj] of vlds) {
       if (!valido && msj) {
         wiSpin(this, false); wiTip(elem, msj, 'error', 2500); elem.focus(); registrando = false; return;
       }
     }
-
     try {
       const [correo, usuario, nombre, apellidos, password] = ['regEmail', 'regUsuario', 'regNombre', 'regApellidos', 'regPassword'].map(id => $(`#${id}`).val().trim());
       const { user } = await createUserWithEmailAndPassword(auth, correo, password);
       await Promise.all([updateProfile(user, { displayName: usuario }), sendEmailVerification(user)]);
-      await setDoc(doc(db, cfg.db, usuario), { usuario, email: correo, nombre, apellidos, rol: cfg.rol, creacion: serverTimestamp(), uid: user.uid });
-      Mensaje('¡Registro completado! ✅'); savels(cfg.ls, 'wIn', 24); cerrarModal('registroModal');
+      const widatos = { usuario, email: correo, nombre, apellidos, rol: cfg.rol, uid: user.uid };
+      await setDoc(doc(db, cfg.db, usuario), { ...widatos, creacion: serverTimestamp() });
+      savels('wiSmile', widatos, 450); Mensaje('¡Registro completado! ✅'); cerrarModal('registroModal'); // 💾 Registro y guardamos datos 
+      (await import('./header.js')).personal(widatos); // Header personalizado
     } catch (error) {
       const errores = { 'auth/email-already-in-use': 'Email ya registrado', 'auth/weak-password': 'Contraseña débil' };
       Mensaje(errores[error.code] || error.message, 'error'); console.error(error);
@@ -148,7 +147,10 @@ const eventos = () => {
         if (!buscar.exists()) throw new Error('Usuario no encontrado');
         correo = buscar.data().email;
       }
-      await signInWithEmailAndPassword(auth, correo, password); savels(cfg.ls, 'wIn', 24); cerrarModal('loginModal');
+      await signInWithEmailAndPassword(auth, correo, password);
+      const usuario = correo.includes('@') ? (await getDoc(doc(db, cfg.db, auth.currentUser.displayName))).data() : (await getDoc(doc(db, cfg.db, campo))).data();
+      savels('wiSmile', usuario, 450); cerrarModal('loginModal'); // 💾 Guardamos Auht
+      (await import('./header.js')).personal(usuario); // Header personalizado
     } catch (error) {
       const errores = { 'auth/invalid-credential': 'Contraseña incorrecta', 'auth/invalid-email': 'Email no válido', 'auth/missing-email': 'Usuario no registrado' };
       Mensaje(errores[error.code] || error.message, 'error'); console.error(error);
