@@ -25,7 +25,7 @@ class WiRouter {
 
     const moduleLoader = this.ruta[normalizedPath];
     if (!moduleLoader) {
-      console.warn(`❌ Ruta no encontrada: ${normalizedPath}`);
+      console.warn(`Ruta no encontrada: ${normalizedPath}`);
       Notificacion('Página no encontrada', 'error', 2000);
       this.isNavigating = false;
       return;
@@ -51,8 +51,8 @@ class WiRouter {
       }
 
       this.currentRoute = normalizedPath;
-      console.log(`✅ ${normalizedPath}`);
-    } catch (error) {console.error('❌ Error:', error); Notificacion('Error al cargar la página', 'error', 2000); } 
+      console.log(`${normalizedPath}`);
+    } catch (error) {console.error('Error:', error); Notificacion('Error al cargar la página', 'error', 2000); } 
     finally {this.isNavigating = false;}
   }
 
@@ -73,7 +73,7 @@ class WiRouter {
       const module = await this.ruta[normalizedPath]();
       this.ruta[normalizedPath] = module;
       this.prefetchCache.add(normalizedPath);
-    } catch (e) {console.warn(`❌ Prefetch error: ${normalizedPath}`); }
+    } catch (e) {console.warn(`Prefetch error: ${normalizedPath}`); }
   }
 
   init() {
