@@ -190,6 +190,4 @@ $(document).off('click.wa', '.login,.registrar').on('click.wa', '.login,.registr
   setTimeout(() => abrirModal($(this).hasClass('login') ? 'loginModal' : 'registroModal'), 100);
 });
 
-console.log('✅ wiAuth() v11.4 DEFINITIVO');
-
 } wiAuth();
