@@ -52,23 +52,20 @@
   --Mora:#7000FF;
   --Futuro:#21273B;
 /* :root[data-theme="Cielo"]  */
-
-  --bg: #1d273f;
-  --wb: #2a385b;
-  --tx: #fff;
-  --txa: #00f3ff;
-  --txe: #3e496f;
-  --hv: #4d5a89;
-  --hva: #3e496f;
-  --mco: #3e496f;
+  --bg: #ccefff;
+  --wb: #e5f7ff;
+  --tx: #000;
+  --txa: #FFF;
+  --txe: #000;
+  --hv: #00a8e6;
+  --hva: #1873cd;
+  --mco: #1978d7;
   --bg1: #ffffff26;
-  --bg2: #00f3ff;
-  --bg3: #2a385b;
-  --bg4: rgba(0, 243, 255, 0.1);
-  --bg5: rgba(0, 243, 255, 0.2);
-  --bg6: rgba(42, 56, 91, 0.5);
-
-
+  --bg2: #1978d7;
+  --bg3: #e5f7ff;
+  --bg4: rgba(25, 120, 215, 0.1);
+  --bg5: rgba(25, 120, 215, 0.2);
+  --bg6: rgba(204, 239, 255, 0.5);
 }
 
 /* =============================================
@@ -126,21 +123,21 @@
   --bg6: rgba(228, 204, 255, 0.5);
 }
 
-:root[data-theme="Cielo"] {
-  --bg: #ccefff;
-  --wb: #e5f7ff;
-  --tx: #000;
-  --txa: #FFF;
-  --txe: #000;
-  --hv: #00a8e6;
-  --hva: #1873cd;
-  --mco: #1978d7;
+:root[data-theme="Futuro"] {
+  --bg: #1d273f;
+  --wb: #2a385b;
+  --tx: #fff;
+  --txa: #00f3ff;
+  --txe: #3e496f;
+  --hv: #4d5a89;
+  --hva: #3e496f;
+  --mco: #3e496f;
   --bg1: #ffffff26;
-  --bg2: #1978d7;
-  --bg3: #e5f7ff;
-  --bg4: rgba(25, 120, 215, 0.1);
-  --bg5: rgba(25, 120, 215, 0.2);
-  --bg6: rgba(204, 239, 255, 0.5);
+  --bg2: #00f3ff;
+  --bg3: #2a385b;
+  --bg4: rgba(0, 243, 255, 0.1);
+  --bg5: rgba(0, 243, 255, 0.2);
+  --bg6: rgba(42, 56, 91, 0.5);
 }
 
 /* =============================================
@@ -1819,11 +1816,11 @@ a {
       
       <div class="wiheader_right"> 
         <div id="wiTema">
-          <div class="tema" data-ths="Cielo|#0EBEFF"></div>
+          <div class="tema mtha" data-ths="Cielo|#0EBEFF"></div>
           <div class="tema" data-ths="Dulce|#FF5C69"></div>
           <div class="tema" data-ths="Paz|#29C72E"></div>
           <div class="tema" data-ths="Mora|#7000FF"></div>
-          <div class="tema mtha" data-ths="Futuro|#21273B"></div>
+          <div class="tema" data-ths="Futuro|#21273B"></div>
         </div>
         <div class="wiauth"></div> 
       </div> <!-- LADO DERECHO: Temas + Auth -->
@@ -1834,7 +1831,7 @@ a {
   </div>
 </body>
 <script>
-(()=>{const d=document,h=d.documentElement,w=d.querySelector('#wiTema');if(!w)return;const ts=[...w.querySelectorAll('.tema')],m=d.querySelector('meta[name="theme-color"]')||d.head.appendChild(Object.assign(d.createElement('meta'),{name:'theme-color'})),st=t=>{const[n,c]=t.dataset.ths.split('|');h.dataset.theme=n;m.content=c;localStorage.wiTema=t.dataset.ths;ts.forEach(x=>x.classList.toggle('mtha',x===t))};w.addEventListener('click',e=>e.target.matches('.tema')&&st(e.target),{passive:!0});const i=w.querySelector(`[data-ths="${localStorage.wiTema}"]`)||ts[4];i&&st(i)})();
+(()=>{const d=document,h=d.documentElement,w=d.querySelector('#wiTema');if(!w)return;const ts=[...w.querySelectorAll('.tema')],m=d.querySelector('meta[name="theme-color"]')||d.head.appendChild(Object.assign(d.createElement('meta'),{name:'theme-color'})),st=t=>{const[n,c]=t.dataset.ths.split('|');h.dataset.theme=n;m.content=c;localStorage.wiTema=t.dataset.ths;ts.forEach(x=>x.classList.toggle('mtha',x===t))};w.addEventListener('click',e=>e.target.matches('.tema')&&st(e.target),{passive:!0});const i=w.querySelector(`[data-ths="${localStorage.wiTema}"]`)||ts[0];i&&st(i)})();
 </script>
 <script type="module" src="./smile/main.js" defer></script> 
 </html>
