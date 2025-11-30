@@ -1,0 +1,725 @@
+/* ========== 📦 MAIN + ⏰ HORA MUNDIAL ====== */
+.wihora {
+  padding: 3.5vh 0;
+  width: 100%;
+  animation: fadeInContent 0.8s ease-out;
+}
+
+@keyframes fadeInContent {
+  from {
+    opacity: 0;
+    transform: translateY(2vh);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wihora_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3vh;
+  padding-bottom: 2vh;
+  border-bottom: 2px solid var(--bg5);
+  position: relative;
+}
+
+.wihora_header::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--mco) 50%, transparent 100%);
+  opacity: 0.6;
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { transform: translateX(-100%); opacity: 0; }
+  50% { transform: translateX(0); opacity: 0.6; }
+}
+
+.wihora_title {
+  font-size: var(--fz_l2);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--mco) 0%, var(--tx) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.05em;
+}
+
+.wihora_subtitle {
+  font-size: var(--fz_m5);
+  font-weight: 600;
+  opacity: 0.7;
+  background: linear-gradient(135deg, var(--tx) 0%, var(--txe) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.wihora_controls {
+  display: flex;
+  gap: 0.8vh;
+  background: var(--bg1);
+  padding: 0.5vh;
+  border-radius: 1vh;
+  border: 1px solid var(--bg5);
+}
+
+.wibtn_format {
+  display: flex;
+  align-items: center;
+  gap: 0.5vw;
+  padding: 0.8vh 1.5vw;
+  background: transparent;
+  border: none;
+  border-radius: 0.8vh;
+  color: var(--tx);
+  font-size: var(--fz_m2);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--tr_f);
+}
+
+.wibtn_format i {
+  font-size: var(--fz_m3);
+}
+
+.wibtn_format:hover {
+  background: var(--bg5);
+}
+
+.wibtn_format.active {
+  background: var(--mco);
+  color: var(--txa);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* ========== 📦 GRID DE RELOJES ====== */
+.wihora_grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2vh;
+}
+
+.wihora_grid > * {
+  flex: 45%;
+}
+
+/* ========== 🃏 CARD PRINCIPAL ====== */
+.wihora_card {
+  position: relative;
+  width: 100%;
+  min-height: 260px;
+  border-radius: 2vh;
+  padding: 2.5vh 2vw;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  animation: cardSlideIn 0.8s ease-out forwards;
+}
+
+.wihora_card:nth-child(1) { animation-delay: 0.1s; }
+.wihora_card:nth-child(2) { animation-delay: 0.2s; }
+
+@keyframes cardSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(3vh) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 🌅 TEMA DÍA */
+.wihora_card.es-dia {
+  background: linear-gradient(135deg, #FFE5B4 0%, #87CEEB 100%);
+  box-shadow: 0 8px 32px rgba(255, 160, 0, 0.3);
+}
+
+.wihora_card.es-dia::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(255, 200, 0, 0.4) 0%, transparent 60%);
+  z-index: 0;
+}
+
+.wihora_card.es-dia .wihora_ciudad,
+.wihora_card.es-dia .wihora_time,
+.wihora_card.es-dia .wihora_info_item span {
+  color: #1a1a1a;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.wihora_card.es-dia .wihora_pais,
+.wihora_card.es-dia .wihora_fecha {
+  color: #333;
+  opacity: 0.85;
+}
+
+.wihora_card.es-dia .wihora_reloj_face {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 200, 0, 0.5);
+  box-shadow: 0 4px 20px rgba(255, 200, 0, 0.3);
+}
+
+.wihora_card.es-dia .wihora_hand {
+  background: #ff6b00;
+}
+
+.wihora_card.es-dia .wihora_reloj_center {
+  background: #ff6b00;
+  box-shadow: 0 0 15px #ff6b00;
+}
+
+.wihora_card.es-dia .wihora_info_item {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 200, 0, 0.3);
+}
+
+.wihora_card.es-dia .wihora_info_item i {
+  color: #ff6b00;
+}
+
+/* 🌙 TEMA NOCHE */
+.wihora_card.es-noche {
+  background: linear-gradient(135deg, #1a2332 0%, #2d3e50 100%);
+  box-shadow: 0 8px 32px rgba(0, 100, 200, 0.4);
+}
+
+.wihora_card.es-noche::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(147, 112, 219, 0.3) 0%, transparent 60%);
+  z-index: 0;
+}
+
+.wihora_card.es-noche .wihora_ciudad,
+.wihora_card.es-noche .wihora_time,
+.wihora_card.es-noche .wihora_info_item span {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(147, 112, 219, 0.6);
+}
+
+.wihora_card.es-noche .wihora_pais,
+.wihora_card.es-noche .wihora_fecha {
+  color: #c5c5c5;
+  opacity: 0.9;
+}
+
+.wihora_card.es-noche .wihora_reloj_face {
+  background: rgba(42, 56, 91, 0.6);
+  border-color: rgba(147, 112, 219, 0.5);
+  box-shadow: 0 4px 20px rgba(100, 80, 200, 0.3);
+}
+
+.wihora_card.es-noche .wihora_hand {
+  background: #9370db;
+}
+
+.wihora_card.es-noche .wihora_reloj_center {
+  background: #9370db;
+  box-shadow: 0 0 15px #9370db;
+}
+
+.wihora_card.es-noche .wihora_info_item {
+  background: rgba(42, 56, 91, 0.5);
+  border-color: rgba(147, 112, 219, 0.3);
+}
+
+.wihora_card.es-noche .wihora_info_item i {
+  color: #9370db;
+}
+
+/* HOVER STATES */
+.wihora_card:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+.wihora_card.es-dia:hover {
+  box-shadow: 0 12px 40px rgba(255, 160, 0, 0.5);
+  border-color: rgba(255, 200, 0, 0.6);
+}
+
+.wihora_card.es-noche:hover {
+  box-shadow: 0 12px 40px rgba(0, 100, 200, 0.6);
+  border-color: rgba(147, 112, 219, 0.6);
+}
+
+/* ========== 📐 LAYOUT: Analógico LEFT + Digital RIGHT ====== */
+.wihora_card_content {
+  display: flex;
+  align-items: center;
+  gap: 1.5vw;
+  position: relative;
+  z-index: 1;
+}
+
+/* === 🕐 RELOJ ANALÓGICO (LEFT) - UN POCO MÁS GRANDE === */
+.wihora_analogico {
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wihora_reloj_face {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.wihora_reloj_center {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  z-index: 10;
+  animation: centerPulse 2s ease-in-out infinite;
+}
+
+@keyframes centerPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.wihora_reloj_marks {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.wihora_mark {
+  position: absolute;
+  background: currentColor;
+  opacity: 0.4;
+  border-radius: 2px;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+}
+
+.wihora_mark_hour {
+  width: 2px;
+  height: 8px;
+  opacity: 0.7;
+}
+
+.wihora_mark_minute {
+  width: 1px;
+  height: 4px;
+}
+
+.wihora_hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: 3px;
+  transition: transform 0.05s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wihora_hand_hour {
+  width: 5px;
+  height: 30px;
+  margin-left: -2.5px;
+}
+
+.wihora_hand_minute {
+  width: 4px;
+  height: 42px;
+  margin-left: -2px;
+}
+
+.wihora_hand_second {
+  width: 2px;
+  height: 48px;
+  margin-left: -1px;
+  opacity: 0.8;
+}
+
+/* === 📱 SECCIÓN DIGITAL (RIGHT) === */
+.wihora_digital_section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vh;
+}
+
+.wihora_header_info {
+  display: flex;
+  align-items: center;
+  gap: 0.8vw;
+  padding-bottom: 0.6vh;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* BANDERA MÁS PEQUEÑA */
+.wihora_flag {
+  width: 3.5vh;
+  height: 2.2vh;
+  object-fit: cover;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.wihora_location {
+  flex: 1;
+}
+
+.wihora_ciudad {
+  font-size: var(--fz_m4);
+  font-weight: 800;
+  margin-bottom: 0.1vh;
+  letter-spacing: -0.02em;
+}
+
+.wihora_pais {
+  font-size: var(--fz_s4);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wihora_icon {
+  width: 2.5vh;
+  height: 2.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: var(--fz_m2);
+}
+
+.wihora_icon .fa-sun {
+  color: #ff6b00;
+  animation: sunRotate 20s linear infinite;
+}
+
+.wihora_icon .fa-moon {
+  color: #9370db;
+  animation: moonGlow 3s ease-in-out infinite;
+}
+
+@keyframes sunRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes moonGlow {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* HORA DIGITAL MÁS GRANDE */
+.wihora_time {
+  font-size: var(--fz_x4);
+  font-weight: 800;
+  font-family: var(--ff_R), monospace;
+  letter-spacing: 0.05em;
+  margin: 0.3vh 0;
+  line-height: 1;
+}
+
+.wihora_fecha {
+  font-size: var(--fz_s4);
+  font-weight: 500;
+  margin-bottom: 0.8vh;
+}
+
+.wihora_info {
+  display: flex;
+  gap: 0.4vh;
+}
+
+.wihora_info_item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.3vw;
+  padding: 0.5vh 0.4vw;
+  backdrop-filter: blur(10px);
+  border-radius: 0.5vh;
+  border: 1px solid;
+  transition: all 0.3s ease;
+  font-size: var(--fz_s3);
+}
+
+.wihora_info_item:hover {
+  transform: translateY(-2px);
+}
+
+.wihora_info_item i {
+  font-size: var(--fz_s4);
+  min-width: 10px;
+  text-align: center;
+}
+
+.wihora_info_item span {
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* ========== 📱 RESPONSIVE ====== */
+@media (max-width: 1024px) {
+  .wihora_grid {
+    flex-direction: column;
+  }
+  
+  .wihora_grid > * {
+    flex: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .wihora_card_content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .wihora_analogico {
+    margin: 0 auto 1.5vh;
+  }
+  
+  .wihora_header_info {
+    justify-content: center;
+  }
+  
+  .wihora_info {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 460px) {
+  .wihora_grid {
+    gap: 2vh;
+  }
+  
+  .wihora_card {
+    padding: 2vh 3vw;
+    min-height: auto;
+  }
+  
+  .wihora_analogico {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .wihora_hand_hour { height: 25px; }
+  .wihora_hand_minute { height: 35px; }
+  .wihora_hand_second { height: 40px; }
+    
+  .wihora_info_item {
+    font-size: var(--fz_s4);
+  }
+}
+
+/* === 🎴 CARDS COMPACTOS (ASIA) === */
+.wicont_card_compact {
+  min-height: 200px;
+  padding: 1.5vh 1vw;
+}
+
+.wicont_compact_content {
+  flex-direction: row;
+  align-items: center;
+  gap: 1vw;
+}
+.wicont_time{
+    font-size: var(--fz_x2);
+}
+
+/* === ⏰ RELOJ ANALÓGICO PEQUEÑO === */
+.wicont_analogico_small {
+  width: 130px;
+  height: 130px;
+  flex-shrink: 0;
+}
+
+.wicont_analogico_small .wihora_reloj_face {
+  border-width: 2px;
+}
+
+.wicont_analogico_small .wihora_reloj_center {
+  width: 10px;
+  height: 10px;
+}
+
+.wicont_analogico_small .wihora_hand_hour {
+  width: 6px;
+  height: 40px;
+  margin-left: -3px;
+}
+
+.wicont_analogico_small .wihora_hand_minute {
+  width: 4px;
+  height: 60px;
+  margin-left: -2px;
+}
+
+.wicont_analogico_small .wihora_hand_second {
+  width: 2px;
+  height: 70px;
+  margin-left: -1px;
+}
+
+.wicont_analogico_small .wihora_mark_hour {
+  width: 2px;
+  height: 8px;
+}
+
+.wicont_analogico_small .wihora_mark_minute {
+  width: 1px;
+  height: 4px;
+}
+
+/* === 📱 DIGITAL COMPACTO === */
+.wicont_digital_compact {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vh;
+}
+
+.wicont_digital_compact .wihora_header_info {
+  margin-bottom: 0.5vh;
+}
+
+.wicont_digital_compact .wihora_flag {
+  width: 5vh;
+  height: 3vh;
+}
+
+.wicont_digital_compact .wihora_ciudad {
+  font-size: var(--fz_m3);
+  margin-bottom: 0.2vh;
+}
+
+.wicont_digital_compact .wihora_pais {
+  font-size: var(--fz_s4);
+}
+
+.wicont_digital_compact .wihora_icon {
+  width: 2.5vh;
+  height: 2.5vh;
+  font-size: var(--fz_m1);
+}
+
+.wicont_digital_compact .wihora_time {
+  font-size: var(--fz_x2);
+  margin-bottom: 0.5vh;
+  text-align: left;
+}
+
+.wicont_digital_compact .wihora_fecha {
+  font-size: var(--fz_s4);
+  margin-bottom: 0.8vh;
+  text-align: left;
+}
+
+.wicont_digital_compact .wihora_info {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6vh;
+}
+
+.wicont_digital_compact .wihora_info_item {
+  padding: 0.6vh 0.4vw;
+}
+
+.wicont_digital_compact .wihora_info_item i {
+  font-size: var(--fz_s4);
+}
+
+.wicont_digital_compact .wihora_info_item span {
+  font-size: var(--fz_s3);
+}
+
+/* === 📱 RESPONSIVE COMPACTO === */
+@media (max-width: 1024px) {
+  .wicont_card_compact {
+    min-height: 180px;
+  }
+  
+  .wicont_analogico_small {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .wicont_analogico_small .wihora_hand_hour { height: 35px; }
+  .wicont_analogico_small .wihora_hand_minute { height: 55px; }
+  .wicont_analogico_small .wihora_hand_second { height: 65px; }
+}
+
+@media (max-width: 768px) {
+  .wicont_card_compact {
+    min-height: auto;
+  }
+  
+  .wicont_compact_content {
+    flex-direction: column;
+    gap: 1.5vh;
+  }
+  
+  .wicont_analogico_small {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+  }
+  
+  .wicont_analogico_small .wihora_hand_hour { height: 40px; }
+  .wicont_analogico_small .wihora_hand_minute { height: 60px; }
+  .wicont_analogico_small .wihora_hand_second { height: 70px; }
+  
+  .wicont_digital_compact {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .wicont_digital_compact .wihora_header_info {
+    justify-content: center;
+  }
+  
+  .wicont_digital_compact .wihora_time,
+  .wicont_digital_compact .wihora_fecha {
+    text-align: center;
+  }
+}
+
+@media (max-width: 460px) {
+  .wicont_analogico_small {
+    width: 130px;
+    height: 130px;
+  }
+  
+  .wicont_analogico_small .wihora_hand_hour { height: 38px; }
+  .wicont_analogico_small .wihora_hand_minute { height: 58px; }
+  .wicont_analogico_small .wihora_hand_second { height: 68px; }
+  
+  .wicont_digital_compact .wihora_time {
+    font-size: var(--fz_m5);
+  }
+}

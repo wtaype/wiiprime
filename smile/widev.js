@@ -1,31 +1,5 @@
 import $ from 'jquery'; 
 
-// GUARDANDO DE LOCAL v10.1
-export function savels(clave, valor, horas = 24) {
-  try {
-    if (!clave || typeof clave !== 'string') return false;
-    localStorage.setItem(clave, JSON.stringify({ value: valor, expiry: Date.now() + horas * 3600000 }));
-    return true;
-  } catch(e) { console.error('esv:', e); return false; }
-}
-
-// OBTENIENDO DE LOCAL v10.1
-export function getls(clave) {
-  try {
-    if (!clave || typeof clave !== 'string') return null;
-    const item = localStorage.getItem(clave);
-    if (!item) return null;
-    const parsed = JSON.parse(item);
-    if (!parsed || Date.now() > parsed.expiry) return localStorage.removeItem(clave), null;
-    return parsed.value;
-  } catch(e) { console.error('egt:', e); localStorage.removeItem(clave); return null; }
-}
-
-// ELIMINANDO DE LOCAL v10.1
-export function removels(...claves) {
-  claves.forEach(clave => clave && typeof clave === 'string' && localStorage.removeItem(clave));
-}
-
 // BANDERAS V11
 export const wiFlag = (cod) => {
   if (!cod || cod.length !== 2) return null;
@@ -46,6 +20,7 @@ export const wiCiudades = {
   asia: [
     { ciudad: 'Tokio', pais: 'Japón', codigo: 'JP', zona: 'Asia/Tokyo', capital: true },
     { ciudad: 'Seúl', pais: 'Corea del Sur', codigo: 'KR', zona: 'Asia/Seoul', capital: true },
+    { ciudad: 'Tel Aviv', pais: 'Israel', codigo: 'IL', zona: 'Asia/Jerusalem', capital: false },
     { ciudad: 'Pekín', pais: 'China', codigo: 'CN', zona: 'Asia/Shanghai', capital: true },
     { ciudad: 'Bangkok', pais: 'Tailandia', codigo: 'TH', zona: 'Asia/Bangkok', capital: true },
     { ciudad: 'Singapur', pais: 'Singapur', codigo: 'SG', zona: 'Asia/Singapore', capital: true },
@@ -56,7 +31,6 @@ export const wiCiudades = {
     { ciudad: 'Hong Kong', pais: 'China', codigo: 'HK', zona: 'Asia/Hong_Kong', capital: false },
     { ciudad: 'Shanghái', pais: 'China', codigo: 'CN', zona: 'Asia/Shanghai', capital: false },
     { ciudad: 'Kuala Lumpur', pais: 'Malasia', codigo: 'MY', zona: 'Asia/Kuala_Lumpur', capital: true },
-    { ciudad: 'Tel Aviv', pais: 'Israel', codigo: 'IL', zona: 'Asia/Jerusalem', capital: false },
     { ciudad: 'Hanói', pais: 'Vietnam', codigo: 'VN', zona: 'Asia/Ho_Chi_Minh', capital: true },
     { ciudad: 'Estambul', pais: 'Turquía', codigo: 'TR', zona: 'Europe/Istanbul', capital: false }
   ],  
@@ -78,16 +52,16 @@ export const wiCiudades = {
     { ciudad: 'Bruselas', pais: 'Bélgica', codigo: 'BE', zona: 'Europe/Brussels', capital: true }
   ],  
   america: [
-    { ciudad: 'Nueva York', pais: 'Estados Unidos', codigo: 'US', zona: 'America/New_York', capital: false },
     { ciudad: 'Los Ángeles', pais: 'Estados Unidos', codigo: 'US', zona: 'America/Los_Angeles', capital: false },
-    { ciudad: 'Ciudad de México', pais: 'México', codigo: 'MX', zona: 'America/Mexico_City', capital: true },
-    { ciudad: 'São Paulo', pais: 'Brasil', codigo: 'BR', zona: 'America/Sao_Paulo', capital: false },
     { ciudad: 'Buenos Aires', pais: 'Argentina', codigo: 'AR', zona: 'America/Argentina/Buenos_Aires', capital: true },
+    { ciudad: 'Nueva York', pais: 'Estados Unidos', codigo: 'US', zona: 'America/New_York', capital: false },
+    { ciudad: 'Santiago', pais: 'Chile', codigo: 'CL', zona: 'America/Santiago', capital: true },
+    { ciudad: 'Ciudad de México', pais: 'México', codigo: 'MX', zona: 'America/Mexico_City', capital: true },
+    { ciudad: 'Miami', pais: 'Estados Unidos', codigo: 'US', zona: 'America/New_York', capital: false },
+    { ciudad: 'São Paulo', pais: 'Brasil', codigo: 'BR', zona: 'America/Sao_Paulo', capital: false },
     { ciudad: 'Lima', pais: 'Perú', codigo: 'PE', zona: 'America/Lima', capital: true },
     { ciudad: 'Bogotá', pais: 'Colombia', codigo: 'CO', zona: 'America/Bogota', capital: true },
     { ciudad: 'Toronto', pais: 'Canadá', codigo: 'CA', zona: 'America/Toronto', capital: false },
-    { ciudad: 'Santiago', pais: 'Chile', codigo: 'CL', zona: 'America/Santiago', capital: true },
-    { ciudad: 'Miami', pais: 'Estados Unidos', codigo: 'US', zona: 'America/New_York', capital: false },
     { ciudad: 'Río de Janeiro', pais: 'Brasil', codigo: 'BR', zona: 'America/Sao_Paulo', capital: false },
     { ciudad: 'Montevideo', pais: 'Uruguay', codigo: 'UY', zona: 'America/Montevideo', capital: true },
     { ciudad: 'Caracas', pais: 'Venezuela', codigo: 'VE', zona: 'America/Caracas', capital: true },
@@ -130,23 +104,31 @@ export const wiCiudades = {
   ]
 };
 
-// INFORMACIÓN DE LA CIUDAD V10.1
+// INFORMACIÓN DE LA CIUDAD V10.2 (CORREGIDO)
 export const infoCiudad = (zona) => {
   try {
     const ahora = new Date();
     const fmtHora = new Intl.DateTimeFormat('es-ES', { timeZone: zona, hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
     const fmtFecha = new Intl.DateTimeFormat('es-ES', { timeZone: zona, weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     const fmtGmt = new Intl.DateTimeFormat('es-ES', { timeZone: zona, timeZoneName: 'shortOffset' });
-    const gmtOffset = fmtGmt.formatToParts(ahora).find(p => p.type === 'timeZoneName')?.value || 'GMT+00:00';    
-    // Detectar hemisferio por zona horaria
-    const zonasSur = ['America/Lima','America/Santiago','America/Argentina/Buenos_Aires','America/Montevideo','America/Sao_Paulo','America/La_Paz','America/Asuncion','America/Guayaquil','America/Caracas','Australia/Sydney','Australia/Melbourne','Australia/Brisbane','Australia/Perth','Australia/Adelaide','Australia/Hobart','Pacific/Auckland','Africa/Johannesburg','Africa/Cairo'];
-    const esSur = zonasSur.some(z => zona.includes(z.split('/')[1]));    
+    const gmtOffset = fmtGmt.formatToParts(ahora).find(p => p.type === 'timeZoneName')?.value || 'GMT+0';
+    
+    // ✅ CORREGIDO: Detección de hemisferio SUR más robusta
+    const zonasSur = [
+      'Lima', 'Santiago', 'Buenos_Aires', 'Montevideo', 'Sao_Paulo', 'La_Paz', 
+      'Asuncion', 'Guayaquil', 'Caracas', 'Sydney', 'Melbourne', 'Brisbane', 
+      'Perth', 'Adelaide', 'Hobart', 'Auckland', 'Johannesburg', 'Cairo'
+    ];
+    
+    const esSur = zonasSur.some(ciudad => zona.includes(ciudad));
+    
     // Calcular estación por hemisferio
     const mes = ahora.getMonth();
     const estacionesNorte = ['Invierno','Invierno','Primavera','Primavera','Primavera','Verano','Verano','Verano','Otoño','Otoño','Otoño','Invierno'];
     const estacionesSur = ['Verano','Verano','Otoño','Otoño','Otoño','Invierno','Invierno','Invierno','Primavera','Primavera','Primavera','Verano'];
-    const estacion = esSur ? estacionesSur[mes] : estacionesNorte[mes];    
-    // Detectar cambio horario (DST) comparando enero vs julio
+    const estacion = esSur ? estacionesSur[mes] : estacionesNorte[mes];
+    
+    // Detectar cambio horario (DST)
     const enero = new Date(ahora.getFullYear(), 0, 1);
     const julio = new Date(ahora.getFullYear(), 6, 1);
     const offsetEnero = new Intl.DateTimeFormat('es-ES', { timeZone: zona, timeZoneName: 'shortOffset' }).formatToParts(enero).find(p => p.type === 'timeZoneName')?.value;
@@ -162,7 +144,7 @@ export const infoCiudad = (zona) => {
       cambioHorario
     };
   } catch (error) {
-    console.error('Error al calcular hora:', error);
+    console.error(`❌ Error en infoCiudad(${zona}):`, error.message);
     return null;
   }
 };
@@ -197,6 +179,36 @@ export const esNoche = (hora) => {
   return h >= 6 && h < 19;
 };
 
+// === ⏰ FORMATO DE HORA V11 ===
+export const formatoHora = (() => {
+  let formato = getls('wiClockFormat') || '24';
+  
+  const convertir = (hora24) => {
+    if (formato === '24') return hora24;
+    const [h, m, s] = hora24.split(':').map(Number);
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const h12 = h % 12 || 12;
+    return `${h12.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')} ${ampm}`;
+  };
+  
+  const cambiar = (nuevoFormato) => {
+    if (['12', '24'].includes(nuevoFormato) && formato !== nuevoFormato) {
+      formato = nuevoFormato;
+      savels('wiClockFormat', formato, 720);
+      return true;
+    }
+    return false;
+  };
+  
+  return {
+    get actual() { return formato; },
+    convertir,
+    cambiar,
+    es12h: () => formato === '12',
+    es24h: () => formato === '24'
+  };
+})();
+
 // CARGANDO V10.1
 export const wiSpin = (btn, act = true, txt = '') => {
   const $btn = $(btn);
@@ -226,13 +238,38 @@ export function Notificacion(msg, tipo = 'error', tiempo = 3000) {
 }
 
 // MENSAJE DE BIENVENIDA V10.1
-export const Mensaje = (msg, tipo = 'success') => {
+export function Mensaje(msg, tipo = 'success') {
   $('.alert-box').remove();
   const ico = {success:'fa-circle-check',error:'fa-circle-exclamation',warning:'fa-exclamation-triangle',info:'fa-info-circle'}[tipo];
   const $alerta = $(`<div class="alert-box" style="position:fixed;top:20px;left:50%;transform:translateX(-50%);padding:15px 20px;border-radius:8px;background:var(--${tipo}-bg,var(--F));color:var(--${tipo});border-left:4px solid var(--${tipo});box-shadow:0 4px 12px rgba(0,0,0,.1);z-index:1000;display:flex;align-items:center;gap:10px;min-width:300px;max-width:90%;"><i class="fas ${ico}" style="color:var(--${tipo});"></i><span>${msg}</span></div>`).appendTo('body').hide().fadeIn(300);
   setTimeout(() => $alerta.fadeOut(300, () => $alerta.remove()), 3000);
 };
 
+// GUARDANDO DE LOCAL v10.1
+export function savels(clave, valor, horas = 24) {
+  try {
+    if (!clave || typeof clave !== 'string') return false;
+    localStorage.setItem(clave, JSON.stringify({ value: valor, expiry: Date.now() + horas * 3600000 }));
+    return true;
+  } catch(e) { console.error('esv:', e); return false; }
+}
+
+// OBTENIENDO DE LOCAL v10.1
+export function getls(clave) {
+  try {
+    if (!clave || typeof clave !== 'string') return null;
+    const item = localStorage.getItem(clave);
+    if (!item) return null;
+    const parsed = JSON.parse(item);
+    if (!parsed || Date.now() > parsed.expiry) return localStorage.removeItem(clave), null;
+    return parsed.value;
+  } catch(e) { console.error('egt:', e); localStorage.removeItem(clave); return null; }
+}
+
+// ELIMINANDO DE LOCAL v10.1
+export function removels(...claves) {
+  claves.forEach(clave => clave && typeof clave === 'string' && localStorage.removeItem(clave));
+}
 
 // TOOLTIP V10.1
 export function wiTip(elm, txt, tipo = 'top', tiempo = 1800) {

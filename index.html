@@ -5,28 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WiiPrime</title>
 <style>
+@import url(/smile/horas.css);
+/* ========== 🎨 VARIABLES Y CONFIGURACIÓN GLOBAL ====== */
 :root {
   /* === TAMAÑOS DE FUENTE RESPONSIVOS === */
-  --fz_s1: clamp(0.625rem, 0.8vh, 0.7rem);     /* ~10px */
-  --fz_s2: clamp(0.675rem, 0.85vh, 0.75rem);   /* ~11px */
-  --fz_s3: clamp(0.725rem, 0.9vh, 0.8rem);     /* ~12px */
-  --fz_s4: clamp(0.775rem, 1vh, 0.85rem);      /* ~13px */
-  --fz_m: clamp(0.8rem, 1.05vh, 0.9rem);       /* ~14px */
-  --fz_m1: clamp(0.85rem, 1.1vh, 0.95rem);     /* ~15px */
-  --fz_m2: clamp(0.9rem, 1.15vh, 1rem);        /* ~16px */
-  --fz_m3: clamp(0.95rem, 1.2vh, 1.05rem);     /* ~17px */
-  --fz_m4: clamp(1rem, 1.3vh, 1.1rem);         /* ~18px */
-  --fz_m5: clamp(1.15rem, 1.5vh, 1.25rem);     /* ~20px */
-  --fz_l1: clamp(1.5rem, 2vh, 1.7rem);         /* ~26px */
-  --fz_l2: clamp(1.8rem, 2.3vh, 2rem);         /* ~31px */
-  --fz_x1: clamp(2.2rem, 3vh, 2.8rem);         /* ~42px */
-  --fz_x2: clamp(2.5rem, 3.6vh, 3.5rem);       /* ~52px */
-  --fz_x3: clamp(2.9rem, 5vh, 3.9rem);         /* ~62px */
-  --fz_y1: clamp(3rem, 14vh, 8rem);            /* ~100px */
+  --fz_s1: clamp(0.625rem, 0.8vh, 0.7rem);
+  --fz_s2: clamp(0.675rem, 0.85vh, 0.75rem);
+  --fz_s3: clamp(0.725rem, 0.9vh, 0.8rem);
+  --fz_s4: clamp(0.775rem, 1vh, 0.85rem);
+  --fz_m: clamp(0.8rem, 1.05vh, 0.9rem);
+  --fz_m1: clamp(0.85rem, 1.1vh, 0.95rem);
+  --fz_m2: clamp(0.9rem, 1.15vh, 1rem);
+  --fz_m3: clamp(0.95rem, 1.2vh, 1.05rem);
+  --fz_m4: clamp(1rem, 1.3vh, 1.1rem);
+  --fz_m5: clamp(1.15rem, 1.5vh, 1.25rem);
+  --fz_l1: clamp(1.5rem, 2vh, 1.7rem);
+  --fz_l2: clamp(1.8rem, 2.3vh, 2rem);
+  --fz_x1: clamp(2.2rem, 3vh, 2.8rem);
+  --fz_x2: clamp(2.5rem, 3.6vh, 3.5rem);
+  --fz_x3: clamp(2.9rem, 5vh, 3.9rem);
+  --fz_x4: clamp(3.3rem, 5.9vh, 4.3rem);
+  --fz_y1: clamp(3rem, 14vh, 8rem);
 
   /* === SOMBRAS Y EFECTOS === */
   --bs_m: 0 0 0.3vh 0.1vh var(--F);
-  --bs_l: 0 0.4vh 0.8vh rgba(0,0,0,0.15); 
+  --bs_l: 0 0.4vh 0.8vh rgba(0,0,0,0.15);
 
   /* === TRANSICIONES === */
   --tr_s: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -37,6 +40,10 @@
   --ff_P: 'Poppins', 'Segoe UI', system-ui;
   --ff_R: 'Rubik', 'Segoe UI', system-ui;
 
+  /* 🌅 GRADIENTES DÍA/NOCHE */
+  --gradient-dia: linear-gradient(135deg, #0EBEFF 0%, #29C72E 100%);
+  --gradient-noche: linear-gradient(135deg, #21273B 0%, #7000FF 100%);
+
   /* === COLORES BASE === */
   --F: #fff;
   --0: #000;
@@ -45,13 +52,14 @@
   --success: #3cd741;
   --error: #ff3849;
   --warning: #ffa726;
-  --info: #00a8e6; 
-  --Cielo:#0EBEFF;
-  --Dulce:#FF5C69;
-  --Paz:#29C72E;
-  --Mora:#7000FF;
-  --Futuro:#21273B;
-/* :root[data-theme="Cielo"]  */
+  --info: #00a8e6;
+  --Cielo: #0EBEFF;
+  --Dulce: #FF5C69;
+  --Paz: #29C72E;
+  --Mora: #7000FF;
+  --Futuro: #21273B;
+
+  /* :root[data-theme="Cielo"] */
   --bg: #ccefff;
   --wb: #e5f7ff;
   --tx: #000;
@@ -67,10 +75,6 @@
   --bg5: rgba(25, 120, 215, 0.2);
   --bg6: rgba(204, 239, 255, 0.5);
 }
-
-/* =============================================
-   TEMAS DE COLOR
-   ============================================= */
 
 :root[data-theme="Dulce"] {
   --bg: #ffccd1;
@@ -113,7 +117,7 @@
   --txa: #FFF;
   --txe: #000;
   --hv: #9442ff;
-  --hva: #5f00db; 
+  --hva: #5f00db;
   --mco: #6a00f5;
   --bg1: #ffffff61;
   --bg2: #6a00f5;
@@ -140,10 +144,6 @@
   --bg6: rgba(42, 56, 91, 0.5);
 }
 
-/* =============================================
-   RESET Y BASE
-   ============================================= */
-
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -157,7 +157,10 @@
   scrollbar-color: var(--mco) var(--bg);
 }
 
-/* === CONTAINER PRINCIPAL === */
+a {
+  text-decoration: none;
+}
+
 .wicontainer {
   min-height: 100vh;
   margin: 0 auto;
@@ -167,9 +170,7 @@
   transition: background var(--tr_m);
 }
 
-/* =============================================
-   HEADER - 6vh CON GLASSMORPHISM
-   ============================================= */
+/* ========== 🎯 HEADER - WITEMAS - AUTENTICACIÓN - FOOTER ====== */
 .wiheader {
   height: 6vh;
   width: 100%;
@@ -186,7 +187,6 @@
   z-index: 100;
 }
 
-/* === LADO IZQUIERDO === */
 .wiheader_left {
   display: flex;
   align-items: center;
@@ -203,7 +203,10 @@
   cursor: pointer;
   transition: all var(--tr_f);
 }
-.wilogo a{color:var(--bg2)}
+
+.wilogo a {
+  color: var(--bg2);
+}
 
 .wilogo i {
   font-size: var(--fz_l1);
@@ -220,7 +223,6 @@
   filter: drop-shadow(0 0 0.5vh var(--mco));
 }
 
-/* === NAVEGACIÓN === */
 .winav {
   display: flex;
   gap: .7vh;
@@ -258,14 +260,12 @@
   box-shadow: 0 0.4vh 1.2vh rgba(0,0,0,0.15);
 }
 
-/* === LADO DERECHO === */
 .wiheader_right {
   display: flex;
   align-items: center;
   gap: .5vh;
 }
 
-/* === SELECTOR DE TEMAS === */
 #wiTema {
   display: flex;
   gap: 0.2vh;
@@ -295,7 +295,12 @@
   transform: scale(1.2);
 }
 
-/* === BOTONES DE AUTH === */
+.tema[data-ths^="Cielo"] { background: var(--Cielo); }
+.tema[data-ths^="Dulce"] { background: var(--Dulce); }
+.tema[data-ths^="Paz"] { background: var(--Paz); }
+.tema[data-ths^="Mora"] { background: var(--Mora); }
+.tema[data-ths^="Futuro"] { background: var(--Futuro); }
+
 .wibtn_auth {
   display: flex;
   align-items: center;
@@ -324,367 +329,7 @@
   background: var(--mco);
   color: var(--txa);
   border-color: var(--mco);
-  box-shadow: 0 0.4vh 1vh rgba(0,0,0,0.15);  
-}
-/* === TEMAS - COLORES DE FONDO === */
-.tema[data-ths^="Cielo"] { background: var(--Cielo); }
-.tema[data-ths^="Dulce"] { background: var(--Dulce); }
-.tema[data-ths^="Paz"] { background: var(--Paz); }
-.tema[data-ths^="Mora"] { background: var(--Mora); }
-.tema[data-ths^="Futuro"] { background: var(--Futuro); }
-
-/* =============================================
-   MAIN - CONTENIDO PRINCIPAL
-   ============================================= */
-.wimain {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2vh 2vw;
-  position: relative;
-}
-
-/* === RELOJ DIGITAL === */
-.wiclock {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2vh;
-  padding: 4vh 6vw;
-  background: var(--wb);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 3vh;
-  box-shadow: var(--bs_l), inset 0 0 2vh var(--bg5);
-  border: 1px solid var(--bg5);
-  position: relative;
-  overflow: hidden;
-}
-
-.wiclock::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, var(--bg5) 0%, transparent 70%);
-  animation: pulse 4s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.3; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.1); }
-}
-
-/* === HORA === */
-.wiclock_time {
-  font-size: var(--fz_y1);
-  font-weight: 700;
-  color: var(--mco);
-  font-family: var(--ff_R);
-  letter-spacing: 0.2vw;
-  text-shadow: 0 0 2vh var(--bg5), 0 0 4vh var(--bg5);
-  position: relative;
-  z-index: 1;
-  transition: font-size var(--tr_m);
-}
-
-/* === FECHA === */
-.wiclock_date {
-  font-size: var(--fz_l1);
-  font-weight: 500;
-  color: var(--tx);
-  opacity: 0.8;
-  position: relative;
-  z-index: 1;
-}
-
-/* === AM/PM === */
-.wiclock_ampm {
-  font-size: var(--fz_m5);
-  font-weight: 600;
-  color: var(--mco);
-  background: var(--bg5);
-  padding: 0.5vh 1.5vw;
-  border-radius: 1vh;
-  position: relative;
-  z-index: 1;
-}
-
-/* =============================================
-   FOOTER - PERSONALIZACIÓN
-   ============================================= */
-.wifooter {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4vw;
-  padding: 2vh 2vw;
-  background: var(--bg4);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 2vh;
-  box-shadow: var(--bs_l);
-  border: 1px solid var(--bg5);
-  margin-top: 4vh;
-}
-
-.wifooter_section {
-  display: flex;
-  align-items: center;
-  gap: 1vw;
-}
-
-/* === LABELS === */
-.wilabel {
-  font-size: var(--fz_m2);
-  font-weight: 500;
-  color: var(--tx);
-  display: flex;
-  align-items: center;
-  gap: 0.5vw;
-  cursor: pointer;
-}
-
-/* === BOTONES DE FORMATO === */
-.wibtn_group {
-  display: flex;
-  gap: 0.5vw;
-  background: var(--bg1);
-  padding: 0.3vh;
-  border-radius: 1vh;
-  border: 1px solid var(--bg5);
-}
-
-.wibtn {
-  padding: 0.8vh 1.5vw;
-  background: transparent;
-  border: none;
-  border-radius: 0.8vh;
-  color: var(--tx);
-  font-size: var(--fz_m2);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all var(--tr_f);
-}
-
-.wibtn:hover {
-  background: var(--bg5);
-}
-
-.wibtn.active {
-  background: var(--mco);
-  color: var(--txa);
-  box-shadow: 0 0.2vh 0.8vh rgba(0,0,0,0.15);
-}
-
-/* === TOGGLE CHECKBOX === */
-.witoggle {
-  width: 3vw;
-  height: 1.5vh;
-  min-width: 40px;
-  min-height: 20px;
-  appearance: none;
-  background: var(--bg1);
-  border-radius: 2vh;
-  position: relative;
-  cursor: pointer;
-  transition: all var(--tr_f);
-  border: 1px solid var(--bg5);
-}
-
-.witoggle::before {
-  content: '';
-  position: absolute;
-  width: 1.2vh;
-  height: 1.2vh;
-  min-width: 16px;
-  min-height: 16px;
-  border-radius: 50%;
-  background: var(--F);
-  top: 50%;
-  left: 0.2vh;
-  transform: translateY(-50%);
-  transition: all var(--tr_f);
-  box-shadow: 0 0.2vh 0.4vh rgba(0,0,0,0.2);
-}
-
-.witoggle:checked {
-  background: var(--mco);
-}
-
-.witoggle:checked::before {
-  left: calc(100% - 1.4vh);
-}
-
-/* === RANGE SLIDER === */
-.wirange {
-  width: 12vw;
-  height: 0.6vh;
-  appearance: none;
-  background: var(--bg1);
-  border-radius: 1vh;
-  outline: none;
-  border: 1px solid var(--bg5);
-  cursor: pointer;
-}
-
-.wirange::-webkit-slider-thumb {
-  appearance: none;
-  width: 1.8vh;
-  height: 1.8vh;
-  border-radius: 50%;
-  background: var(--mco);
-  cursor: pointer;
-  box-shadow: 0 0.2vh 0.8vh rgba(0,0,0,0.2);
-  transition: all var(--tr_f);
-}
-
-.wirange::-webkit-slider-thumb:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 1vh var(--mco);
-}
-
-.wirange::-moz-range-thumb {
-  width: 1.8vh;
-  height: 1.8vh;
-  border-radius: 50%;
-  background: var(--mco);
-  cursor: pointer;
-  border: none;
-  box-shadow: 0 0.2vh 0.8vh rgba(0,0,0,0.2);
-  transition: all var(--tr_f);
-}
-
-.wirange::-moz-range-thumb:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 1vh var(--mco);
-}
-
-.wirange_value {
-  font-size: var(--fz_m2);
-  font-weight: 600;
-  color: var(--mco);
-  min-width: 4vw;
-  text-align: center;
-}
-
-/* =============================================
-   RESPONSIVE
-   ============================================= */
-@media (max-width: 768px) {
-  .wiheader {
-    height: 8vh;
-    flex-direction: column;
-    padding: 1vh 2vw;
-    gap: 1vh;
-  }
-
-  .wiheader_left {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .winav {
-    gap: 0.5vw;
-  }
-
-  .winav_item span {
-    display: none;
-  }
-
-  .wiheader_right {
-    width: 100%;
-    justify-content: space-between;
-  }
-  .wiclock_time {
-    font-size: var(--fz_x3);
-  }
-
-  .wifooter {
-    flex-direction: column;
-    gap: 2vh;
-  }
-
-  .wirange {
-    width: 60vw;
-  }
-}
-
-/* =============================================
-   ESTILOS PARA PÁGINAS PLACEHOLDER
-   ============================================= */
-
-.wicalendar,
-.wicalculator,
-.wistopwatch {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 70vh;
-  padding: 4vh 2vw;
-}
-
-.wicalendar_header,
-.wicalculator_header,
-.wistopwatch_header {
-  text-align: center;
-  margin-bottom: 4vh;
-}
-
-.wicalendar_header h2,
-.wicalculator_header h2,
-.wistopwatch_header h2 {
-  font-size: var(--fz_l2);
-  font-weight: 700;
-  color: var(--mco);
-  margin-bottom: 1vh;
-}
-
-.wicalendar_subtitle,
-.wicalculator_subtitle,
-.wistopwatch_subtitle {
-  font-size: var(--fz_m2);
-  color: var(--tx);
-  opacity: 0.7;
-}
-
-.wicalendar_placeholder,
-.wicalculator_placeholder,
-.wistopwatch_placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 6vh 4vw;
-  background: var(--wb);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 3vh;
-  box-shadow: var(--bs_l), inset 0 0 2vh var(--bg5);
-  border: 1px solid var(--bg5);
-  text-align: center;
-  max-width: 600px;
-}
-
-.wicalendar_placeholder i,
-.wicalculator_placeholder i,
-.wistopwatch_placeholder i {
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-2vh);
-  }
+  box-shadow: 0 0.4vh 1vh rgba(0,0,0,0.15);
 }
 
 .wiauth {
@@ -732,10 +377,6 @@
   transition: var(--tr_s);
 }
 
-a {
-  text-decoration: none;
-}
-
 .foo {
   width: 100%;
   text-align: center;
@@ -771,237 +412,203 @@ a {
   background: var(--mco);
   color: var(--txa);
 }
-
-/* =============================================
-   ⏰ PÁGINA PRINCIPAL - HORA MUNDIAL
-   ============================================= */
-
-.wihora {
+.wimain {
+  flex: 1;
   width: 100%;
-  padding: 3vh 2vw;
-  animation: fadeInContent 0.8s ease-out;
+  padding: 2vh 2vw;
+  overflow-y: auto;
 }
 
-@keyframes fadeInContent {
-  from { opacity: 0; transform: translateY(2vh); }
-  to { opacity: 1; transform: translateY(0); }
+
+/* === 📱 RESPONSIVE GLASS-CARD === */
+@media (max-width: 1024px) {
+  .wihora_card_content {
+    flex-direction: column;
+    padding: 2.5vh 2vw;
+  }
+  
+  .wihora_analogico {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto;
+  }
+  
+  .wihora_hand_hour { height: 55px; }
+  .wihora_hand_minute { height: 80px; }
+  .wihora_hand_second { height: 90px; }
+  
+  .wihora_digital_section {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .wihora_header_info {
+    justify-content: center;
+  }
 }
 
-/* === HEADER CON CONTROLES === */
+@media (max-width: 768px) {
+  .wihora_analogico {
+    width: 170px;
+    height: 170px;
+  }
+  
+  .wihora_hand_hour { height: 50px; }
+  .wihora_hand_minute { height: 75px; }
+  .wihora_hand_second { height: 85px; }
+  
+  .wihora_time {
+    font-size: var(--fz_x1);
+  }
+  
+  .wihora_info {
+    flex-direction: column;
+  }
+}
 
-.wihora_header {
+@media (max-width: 564px) {
+  .wihora_analogico {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .wihora_hand_hour { height: 48px; }
+  .wihora_hand_minute { height: 70px; }
+  .wihora_hand_second { height: 80px; }
+  
+  .wihora_card_content {
+    padding: 3vh 4vw;
+  }
+}
+
+@media (max-width: 460px) {
+  .wihora_analogico {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .wihora_hand_hour { height: 45px; }
+  .wihora_hand_minute { height: 65px; }
+  .wihora_hand_second { height: 75px; }
+  
+  .wihora_time {
+    font-size: var(--fz_l2);
+  }
+}
+/* 🕐 RELOJ ANALÓGICO */
+.wihora_analogico {
+  width: 200px;
+  height: 200px;
+  position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 4vh;
-  padding-bottom: 2vh;
-  border-bottom: 2px solid var(--bg5);
-  position: relative;
+  justify-content: center;
+  flex-shrink: 0;
+  margin: 0 auto;
 }
 
-.wihora_header::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
+.wihora_reloj_face {
   width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    var(--mco) 50%, 
-    transparent 100%);
-  opacity: 0.6;
-  animation: shimmer 3s infinite;
-}
-
-@keyframes shimmer {
-  0%, 100% { transform: translateX(-100%); opacity: 0; }
-  50% { transform: translateX(0); opacity: 0.6; }
-}
-
-.wihora_title {
-  font-size: var(--fz_l2);
-  font-weight: 800;
-  background: linear-gradient(135deg, var(--mco) 0%, var(--tx) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.05em;
-  position: relative;
-}
-
-.wihora_controls {
-  display: flex;
-  gap: 1vh;
+  height: 100%;
+  border-radius: 50%;
   background: var(--bg1);
-  backdrop-filter: blur(15px) saturate(180%);
-  padding: 0.8vh 1.2vh;
-  border-radius: 1.5vh;
-  border: 1px solid var(--bg5);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  transition: all var(--tr_m);
-}
-
-.wihora_controls:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-}
-
-.wibtn_format {
-  padding: 1vh 2vw;
-  border: none;
-  background: transparent;
-  color: var(--tx);
-  font-weight: 600;
-  font-size: var(--fz_m3);
-  border-radius: 1vh;
-  cursor: pointer;
-  transition: all var(--tr_m);
-  position: relative;
-  overflow: hidden;
-}
-
-.wibtn_format::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: var(--mco);
-  opacity: 0;
-  border-radius: 1vh;
-  transition: opacity var(--tr_m);
-  z-index: -1;
-}
-
-.wibtn_format:hover::before {
-  opacity: 0.15;
-}
-
-.wibtn_format.active::before {
-  opacity: 1;
-}
-
-.wibtn_format.active {
-  color: white;
-  font-weight: 700;
-}
-
-.wibtn_format:hover:not(.active) {
-  color: var(--mco);
-}
-
-/* === GRID DE CIUDADES (2x2) === */
-
-.wihora_grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2.5vh;
-  padding: 1vh 0;
-}
-
-/* === CARD PRINCIPAL === */
-
-.wihora_card {
-  position: relative;
-  background: var(--bg3);
-  backdrop-filter: blur(25px) saturate(180%);
-  -webkit-backdrop-filter: blur(25px) saturate(180%);
-  border: 1px solid var(--bg5);
-  border-radius: 2.5vh;
-  padding: 2.5vh 2vw;
-  overflow: hidden;
-  cursor: pointer;
+  border: 3px solid var(--bg5);
   box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.08),
-    0 2px 8px rgba(0, 0, 0, 0.04),
-    inset 0 1px 0 var(--bg1);
-  transition: all 0.4s ease;
-  opacity: 0;
-  animation: cardSlideIn 0.6s ease-out forwards;
-}
-
-.wihora_card:nth-child(1) { animation-delay: 0.1s; }
-.wihora_card:nth-child(2) { animation-delay: 0.2s; }
-.wihora_card:nth-child(3) { animation-delay: 0.3s; }
-.wihora_card:nth-child(4) { animation-delay: 0.4s; }
-
-@keyframes cardSlideIn {
-  from {
-    opacity: 0;
-    transform: translateY(2vh);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.wihora_card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, 
-    var(--bg1) 0%, 
-    transparent 50%,
-    transparent 100%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.wihora_card:hover {
-  transform: translateY(-0.5vh);
-  box-shadow: 
-    0 12px 40px rgba(0, 0, 0, 0.1),
-    0 4px 12px rgba(0, 0, 0, 0.06),
-    0 0 0 1px var(--mco),
-    inset 0 1px 0 var(--bg1);
-  border-color: var(--mco);
-}
-
-.wihora_card:hover::before {
-  opacity: 1;
-}
-
-/* === HEADER DE CARD === */
-
-.wihora_card_header {
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    inset 0 2px 8px var(--bg1);
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 1.5vw;
-  margin-bottom: 2.5vh;
-  position: relative;
-  z-index: 1;
+  justify-content: center;
 }
 
+.wihora_reloj_center {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: var(--mco);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--mco);
+  z-index: 10;
+}
+
+.wihora_reloj_marks {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.wihora_mark {
+  position: absolute;
+  background: var(--tx);
+  opacity: 0.3;
+  border-radius: 2px;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+}
+
+.wihora_mark_hour {
+  width: 3px;
+  height: 12px;
+  opacity: 0.6;
+}
+
+.wihora_mark_minute {
+  width: 2px;
+  height: 6px;
+}
+
+.wihora_hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: 4px;
+  background: var(--mco);
+  transition: transform 0.05s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wihora_hand_hour {
+  width: 8px;
+  height: 60px;
+  margin-left: -4px;
+  opacity: 0.9;
+}
+
+.wihora_hand_minute {
+  width: 6px;
+  height: 85px;
+  margin-left: -3px;
+  opacity: 0.85;
+}
+
+.wihora_hand_second {
+  width: 3px;
+  height: 95px;
+  margin-left: -1.5px;
+  background: var(--hv);
+}
+
+/* INFO DIGITAL */
 .wihora_flag {
   width: 7vh;
   height: 4vh;
   object-fit: cover;
-  border-radius: 1vh;
-  box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.12),
-    0 1px 4px rgba(0, 0, 0, 0.08),
-    inset 0 1px 0 var(--bg1);
+  border-radius: 0.8vh;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), inset 0 1px 0 var(--bg1);
   transition: all var(--tr_m);
   border: 1px solid var(--bg5);
 }
 
 .wihora_card:hover .wihora_flag {
   transform: scale(1.05);
-  box-shadow: 
-    0 6px 16px rgba(0, 0, 0, 0.18),
-    0 2px 6px rgba(0, 0, 0, 0.12),
-    0 0 0 1px var(--mco);
 }
 
 .wihora_location {
   flex: 1;
+  min-width: 0;
 }
 
 .wihora_ciudad {
@@ -1010,7 +617,7 @@ a {
   color: var(--tx);
   margin-bottom: 0.3vh;
   letter-spacing: -0.03em;
-  transition: all var(--tr_m);
+  transition: color var(--tr_m);
 }
 
 .wihora_card:hover .wihora_ciudad {
@@ -1018,49 +625,41 @@ a {
 }
 
 .wihora_pais {
-  font-size: var(--fz_m2);
+  font-size: var(--fz_m1);
   color: var(--tx);
-  opacity: 0.85;
+  opacity: 0.75;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
 }
 
 .wihora_icon {
-  width: 4vh;
-  height: 4vh;
+  width: 3.5vh;
+  height: 3.5vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, 
-    var(--bg1) 0%, 
-    transparent 100%);
+  background: linear-gradient(135deg, var(--bg1) 0%, transparent 100%);
   border-radius: 50%;
-  font-size: var(--fz_m5);
-  box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.1),
-    inset 0 2px 4px var(--bg1);
+  font-size: var(--fz_m4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 2px 4px var(--bg1);
   transition: all var(--tr_m);
   border: 1px solid var(--bg5);
 }
 
 .wihora_card:hover .wihora_icon {
   transform: scale(1.1);
-  box-shadow: 
-    0 6px 16px rgba(0, 0, 0, 0.15),
-    0 0 0 2px var(--bg4),
-    0 0 0 3px var(--mco);
 }
 
 .wihora_icon .fa-sun {
   color: #ff9800;
-  filter: drop-shadow(0 0 0.6vh #ffa726);
+  filter: drop-shadow(0 0 0.5vh #ffa726);
   animation: sunPulse 2.5s ease-in-out infinite;
 }
 
 .wihora_icon .fa-moon {
   color: #7e57c2;
-  filter: drop-shadow(0 0 0.6vh #9575cd);
+  filter: drop-shadow(0 0 0.5vh #9575cd);
   animation: moonGlow 3s ease-in-out infinite;
 }
 
@@ -1074,146 +673,20 @@ a {
   50% { opacity: 1; filter: drop-shadow(0 0 1vh #7e57c2); }
 }
 
-/* === HORA PRINCIPAL === */
-
 .wihora_time {
-  font-size: var(--fz_x1);
+  font-size: var(--fz_x4);
   font-weight: 800;
   color: var(--bg2);
   font-family: var(--ff_R), 'Courier New', monospace;
-  text-align: center;
-  margin-bottom: 1.5vh;
-  position: relative;
-  z-index: 1;
+  text-align: left;
+  margin-bottom: 0.8vh;
   letter-spacing: 0.05em;
-  text-shadow: 
-    0 2px 4px rgba(0, 0, 0, 0.08),
-    0 0 0.8vh var(--bg5);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 0 0.8vh var(--bg5);
   transition: all var(--tr_m);
 }
 
 .wihora_card:hover .wihora_time {
-  transform: scale(1.03);
-  text-shadow: 
-    0 4px 8px rgba(0, 0, 0, 0.12),
-    0 0 1.5vh var(--mco);
-}
-
-.wihora_fecha {
-  font-size: var(--fz_m3);
-  color: var(--tx);
-  text-align: center;
-  margin-bottom: 2.5vh;
-  opacity: 0.9;
-  position: relative;
-  z-index: 1;
-  text-transform: capitalize;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-/* === INFO GRID === */
-
-.wihora_info {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.2vh;
-  position: relative;
-  z-index: 1;
-}
-
-.wihora_info_item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.8vh;
-  padding: 1.5vh 0.5vw;
-  background: var(--bg1);
-  backdrop-filter: blur(10px);
-  border-radius: 1.2vh;
-  border: 1px solid var(--bg5);
-  box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 var(--bg1);
-  transition: all var(--tr_m);
-  position: relative;
-  overflow: hidden;
-}
-
-.wihora_info_item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, 
-    transparent, 
-    var(--bg1), 
-    transparent);
-  transition: left 0.5s ease;
-}
-
-.wihora_info_item:hover::before {
-  left: 100%;
-}
-
-.wihora_info_item:hover {
-  background: var(--bg1);
-  transform: translateY(-0.3vh);
-  box-shadow: 
-    0 6px 16px rgba(0, 0, 0, 0.1),
-    0 0 0 1px var(--mco);
-  border-color: var(--mco);
-}
-
-.wihora_info_item i {
-  font-size: var(--fz_m3);
-  color: var(--bg2);
-  transition: all var(--tr_m);
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.08));
-}
-
-.wihora_info_item:hover i {
-  transform: scale(1.15);
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
-}
-
-.wihora_info_item span {
-  font-size: var(--fz_m2);
-  color: var(--tx);
-  font-weight: 700;
-  text-align: center;
-  line-height: 1.3;
-}
-
-.wihora_diferencia {
-  font-size: var(--fz_m1);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0.5vh 1vw;
-  border-radius: 0.8vh;
-  transition: all var(--tr_m);
-}
-
-.wihora_subtitle {
-  font-size: var(--fz_m5);
-  font-weight: 600;
-  opacity: 0.7;
-  background: linear-gradient(135deg, var(--tx) 0%, var(--txe) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  position: relative;
-}
-
-.wihora_subtitle::before {
-  content: '📍';
-  margin-right: 0.5vw;
-  filter: grayscale(0);
-  -webkit-text-fill-color: initial;
+  transform: scale(1.02);
 }
 
 .wihora_time.changing {
@@ -1221,15 +694,73 @@ a {
 }
 
 @keyframes timeChange {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(0.95); opacity: 0.6; }
-  100% { transform: scale(1); opacity: 1; }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; transform: scale(0.98); }
 }
 
-/* =============================================
-   🌍 CONTINENTES
-   ============================================= */
+.wihora_fecha {
+  font-size: var(--fz_m2);
+  color: var(--tx);
+  font-weight: 600;
+  margin-bottom: 1.5vh;
+  opacity: 0.85;
+}
 
+.wihora_info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1vh;
+}
+
+.wihora_info_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5vh;
+  padding: 1vh 0.5vw;
+  background: var(--bg6);
+  backdrop-filter: blur(10px);
+  border-radius: 1vh;
+  border: 1px solid var(--bg5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06), inset 0 1px 0 var(--bg1);
+  transition: all var(--tr_m);
+}
+
+.wihora_info_item:hover {
+  background: var(--bg1);
+  transform: translateY(-0.3vh);
+  border-color: var(--mco);
+}
+
+.wihora_info_item i {
+  font-size: var(--fz_m2);
+  color: var(--mco);
+}
+
+.wihora_info_item span {
+  font-size: var(--fz_m1);
+  color: var(--tx);
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.wihora_diferencia {
+  display: flex;
+  align-items: center;
+  gap: 0.3vw;
+}
+
+.wihora_diferencia i {
+  font-size: var(--fz_m1);
+}
+
+.wihora_gmt, .wihora_estacion {
+  white-space: nowrap;
+}
+
+/* ========== 🌍 CONTINENTES ====== */
 .wicontinente {
   width: 100%;
   padding: 2vh 2vw;
@@ -1637,9 +1168,276 @@ a {
   gap: 0.4vh;
 }
 
-/* =============================================
-   📱 RESPONSIVE OPTIMIZADO
-   ============================================= */
+/* ========== 🔧 COMPONENTES LABS ====== */
+.wiclock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vh;
+  padding: 4vh 6vw;
+  background: var(--wb);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 3vh;
+  box-shadow: var(--bs_l), inset 0 0 2vh var(--bg5);
+  border: 1px solid var(--bg5);
+  position: relative;
+  overflow: hidden;
+}
+
+.wiclock::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--bg5) 0%, transparent 70%);
+  animation: pulse 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+.wiclock_time {
+  font-size: var(--fz_y1);
+  font-weight: 700;
+  color: var(--mco);
+  font-family: var(--ff_R);
+  letter-spacing: 0.2vw;
+  text-shadow: 0 0 2vh var(--bg5), 0 0 4vh var(--bg5);
+  position: relative;
+  z-index: 1;
+  transition: font-size var(--tr_m);
+}
+
+.wiclock_date {
+  font-size: var(--fz_l1);
+  font-weight: 500;
+  color: var(--tx);
+  opacity: 0.8;
+  position: relative;
+  z-index: 1;
+}
+
+.wiclock_ampm {
+  font-size: var(--fz_m5);
+  font-weight: 600;
+  color: var(--mco);
+  background: var(--bg5);
+  padding: 0.5vh 1.5vw;
+  border-radius: 1vh;
+  position: relative;
+  z-index: 1;
+}
+
+.wifooter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4vw;
+  padding: 2vh 2vw;
+  background: var(--bg4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 2vh;
+  box-shadow: var(--bs_l);
+  border: 1px solid var(--bg5);
+  margin-top: 4vh;
+}
+
+.wifooter_section {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+}
+
+.wilabel {
+  font-size: var(--fz_m2);
+  font-weight: 500;
+  color: var(--tx);
+  display: flex;
+  align-items: center;
+  gap: 0.5vw;
+  cursor: pointer;
+}
+
+.wibtn_group {
+  display: flex;
+  gap: 0.5vw;
+  background: var(--bg1);
+  padding: 0.3vh;
+  border-radius: 1vh;
+  border: 1px solid var(--bg5);
+}
+
+.wibtn {
+  padding: 0.8vh 1.5vw;
+  background: transparent;
+  border: none;
+  border-radius: 0.8vh;
+  color: var(--tx);
+  font-size: var(--fz_m2);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--tr_f);
+}
+
+.wibtn:hover {
+  background: var(--bg5);
+}
+
+.wibtn.active {
+  background: var(--mco);
+  color: var(--txa);
+  box-shadow: 0 0.2vh 0.8vh rgba(0,0,0,0.15);
+}
+
+.witoggle {
+  width: 3vw;
+  height: 1.5vh;
+  min-width: 40px;
+  min-height: 20px;
+  appearance: none;
+  background: var(--bg1);
+  border-radius: 2vh;
+  position: relative;
+  cursor: pointer;
+  transition: all var(--tr_f);
+  border: 1px solid var(--bg5);
+}
+
+.witoggle::before {
+  content: '';
+  position: absolute;
+  width: 1.2vh;
+  height: 1.2vh;
+  min-width: 16px;
+  min-height: 16px;
+  border-radius: 50%;
+  background: var(--F);
+  top: 50%;
+  left: 0.2vh;
+  transform: translateY(-50%);
+  transition: all var(--tr_f);
+  box-shadow: 0 0.2vh 0.4vh rgba(0,0,0,0.2);
+}
+
+.witoggle:checked {
+  background: var(--mco);
+}
+
+.witoggle:checked::before {
+  left: calc(100% - 1.4vh);
+}
+
+.wirange {
+  width: 12vw;
+  height: 0.6vh;
+  appearance: none;
+  background: var(--bg1);
+  border-radius: 1vh;
+  outline: none;
+  border: 1px solid var(--bg5);
+  cursor: pointer;
+}
+
+.wirange::-webkit-slider-thumb {
+  appearance: none;
+  width: 1.8vh;
+  height: 1.8vh;
+  border-radius: 50%;
+  background: var(--mco);
+  cursor: pointer;
+  box-shadow: 0 0.2vh 0.8vh rgba(0,0,0,0.2);
+  transition: all var(--tr_f);
+}
+
+.wirange::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 1vh var(--mco);
+}
+
+.wirange::-moz-range-thumb {
+  width: 1.8vh;
+  height: 1.8vh;
+  border-radius: 50%;
+  background: var(--mco);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0.2vh 0.8vh rgba(0,0,0,0.2);
+  transition: all var(--tr_f);
+}
+
+.wirange::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 1vh var(--mco);
+}
+
+.wirange_value {
+  font-size: var(--fz_m2);
+  font-weight: 600;
+  color: var(--mco);
+  min-width: 4vw;
+  text-align: center;
+}
+
+.wicalendar, .wicalculator, .wistopwatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  padding: 4vh 2vw;
+}
+
+.wicalendar_header, .wicalculator_header, .wistopwatch_header {
+  text-align: center;
+  margin-bottom: 4vh;
+}
+
+.wicalendar_header h2, .wicalculator_header h2, .wistopwatch_header h2 {
+  font-size: var(--fz_l2);
+  font-weight: 700;
+  color: var(--mco);
+  margin-bottom: 1vh;
+}
+
+.wicalendar_subtitle, .wicalculator_subtitle, .wistopwatch_subtitle {
+  font-size: var(--fz_m2);
+  color: var(--tx);
+  opacity: 0.7;
+}
+
+.wicalendar_placeholder, .wicalculator_placeholder, .wistopwatch_placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6vh 4vw;
+  background: var(--wb);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 3vh;
+  box-shadow: var(--bs_l), inset 0 0 2vh var(--bg5);
+  border: 1px solid var(--bg5);
+  text-align: center;
+  max-width: 600px;
+}
+
+.wicalendar_placeholder i, .wicalculator_placeholder i, .wistopwatch_placeholder i {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2vh); }
+}
+
+/* ========== 📱 RESPONSIVE - MEDIA QUERIES ====== */
 
 /* === 💻 TABLET GRANDE (1024px) === */
 @media (max-width: 1024px) {
@@ -1655,126 +1453,311 @@ a {
   .sesion { height: 5vh; padding-inline: 1.8vh; gap: 1vh; }
   .sesion img { max-width: 3.5vh; }
   .bt_salir { padding-inline: 2.5vh; font-size: var(--fz_m1); }
+  
+  /* Hora Mundial */
   .wihora_grid { grid-template-columns: 1fr; gap: 2.5vh; }
+  .wihora_card_header { grid-template-columns: 180px 1fr; }
+  .wihora_analogico { width: 180px; height: 180px; }
+  .wihora_hand_hour { height: 55px; }
+  .wihora_hand_minute { height: 80px; }
+  .wihora_hand_second { height: 90px; }
+  
+  /* Continentes */
   .wicont_grid { grid-template-columns: repeat(2, 1fr); gap: 2vh; }
 }
 
 /* === 📱 TABLET (768px) === */
 @media (max-width: 768px) {
-  .wiheader { height: auto; min-height: 10vh; flex-direction: column; padding: 1.5vh 4vw; gap: 1.5vh; }
-  .wiheader_left, .wiheader_right { width: 100%; justify-content: space-between; }
+  /* Header */
+  .wiheader { 
+    height: auto; 
+    min-height: 10vh; 
+    flex-direction: column; 
+    padding: 1.5vh 4vw; 
+    gap: 1.5vh; 
+  }
+  .wiheader_left, .wiheader_right { 
+    width: 100%; 
+    justify-content: space-between; 
+  }
   .wilogo { font-size: var(--fz_m5); }
   .wilogo i { font-size: var(--fz_l1); }
+  
+  /* Navegación */
   .winav { gap: 0.8vh; flex-wrap: wrap; }
   .winav_item { padding: 1vh 2vw; gap: 0.6vw; }
   .winav_item span { display: none; }
   .winav_item i { font-size: var(--fz_m4); }
+  
+  /* Temas */
   #wiTema { padding: 0.8vh 1.5vw; gap: 0.5vh; }
   .tema { width: 4vh; height: 3.9vh; }
-  .wiauth {width: auto;gap: .5vh;}
+  
+  /* Auth */
+  .wiauth { width: auto; gap: .5vh; }
   .sesion { height: 5.5vh; padding-inline: 2vh; gap: 1.2vh; }
   .sesion span, .bt_salir { font-size: var(--fz_m2); }
   .bt_salir { padding-inline: 3vh; height: 5.5vh; }
+  
+  /* Main y Footer */
   .wimain, .wifooter { padding: 2vh 4vw; }
   .wifooter { flex-direction: column; gap: 2vh; }
-  .wihora_header { flex-direction: column; gap: 2vh; text-align: center; }
+  
+  /* Hora Mundial */
+  .wihora_header { 
+    flex-direction: column; 
+    gap: 2vh; 
+    text-align: center; 
+  }
   .wihora_title { font-size: var(--fz_l1); }
   .wihora_controls { width: 100%; justify-content: center; }
   .wihora_grid, .wicont_grid { gap: 2vh; }
   .wihora_card { padding: 2.5vh 4vw; }
-  .wihora_flag { width: 8vh; height: 4.5vh; }
+  .wihora_card_header { 
+    grid-template-columns: 1fr;
+    gap: 2vh;
+    text-align: center;
+  }
+  .wihora_analogico { 
+    width: 180px; 
+    height: 180px;
+    margin: 0 auto;
+  }
+  .wihora_hand_hour { height: 50px; }
+  .wihora_hand_minute { height: 75px; }
+  .wihora_hand_second { height: 85px; }
+  .wihora_flag { width: 8vh; height: 4.5vh; margin: 0 auto; }
   .wihora_ciudad { font-size: var(--fz_m4); }
   .wihora_time, .wicont_time { font-size: var(--fz_x1); }
-  .wihora_info, .wicont_info { grid-template-columns: repeat(3, 1fr); gap: 1vh; }
+  .wihora_info, .wicont_info { 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 1vh; 
+  }
+  
+  /* Continentes */
   .wicont_grid { grid-template-columns: 1fr; }
-  .wicont_controls { flex-direction: column; align-items: stretch; }
+  .wicont_controls { 
+    flex-direction: column; 
+    align-items: stretch; 
+  }
   .wicont_search { min-width: 100%; }
+  
+  /* Reloj Digital */
   .wiclock_time { font-size: var(--fz_x3); }
+  
+  /* Controles */
   .wirange { width: 60vw; }
 }
 
 /* === 📱 MÓVIL GRANDE (564px) === */
 @media (max-width: 564px) {
+  /* Header */
   .wiheader { min-height: 12vh; padding: 1.5vh 5vw; gap: 1.8vh; }
-  .wiheader_left { flex-direction: column; align-items: flex-start; gap: 1.5vh; }
+  .wiheader_left { 
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 1.5vh; 
+  }
   .wiheader_right { gap: 2vh; }
-  .wilogo { font-size: var(--fz_m5); width: 100%; justify-content: center; }
+  .wilogo { 
+    font-size: var(--fz_m5); 
+    width: 100%; 
+    justify-content: center; 
+  }
   .wilogo i { font-size: var(--fz_l1); }
-  .winav { width: 100%; justify-content: space-around; gap: 1vh; }
-  .winav_item { flex: 1; justify-content: center; padding: 1.2vh 0; min-width: 45px; }
+  
+  /* Navegación */
+  .winav { 
+    width: 100%; 
+    justify-content: space-around; 
+    gap: 1vh; 
+  }
+  .winav_item { 
+    flex: 1; 
+    justify-content: center; 
+    padding: 1.2vh 0; 
+    min-width: 45px; 
+  }
   .winav_item i { font-size: var(--fz_m5); }
-  #wiTema {flex: 1;justify-content: space-around;padding: 3vw 1vw;}
+  
+  /* Temas */
+  #wiTema { 
+    flex: 1; 
+    justify-content: space-around; 
+    padding: 3vw 1vw; 
+  }
   .tema { width: 4.5vh; height: 4.5vh; }
+  
+  /* Auth */
   .wiauth { flex: 1; justify-content: flex-end; }
   .sesion { height: 6vh; padding-inline: 2.5vh; gap: 1.5vh; }
   .sesion img { max-width: 4vh; }
   .sesion span, .bt_salir { font-size: var(--fz_m3); }
   .bt_salir { height: 6vh; padding-inline: 3.5vh; }
+  
+  /* Main */
   .wimain, .wifooter { padding: 2vh 5vw; }
+  
+  /* Hora Mundial */
   .wihora_title, .wihora_ciudad { font-size: var(--fz_m5); }
   .wihora_card, .wicont_card { padding: 3vh 5vw; }
+  .wihora_analogico { 
+    width: 170px; 
+    height: 170px; 
+  }
+  .wihora_hand_hour { height: 48px; }
+  .wihora_hand_minute { height: 70px; }
+  .wihora_hand_second { height: 80px; }
   .wihora_flag { width: 10vh; height: 5.5vh; }
   .wihora_pais { font-size: var(--fz_m1); }
   .wihora_time { font-size: var(--fz_l2); }
   .wihora_fecha { font-size: var(--fz_m2); }
-  .wihora_info { grid-template-columns: repeat(2, 1fr); gap: 1.2vh; }
+  .wihora_info { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 1.2vh; 
+  }
   .wihora_info_item { padding: 1.8vh 2vw; }
+  
+  /* Continentes */
   .wicont_flag { width: 7vh; height: 4vh; }
   .wicont_time { font-size: var(--fz_l1); }
-  .wicont_info { grid-template-columns: repeat(2, 1fr); gap: 1vh; }
+  .wicont_info { 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 1vh; 
+  }
+  
+  /* Reloj Digital */
   .wiclock_time { font-size: var(--fz_x2); }
   .wiclock_date { font-size: var(--fz_m5); }
 }
 
 /* === 📱 MÓVIL PEQUEÑO (460px) === */
 @media (max-width: 460px) {
+  /* Header */
   .wiheader { min-height: 14vh; padding: 2vh 6vw; gap: 2vh; }
   .wiheader_left { gap: 2vh; }
   .wilogo { font-size: var(--fz_l1); }
   .wilogo i { font-size: var(--fz_l2); }
+  
+  /* Navegación */
   .winav { gap: 1.2vh; }
   .winav_item { padding: 1.5vh 0; border-radius: 1.2vh; }
   .winav_item i { font-size: var(--fz_l1); }
-  .winav_item:not(.active) i{color:var(--bg2);}
-  #wiTema {gap: 0;}
-  .tema {width: 3.5vh;height: 3.5vh;}
+  .winav_item:not(.active) i { color: var(--bg2); }
+  
+  /* Temas */
+  #wiTema { gap: 0; }
+  .tema { width: 3.5vh; height: 3.5vh; }
+  
+  /* Auth */
   .sesion { height: 6.5vh; padding-inline: 3vw; gap: 1vw; }
   .sesion img { max-width: 4.5vh; }
-  .sesion span, .bt_salir, .wibtn_format, .wiclock_ampm, .wilabel, .wibtn, .wirange_value { font-size: var(--fz_m4); }
+  .sesion span, 
+  .bt_salir, 
+  .wibtn_format, 
+  .wiclock_ampm, 
+  .wilabel, 
+  .wibtn, 
+  .wirange_value { font-size: var(--fz_m4); }
   .bt_salir { height: 6.5vh; padding-inline: 4vw; }
-  .bt_salir span{display: none;}
-  .wimain {padding: 2.5vh 1vw;}
-  .wihora_title, .wihora_ciudad, .wicont_title { font-size: var(--fz_l1); }
+  .bt_salir span { display: none; }
+  
+  /* Main */
+  .wimain { padding: 2.5vh 1vw; }
+  
+  /* Hora Mundial */
+  .wihora_title, 
+  .wihora_ciudad, 
+  .wicont_title { font-size: var(--fz_l1); }
   .wihora_controls { padding: 1vh 1.5vh; }
   .wibtn_format { padding: 1.2vh 3vw; }
-  .wihora_card, .wicont_card { padding: 3.5vh 6vw; border-radius: 2vh; }
+  .wihora_card, .wicont_card { 
+    padding: 3.5vh 6vw; 
+    border-radius: 2vh; 
+  }
   .wihora_card_header { gap: 2vw; margin-bottom: 3vh; }
-  .wihora_flag { width: 12vh; height: 6.5vh; border-radius: 1.2vh; }
+  .wihora_analogico { 
+    width: 160px; 
+    height: 160px; 
+  }
+  .wihora_hand_hour { height: 45px; }
+  .wihora_hand_minute { height: 65px; }
+  .wihora_hand_second { height: 75px; }
+  .wihora_flag { 
+    width: 12vh; 
+    height: 6.5vh; 
+    border-radius: 1.2vh; 
+  }
   .wihora_pais, .wicont_pais { font-size: var(--fz_m2); }
-  .wihora_icon { width: 5vh; height: 5vh; font-size: var(--fz_l1); }
-  .wihora_time, .wicont_time, .wiclock_time { font-size: var(--fz_x1); margin-bottom: 2vh; }
-  .wihora_fecha, .wicont_fecha { font-size: var(--fz_m3); margin-bottom: 3vh; }
-  .wihora_info, .wicont_info { grid-template-columns: 1fr; gap: 1.5vh; }
+  .wihora_icon { 
+    width: 5vh; 
+    height: 5vh; 
+    font-size: var(--fz_l1); 
+  }
+  .wihora_time, 
+  .wicont_time, 
+  .wiclock_time { 
+    font-size: var(--fz_x1); 
+    margin-bottom: 2vh; 
+  }
+  .wihora_fecha, .wicont_fecha { 
+    font-size: var(--fz_m3); 
+    margin-bottom: 3vh; 
+  }
+  .wihora_info, .wicont_info { 
+    grid-template-columns: 1fr; 
+    gap: 1.5vh; 
+  }
   .wihora_info_item { padding: 2.5vh 4vw; }
-  .wihora_info_item i, .wicont_search_icon, .wicont_ciudad { font-size: var(--fz_m5); }
+  .wihora_info_item i, 
+  .wicont_search_icon, 
+  .wicont_ciudad { font-size: var(--fz_m5); }
   .wihora_info_item span { font-size: var(--fz_m3); }
+  
+  /* Continentes */
   .wicont_header { margin-bottom: 3vh; }
   .wicont_subtitle, .wisearch_input { font-size: var(--fz_m4); }
   .wicont_search { padding: 1.2vh 3vw; }
   .wicont_flag { width: 8vh; height: 4.5vh; }
   .wicont_info_item { padding: 1.5vh 3vw; }
+  
+  /* Reloj Digital */
   .wiclock { padding: 5vh 8vw; }
   .wiclock_date { font-size: var(--fz_m4); }
   .wiclock_ampm { padding: 0.8vh 3vw; }
+  
+  /* Footer */
   .wifooter { padding: 3vh 6vw; gap: 3vh; }
-  .wifooter_section { width: 100%; flex-direction: column; gap: 2vh; }
-  .wibtn_group { width: 100%; justify-content: stretch; }
+  .wifooter_section { 
+    width: 100%; 
+    flex-direction: column; 
+    gap: 2vh; 
+  }
+  .wibtn_group { 
+    width: 100%; 
+    justify-content: stretch; 
+  }
   .wibtn { flex: 1; padding: 1.2vh 3vw; }
   .witoggle { min-width: 50px; min-height: 25px; }
   .wirange { width: 80vw; }
+  
+  /* Footer bottom */
   .foo { padding-block: 2vh 1.5vh; }
   .foo * { font-size: var(--fz_m1); }
 }
+
+/* === 🔧 AJUSTES FINALES === */
+@media (max-width: 360px) {
+  .wihora_analogico { 
+    width: 140px; 
+    height: 140px; 
+  }
+  .wihora_hand_hour { height: 40px; }
+  .wihora_hand_minute { height: 60px; }
+  .wihora_hand_second { height: 70px; }
+  .wihora_reloj_center { width: 12px; height: 12px; }
+}
+
 </style>
   <link rel="icon" type="image/svg+xml" href="/smile.png" />
   <link rel="canonical" href="https://wtaype.github.io/wiiprime/" />
