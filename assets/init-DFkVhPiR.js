@@ -1,0 +1,1 @@
+import{j as i,k as a,l as p}from"./firebase-D8uqL1sE.js";const t={apiKey:"AIzaSyAw1I8I84eHjOk69UoAaM74k3OUAJMlET8",authDomain:"wiiprime.firebaseapp.com",projectId:"wiiprime",storageBucket:"wiiprime.firebasestorage.app",messagingSenderId:"560186875326",appId:"1:560186875326:web:1e8d7104fc7e53878b2def"},e=p(t),r=i(e),s=a(e);export{r as auth,s as db};
