@@ -1,5 +1,25 @@
 import $ from 'jquery'; 
 
+// ===  ⚡ CARGA INTELIGENTE v14 ===
+export const wiSmart = (() => {
+  const cargados = new Set(), cache = getls('wiSmart');
+  const cargar = (tipo, item) => {
+    const clave = `${tipo}:${item}`;
+    if (cargados.has(clave)) return; 
+    cargados.add(clave);
+    if (tipo === 'css') {
+      const url = item;
+      !$(`link[href="${url}"]`).length && $('<link>', { rel: 'stylesheet', href: url }).appendTo('head');
+    } else{typeof item === 'function' && item().catch?.(e => console.error('wiSmart js error:', e));}
+  };
+  const procesar = (obj) => {
+    $.each(obj, (tipo, items) => $.each($.isArray(items) ? items : [items], (i, it) => cargar(tipo, it)));
+    savels('wiSmart', 1);
+  };
+  return (obj) => cache ? procesar(obj) : $(document).one('touchstart scroll click mousemove', () => procesar(obj));
+})();
+
+
 // BANDERAS V11
 export const wiFlag = (cod) => {
   if (!cod || cod.length !== 2) return null;
@@ -53,10 +73,10 @@ export const wiCiudades = {
   ],  
   america: [
     { ciudad: 'Los Ángeles', pais: 'Estados Unidos', codigo: 'US', zona: 'America/Los_Angeles', capital: false },
+    { ciudad: 'Ciudad de México', pais: 'México', codigo: 'MX', zona: 'America/Mexico_City', capital: true },
     { ciudad: 'Buenos Aires', pais: 'Argentina', codigo: 'AR', zona: 'America/Argentina/Buenos_Aires', capital: true },
     { ciudad: 'Nueva York', pais: 'Estados Unidos', codigo: 'US', zona: 'America/New_York', capital: false },
     { ciudad: 'Santiago', pais: 'Chile', codigo: 'CL', zona: 'America/Santiago', capital: true },
-    { ciudad: 'Ciudad de México', pais: 'México', codigo: 'MX', zona: 'America/Mexico_City', capital: true },
     { ciudad: 'Miami', pais: 'Estados Unidos', codigo: 'US', zona: 'America/New_York', capital: false },
     { ciudad: 'São Paulo', pais: 'Brasil', codigo: 'BR', zona: 'America/Sao_Paulo', capital: false },
     { ciudad: 'Lima', pais: 'Perú', codigo: 'PE', zona: 'America/Lima', capital: true },

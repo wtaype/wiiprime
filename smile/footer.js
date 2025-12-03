@@ -14,3 +14,6 @@ function footer(){
   `;
 }; $('body').append(footer());  //Actualizar 
 
+const mstyles = `
+:root{--bgim:url("https://d35aaqx5ub95lt.cloudfront.net/images/star-pattern.svg")}.wicontainer{background: var(--bgim),linear-gradient(to bottom,var(--bg),var(--wb));}
+`;$('head').append(`<style>${mstyles}</style> `);

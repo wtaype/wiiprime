@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WiiPrime</title>
 <style>
-@import url(/smile/horas.css);
+/* @import url(/smile/horas.css); */
 /* ========== 🎨 VARIABLES Y CONFIGURACIÓN GLOBAL ====== */
 :root {
   /* === TAMAÑOS DE FUENTE RESPONSIVOS === */
@@ -60,20 +60,21 @@
   --Futuro: #21273B;
 
   /* :root[data-theme="Cielo"] */
-  --bg: #ccefff;
-  --wb: #e5f7ff;
-  --tx: #000;
-  --txa: #FFF;
-  --txe: #000;
-  --hv: #00a8e6;
-  --hva: #1873cd;
-  --mco: #1978d7;
+  --bg: #1d273f;
+  --wb: #2a385b;
+  --tx: #fff;
+  --txa: #00f3ff;
+  --txe: #3e496f;
+  --hv: #4d5a89;
+  --hva: #3e496f;
+  --mco: #3e496f;
   --bg1: #ffffff26;
-  --bg2: #1978d7;
-  --bg3: #e5f7ff;
-  --bg4: rgba(25, 120, 215, 0.1);
-  --bg5: rgba(25, 120, 215, 0.2);
-  --bg6: rgba(204, 239, 255, 0.5);
+  --bg2: #00f3ff;
+  --bg3: #2a385b;
+  --bg4: rgba(0, 243, 255, 0.1);
+  --bg5: rgba(0, 243, 255, 0.2);
+  --bg6: rgba(42, 56, 91, 0.5); 
+
 }
 
 :root[data-theme="Dulce"] {
@@ -127,21 +128,21 @@
   --bg6: rgba(228, 204, 255, 0.5);
 }
 
-:root[data-theme="Futuro"] {
-  --bg: #1d273f;
-  --wb: #2a385b;
-  --tx: #fff;
-  --txa: #00f3ff;
-  --txe: #3e496f;
-  --hv: #4d5a89;
-  --hva: #3e496f;
-  --mco: #3e496f;
+:root[data-theme="Cielo"] {
+  --bg: #ccefff;
+  --wb: #e5f7ff;
+  --tx: #000;
+  --txa: #FFF;
+  --txe: #000;
+  --hv: #00a8e6;
+  --hva: #1873cd;
+  --mco: #1978d7;
   --bg1: #ffffff26;
-  --bg2: #00f3ff;
-  --bg3: #2a385b;
-  --bg4: rgba(0, 243, 255, 0.1);
-  --bg5: rgba(0, 243, 255, 0.2);
-  --bg6: rgba(42, 56, 91, 0.5);
+  --bg2: #1978d7;
+  --bg3: #e5f7ff;
+  --bg4: rgba(25, 120, 215, 0.1);
+  --bg5: rgba(25, 120, 215, 0.2);
+  --bg6: rgba(204, 239, 255, 0.5);
 }
 
 *, *::before, *::after {
@@ -164,10 +165,10 @@ a {
 .wicontainer {
   min-height: 100vh;
   margin: 0 auto;
-  background: var(--bg);
   display: flex;
   flex-direction: column;
   transition: background var(--tr_m);
+  background:var(--bg);
 }
 
 /* ========== 🎯 HEADER - WITEMAS - AUTENTICACIÓN - FOOTER ====== */
@@ -335,7 +336,7 @@ a {
 .wiauth {
   display: flex;
   gap: .5vh;
-  width: 13.9vw;
+  min-width: 13.9vw;
 }
 
 .sesion img {
@@ -541,7 +542,7 @@ a {
 
 .wihora_mark {
   position: absolute;
-  background: var(--tx);
+  background: var(--txe);
   opacity: 0.3;
   border-radius: 2px;
   top: 50%;
@@ -620,9 +621,7 @@ a {
   transition: color var(--tr_m);
 }
 
-.wihora_card:hover .wihora_ciudad {
-  color: var(--mco);
-}
+
 
 .wihora_pais {
   font-size: var(--fz_m1);
@@ -799,7 +798,7 @@ a {
 
 .wicont_subtitle {
   font-size: var(--fz_m3);
-  color: var(--txe);
+  color: var(--bg2);
   opacity: 0.85;
   font-weight: 500;
   margin-bottom: 1.5vh;
@@ -1758,6 +1757,1461 @@ a {
   .wihora_reloj_center { width: 12px; height: 12px; }
 }
 
+
+/* ========== EXTRASSSS CSSS EN LOADING PROCESS [STAR] ====== */
+/* ========== EXTRASSSS CSSS EN LOADING PROCESS [STAR] ====== */
+/* ========== EXTRASSSS CSSS EN LOADING PROCESS [STAR] ====== */
+/* ========== 📦 MAIN + ⏰ HORA MUNDIAL ====== */
+.wihora {
+  padding: 3.5vh 0;
+  width: 100%;
+  animation: fadeInContent 0.8s ease-out;
+}
+
+@keyframes fadeInContent {
+  from {
+    opacity: 0;
+    transform: translateY(2vh);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.wihora_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3vh;
+  padding-bottom: 2vh;
+  border-bottom: 2px solid var(--bg5);
+  position: relative;
+}
+
+.wihora_header::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--mco) 50%, transparent 100%);
+  opacity: 0.6;
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0%, 100% { transform: translateX(-100%); opacity: 0; }
+  50% { transform: translateX(0); opacity: 0.6; }
+}
+
+.wihora_title {
+  font-size: var(--fz_l2);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--mco) 0%, var(--tx) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.05em;
+}
+
+.wihora_subtitle {
+  font-size: var(--fz_m5);
+  font-weight: 600;
+  opacity: 0.7;
+  background: linear-gradient(135deg, var(--tx) 0%, var(--txe) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.wihora_controls {
+  display: flex;
+  gap: 0.8vh;
+  background: var(--bg1);
+  padding: 0.5vh;
+  border-radius: 1vh;
+  border: 1px solid var(--bg5);
+}
+
+.wibtn_format {
+  display: flex;
+  align-items: center;
+  gap: 0.5vw;
+  padding: 0.8vh 1.5vw;
+  background: transparent;
+  border: none;
+  border-radius: 0.8vh;
+  color: var(--tx);
+  font-size: var(--fz_m2);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--tr_f);
+}
+
+.wibtn_format i {
+  font-size: var(--fz_m3);
+}
+
+.wibtn_format:hover {
+  background: var(--bg5);
+}
+
+.wibtn_format.active {
+  background: var(--mco);
+  color: var(--txa);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+/* ========== 📦 GRID DE RELOJES ====== */
+.wihora_grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2vh;
+}
+
+.wihora_grid > * {
+  flex: 45%;
+}
+
+/* ========== 🃏 CARD PRINCIPAL ====== */
+.wihora_card {
+  position: relative;
+  width: 100%;
+  min-height: 260px;
+  border-radius: 2vh;
+  padding: 2.5vh 2vw;
+  overflow: hidden;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+  animation: cardSlideIn 0.8s ease-out forwards;
+}
+
+.wihora_card:nth-child(1) { animation-delay: 0.1s; }
+.wihora_card:nth-child(2) { animation-delay: 0.2s; }
+
+@keyframes cardSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(3vh) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 🌅 TEMA DÍA */
+.wihora_card.es-dia {
+  background: linear-gradient(135deg, #FFE5B4 0%, #87CEEB 100%);
+  box-shadow: 0 8px 32px rgba(255, 160, 0, 0.3);
+}
+
+.wihora_card.es-dia::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.wihora_card.es-dia .wihora_ciudad,
+.wihora_card.es-dia .wihora_time,
+.wihora_card.es-dia .wihora_info_item span {
+  color: #1a1a1a;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+.wihora_card.es-dia .wihora_pais,
+.wihora_card.es-dia .wihora_fecha {
+  color: #333;
+  opacity: 0.85;
+}
+
+.wihora_card.es-dia .wihora_reloj_face {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(255, 200, 0, 0.5);
+  box-shadow: 0 4px 20px rgba(255, 200, 0, 0.3);
+}
+
+.wihora_card.es-dia .wihora_hand {
+  background: #ff6b00;
+}
+
+.wihora_card.es-dia .wihora_reloj_center {
+  background: #ff6b00;
+  box-shadow: 0 0 15px #ff6b00;
+}
+
+.wihora_card.es-dia .wihora_info_item {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(255, 200, 0, 0.3);
+}
+
+.wihora_card.es-dia .wihora_info_item i {
+  color: #ff6b00;
+}
+
+/* 🌙 TEMA NOCHE */
+.wihora_card.es-noche {
+  background: linear-gradient(135deg, #1a2332 0%, #2d3e50 100%);
+  box-shadow: 0 8px 32px rgba(0, 100, 200, 0.4);
+}
+
+.wihora_card.es-noche::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(147, 112, 219, 0.3) 0%, transparent 60%);
+  z-index: 0;
+}
+
+.wihora_card.es-noche .wihora_ciudad,
+.wihora_card.es-noche .wihora_time,
+.wihora_card.es-noche .wihora_info_item span {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(147, 112, 219, 0.6);
+}
+
+.wihora_card.es-noche .wihora_pais,
+.wihora_card.es-noche .wihora_fecha {
+  color: #c5c5c5;
+  opacity: 0.9;
+}
+
+.wihora_card.es-noche .wihora_reloj_face {
+  background: rgba(42, 56, 91, 0.6);
+  border-color: rgba(147, 112, 219, 0.5);
+  box-shadow: 0 4px 20px rgba(100, 80, 200, 0.3);
+}
+
+.wihora_card.es-noche .wihora_hand {
+  background: #9370db;
+}
+
+.wihora_card.es-noche .wihora_reloj_center {
+  background: #9370db;
+  box-shadow: 0 0 15px #9370db;
+}
+
+.wihora_card.es-noche .wihora_info_item {
+  background: rgba(42, 56, 91, 0.5);
+  border-color: rgba(147, 112, 219, 0.3);
+}
+
+.wihora_card.es-noche .wihora_info_item i {
+  color: #9370db;
+}
+
+/* HOVER STATES */
+.wihora_card:hover {
+  transform: translateY(-5px) scale(1.02);
+}
+
+.wihora_card.es-dia:hover {
+  box-shadow: 0 12px 40px rgba(255, 160, 0, 0.5);
+  border-color: rgba(255, 200, 0, 0.6);
+}
+
+.wihora_card.es-noche:hover {
+  box-shadow: 0 12px 40px rgba(0, 100, 200, 0.6);
+  border-color: rgba(147, 112, 219, 0.6);
+}
+
+/* ========== 📐 LAYOUT: Analógico LEFT + Digital RIGHT ====== */
+.wihora_card_content {
+  display: flex;
+  align-items: center;
+  gap: 1.5vw;
+  position: relative;
+  z-index: 1;
+}
+
+/* === 🕐 RELOJ ANALÓGICO (LEFT) - UN POCO MÁS GRANDE === */
+.wihora_analogico {
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wihora_reloj_face {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.wihora_reloj_center {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  z-index: 10;
+  animation: centerPulse 2s ease-in-out infinite;
+}
+
+@keyframes centerPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.wihora_reloj_marks {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.wihora_mark {
+  position: absolute;
+  background: currentColor;
+  opacity: 0.4;
+  border-radius: 2px;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+}
+
+.wihora_mark_hour {
+  width: 2px;
+  height: 8px;
+  opacity: 0.7;
+}
+
+.wihora_mark_minute {
+  width: 1px;
+  height: 4px;
+}
+
+.wihora_hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: 3px;
+  transition: transform 0.05s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wihora_hand_hour {
+  width: 5px;
+  height: 30px;
+  margin-left: -2.5px;
+}
+
+.wihora_hand_minute {
+  width: 4px;
+  height: 42px;
+  margin-left: -2px;
+}
+
+.wihora_hand_second {
+  width: 2px;
+  height: 48px;
+  margin-left: -1px;
+  opacity: 0.8;
+}
+
+/* === 📱 SECCIÓN DIGITAL (RIGHT) === */
+.wihora_digital_section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vh;
+}
+
+.wihora_header_info {
+  display: flex;
+  align-items: center;
+  gap: 0.8vw;
+  padding-bottom: 0.6vh;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* BANDERA MÁS PEQUEÑA */
+.wihora_flag {
+  width: 3.5vh;
+  height: 2.2vh;
+  object-fit: cover;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.wihora_location {
+  flex: 1;
+}
+
+.wihora_ciudad {
+  font-size: var(--fz_m4);
+  font-weight: 800;
+  margin-bottom: 0.1vh;
+  letter-spacing: -0.02em;
+}
+
+.wihora_pais {
+  font-size: var(--fz_s4);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.wihora_icon {
+  width: 2.5vh;
+  height: 2.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: var(--fz_m2);
+}
+
+.wihora_icon .fa-sun {
+  color: #ff6b00;
+  animation: sunRotate 20s linear infinite;
+}
+
+.wihora_icon .fa-moon {
+  color: #9370db;
+  animation: moonGlow 3s ease-in-out infinite;
+}
+
+@keyframes sunRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes moonGlow {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* HORA DIGITAL MÁS GRANDE */
+.wihora_time {
+  font-size: var(--fz_x4);
+  font-weight: 800;
+  font-family: var(--ff_R), monospace;
+  letter-spacing: 0.05em;
+  margin: 0.3vh 0;
+  line-height: 1;
+}
+
+.wihora_fecha {
+  font-size: var(--fz_s4);
+  font-weight: 500;
+  margin-bottom: 0.8vh;
+}
+
+.wihora_info {
+  display: flex;
+  gap: 0.4vh;
+}
+
+.wihora_info_item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.3vw;
+  padding: 0.5vh 0.4vw;
+  backdrop-filter: blur(10px);
+  border-radius: 0.5vh;
+  border: 1px solid;
+  transition: all 0.3s ease;
+  font-size: var(--fz_s3);
+}
+
+.wihora_info_item:hover {
+  transform: translateY(-2px);
+}
+
+.wihora_info_item i {
+  font-size: var(--fz_s4);
+  min-width: 10px;
+  text-align: center;
+}
+
+.wihora_info_item span {
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* ========== 📱 RESPONSIVE ====== */
+@media (max-width: 1024px) {
+  .wihora_grid {
+    flex-direction: column;
+  }
+  
+  .wihora_grid > * {
+    flex: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .wihora_card_content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .wihora_analogico {
+    margin: 0 auto 1.5vh;
+  }
+  
+  .wihora_header_info {
+    justify-content: center;
+  }
+  
+  .wihora_info {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 460px) {
+  .wihora_grid {
+    gap: 2vh;
+  }
+  
+  .wihora_card {
+    padding: 2vh 3vw;
+    min-height: auto;
+  }
+  
+  .wihora_analogico {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .wihora_hand_hour { height: 25px; }
+  .wihora_hand_minute { height: 35px; }
+  .wihora_hand_second { height: 40px; }
+    
+  .wihora_info_item {
+    font-size: var(--fz_s4);
+  }
+}
+
+/* === 🎴 CARDS COMPACTOS (ASIA) === */
+.wicont_card_compact {
+  min-height: 200px;
+  padding: 1.5vh 1vw;
+}
+
+.wicont_compact_content {
+  flex-direction: row;
+  align-items: center;
+  gap: 1vw;
+}
+.wicont_time{
+    font-size: var(--fz_x2);
+}
+
+/* === ⏰ RELOJ ANALÓGICO PEQUEÑO === */
+.wicont_analogico_small {
+  width: 130px;
+  height: 130px;
+  flex-shrink: 0;
+}
+
+.wicont_analogico_small .wihora_reloj_face {
+  border-width: 2px;
+}
+
+.wicont_analogico_small .wihora_reloj_center {
+  width: 10px;
+  height: 10px;
+}
+
+.wicont_analogico_small .wihora_hand_hour {
+  width: 6px;
+  height: 40px;
+  margin-left: -3px;
+}
+
+.wicont_analogico_small .wihora_hand_minute {
+  width: 4px;
+  height: 60px;
+  margin-left: -2px;
+}
+
+.wicont_analogico_small .wihora_hand_second {
+  width: 2px;
+  height: 70px;
+  margin-left: -1px;
+}
+
+.wicont_analogico_small .wihora_mark_hour {
+  width: 2px;
+  height: 8px;
+}
+
+.wicont_analogico_small .wihora_mark_minute {
+  width: 1px;
+  height: 4px;
+}
+
+/* === 📱 DIGITAL COMPACTO === */
+.wicont_digital_compact {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vh;
+}
+
+.wicont_digital_compact .wihora_header_info {
+  margin-bottom: 0.5vh;
+}
+
+.wicont_digital_compact .wihora_flag {
+  width: 5vh;
+  height: 3vh;
+}
+
+.wicont_digital_compact .wihora_ciudad {
+  font-size: var(--fz_m3);
+  margin-bottom: 0.2vh;
+}
+
+.wicont_digital_compact .wihora_pais {
+  font-size: var(--fz_s4);
+}
+
+.wicont_digital_compact .wihora_icon {
+  width: 2.5vh;
+  height: 2.5vh;
+  font-size: var(--fz_m1);
+}
+
+.wicont_digital_compact .wihora_time {
+  font-size: var(--fz_x2);
+  margin-bottom: 0.5vh;
+  text-align: left;
+}
+
+.wicont_digital_compact .wihora_fecha {
+  font-size: var(--fz_s4);
+  margin-bottom: 0.8vh;
+  text-align: left;
+}
+
+.wicont_digital_compact .wihora_info {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6vh;
+}
+
+.wicont_digital_compact .wihora_info_item {
+  padding: 0.6vh 0.4vw;
+}
+
+.wicont_digital_compact .wihora_info_item i {
+  font-size: var(--fz_s4);
+}
+
+.wicont_digital_compact .wihora_info_item span {
+  font-size: var(--fz_s3);
+}
+
+/* === 📱 RESPONSIVE COMPACTO === */
+@media (max-width: 1024px) {
+  .wicont_card_compact {
+    min-height: 180px;
+  }
+  
+  .wicont_analogico_small {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .wicont_analogico_small .wihora_hand_hour { height: 35px; }
+  .wicont_analogico_small .wihora_hand_minute { height: 55px; }
+  .wicont_analogico_small .wihora_hand_second { height: 65px; }
+}
+
+@media (max-width: 768px) {
+  .wicont_card_compact {
+    min-height: auto;
+  }
+  
+  .wicont_compact_content {
+    flex-direction: column;
+    gap: 1.5vh;
+  }
+  
+  .wicont_analogico_small {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+  }
+  
+  .wicont_analogico_small .wihora_hand_hour { height: 40px; }
+  .wicont_analogico_small .wihora_hand_minute { height: 60px; }
+  .wicont_analogico_small .wihora_hand_second { height: 70px; }
+  
+  .wicont_digital_compact {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .wicont_digital_compact .wihora_header_info {
+    justify-content: center;
+  }
+  
+  .wicont_digital_compact .wihora_time,
+  .wicont_digital_compact .wihora_fecha {
+    text-align: center;
+  }
+}
+
+@media (max-width: 460px) {
+  .wicont_analogico_small {
+    width: 130px;
+    height: 130px;
+  }
+  
+  .wicont_analogico_small .wihora_hand_hour { height: 38px; }
+  .wicont_analogico_small .wihora_hand_minute { height: 58px; }
+  .wicont_analogico_small .wihora_hand_second { height: 68px; }
+  
+  .wicont_digital_compact .wihora_time {
+    font-size: var(--fz_m5);
+  }
+}
+
+.loc {
+  padding: 2vh 0;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  animation: fadeInContent 0.6s ease-out;
+}
+
+.loc_head {
+  margin-bottom: 2vh;
+  padding-bottom: 1.5vh;
+  border-bottom: 2px solid var(--bg5);
+  position: relative;
+}
+
+.loc_head::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--mco) 50%, transparent);
+  opacity: 0.5;
+  animation: shimmer 3s infinite;
+}
+
+.loc_h2 {
+  font-size: var(--fz_l1);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--mco), var(--tx));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.03em;
+}
+
+.loc_sub {
+  font-size: var(--fz_m2);
+  color: var(--bg2);
+  opacity: 0.8;
+  font-weight: 500;
+  margin-top: 0.3vh;
+}
+
+.loc_card {
+  background: var(--wb);
+  backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--bg5);
+  border-radius: 1.2vh;
+  padding: 1.5vh 1.5vw;
+  margin-bottom: 1.5vh;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.loc_card:hover {
+  transform: translateY(-0.2vh);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+  border-color: var(--mco);
+}
+
+.loc_title {
+  color: var(--tx);
+  margin-bottom: 1vh;
+  font-size: var(--fz_m4);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4vw;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.loc_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1vh;
+}
+
+.loc_item {
+  padding: 1vh 0.8vw;
+  background: var(--bg1);
+  border-radius: 0.8vh;
+  border: 1px solid var(--bg5);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4vh;
+}
+
+.loc_item:hover {
+  background: var(--bg4);
+  transform: translateY(-0.1vh);
+  border-color: var(--mco);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.loc_label {
+  font-size: var(--fz_s4);
+  color: var(--txe);
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.loc_val {
+  font-size: var(--fz_m3);
+  font-weight: 700;
+  word-break: break-word;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.loc_acts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.8vh;
+}
+
+.loc_btn {
+  padding: 1vh 1.5vw;
+  color: var(--txa);
+  border: none;
+  border-radius: 0.8vh;
+  cursor: pointer;
+  font-size: var(--fz_m2);
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.loc_btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.loc_btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.loc_btn:hover {
+  transform: translateY(-0.2vh);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.loc_btn:active {
+  transform: scale(0.98);
+}
+
+.loc_json {
+  background: var(--bg1);
+  border-radius: 1.2vh;
+  border-left: 3px solid var(--mco);
+  border: 1px solid var(--bg5);
+  padding: 1.5vh 1.5vw;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.loc_json_title {
+  color: var(--mco);
+  margin-bottom: 1vh;
+  font-size: var(--fz_m3);
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.loc_json_data {
+  font-family: var(--ff_R), 'Courier New', monospace;
+  font-size: var(--fz_s4);
+  color: var(--tx);
+  background: var(--wb);
+  padding: 1.2vh 1.2vw;
+  border-radius: 0.8vh;
+  overflow-x: auto;
+  line-height: 1.5;
+  border: 1px solid var(--bg5);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  max-height: 40vh;
+}
+
+/* === 🌙 OPTIMIZACIÓN TEMA FUTURO === */
+:root[data-theme="Futuro"] .loc_card {
+  background: rgba(42, 56, 91, 0.4);
+  border-color: rgba(100, 120, 150, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+:root[data-theme="Futuro"] .loc_item {
+  background: rgba(30, 40, 60, 0.6);
+  border-color: rgba(100, 120, 150, 0.2);
+}
+
+:root[data-theme="Futuro"] .loc_item:hover {
+  background: rgba(50, 70, 100, 0.7);
+  border-color: var(--mco);
+  box-shadow: 0 2px 12px rgba(0, 243, 255, 0.2);
+}
+
+:root[data-theme="Futuro"] .loc_json {
+  background: rgba(30, 40, 60, 0.6);
+  border-color: rgba(100, 120, 150, 0.3);
+}
+
+:root[data-theme="Futuro"] .loc_json_data {
+  background: rgba(20, 30, 50, 0.8);
+  border-color: rgba(100, 120, 150, 0.2);
+  color: #a0d0ff;
+}
+
+.des {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2vh 2vw;
+  animation: fadeInContent 0.8s ease-out;
+}
+
+/* === 🎨 HERO SECTION === */
+.des_hro {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4vw;
+  padding: 4vh 3vw;
+  background: var(--bg3);
+  border-radius: 2vh;
+  overflow: hidden;
+  margin-bottom: 4vh;
+  border: 1px solid var(--bg5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.des_hro::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 50%, var(--bg4) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.des_hro_cnt {
+  flex: 1;
+  z-index: 2;
+}
+
+.des_h1 {
+  font-size: var(--fz_x3);
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--mco) 0%, var(--hv) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 2vh;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.des_sub {
+  font-size: var(--fz_m5);
+  color: var(--tx);
+  opacity: 0.85;
+  margin-bottom: 4vh;
+  font-weight: 500;
+}
+
+.des_cta {
+  display: flex;
+  gap: 1.5vh;
+  flex-wrap: wrap;
+}
+
+.des_btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5vw;
+  padding: 1.5vh 2.5vw;
+  border: none;
+  border-radius: 1vh;
+  font-size: var(--fz_m3);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.des_btn i {
+  font-size: var(--fz_m4);
+}
+
+.des_btn_pri {
+  background: linear-gradient(135deg, var(--mco) 0%, var(--hv) 100%);
+  color: var(--txa);
+}
+
+.des_btn_pri:hover {
+  transform: translateY(-0.3vh) scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.des_btn_sec {
+  background: var(--bg1);
+  color: var(--tx);
+  border: 2px solid var(--bg5);
+}
+
+.des_btn_sec:hover {
+  background: var(--bg5);
+  border-color: var(--mco);
+  transform: translateY(-0.3vh);
+}
+
+/* === 🎆 FLOATING ELEMENTS === */
+.des_hro_img {
+  flex: 1;
+  position: relative;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.des_flt {
+  position: absolute;
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.des_flt1 {
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(135deg, var(--success) 0%, var(--info) 100%);
+  opacity: 0.2;
+  top: 10%;
+  left: 10%;
+}
+
+.des_flt2 {
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(135deg, var(--warning) 0%, var(--error) 100%);
+  opacity: 0.25;
+  top: 40%;
+  right: 15%;
+  animation-delay: 1s;
+}
+
+.des_flt3 {
+  width: 180px;
+  height: 180px;
+  background: linear-gradient(135deg, var(--mco) 0%, var(--hv) 100%);
+  opacity: 0.2;
+  bottom: 15%;
+  left: 25%;
+  animation-delay: 2s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+/* === 📦 BENEFICIOS GRID === */
+.des_sec {
+  margin-bottom: 6vh;
+}
+
+.des_h2 {
+  font-size: var(--fz_l2);
+  font-weight: 800;
+  text-align: center;
+  background: linear-gradient(135deg, var(--mco) 0%, var(--tx) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 4vh;
+  letter-spacing: -0.02em;
+}
+
+.des_grd {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2vh;
+}
+
+.des_crd {
+  background: var(--wb);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--bg5);
+  border-radius: 1.5vh;
+  padding: 2.5vh 2vw;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.des_crd::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--bg1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.des_crd:hover {
+  transform: translateY(-0.5vh);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  border-color: var(--mco);
+}
+
+.des_crd:hover::before {
+  opacity: 1;
+}
+
+.des_ico {
+  width: 6vh;
+  height: 6vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fz_l1);
+  border-radius: 1.2vh;
+  margin-bottom: 2vh;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.des_tit {
+  font-size: var(--fz_m4);
+  font-weight: 700;
+  color: var(--tx);
+  margin-bottom: 1vh;
+  position: relative;
+  z-index: 1;
+}
+
+.des_des {
+  font-size: var(--fz_m2);
+  color: var(--tx);
+  opacity: 0.8;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+}
+
+/* === 📊 TABLA COMPARATIVA === */
+.des_cmp {
+  margin-bottom: 6vh;
+}
+
+.des_tbl {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5vh;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.des_col {
+  background: var(--wb);
+  border: 2px solid var(--bg5);
+  border-radius: 1.5vh;
+  padding: 3vh 2vw;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.des_col:hover {
+  transform: translateY(-0.8vh);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.des_col_pro {
+  border-color: var(--mco);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  transform: scale(1.05);
+}
+
+.des_bdg {
+  position: absolute;
+  top: 2vh;
+  right: -3vw;
+  background: var(--mco);
+  color: var(--txa);
+  padding: 0.5vh 4vw;
+  font-size: var(--fz_s4);
+  font-weight: 700;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.des_col_hd {
+  text-align: center;
+  margin-bottom: 3vh;
+  padding-bottom: 2vh;
+  border-bottom: 2px solid var(--bg5);
+}
+
+.des_col_hd i {
+  font-size: var(--fz_x1);
+  color: var(--mco);
+  margin-bottom: 1.5vh;
+  display: block;
+}
+
+.des_col_hd h3 {
+  font-size: var(--fz_l1);
+  font-weight: 800;
+  color: var(--tx);
+  margin-bottom: 1vh;
+}
+
+.des_prc {
+  font-size: var(--fz_x2);
+  font-weight: 900;
+  color: var(--mco);
+  line-height: 1;
+}
+
+.des_prc span {
+  font-size: var(--fz_m2);
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.des_lst {
+  list-style: none;
+  margin-bottom: 3vh;
+}
+
+.des_lst li {
+  display: flex;
+  align-items: center;
+  gap: 1vw;
+  padding: 1vh 0;
+  font-size: var(--fz_m2);
+  color: var(--tx);
+}
+
+.des_lst i {
+  font-size: var(--fz_m3);
+  min-width: 20px;
+}
+
+.des_lst .fa-check {
+  color: var(--success);
+}
+
+.des_lst .fa-times {
+  color: var(--error);
+  opacity: 0.5;
+}
+
+.des_btn_pro {
+  width: 100%;
+  background: var(--mco);
+  color: var(--txa);
+  justify-content: center;
+}
+
+/* === 🎯 FOOTER CTA === */
+.des_ftr {
+  text-align: center;
+  padding: 6vh 3vw;
+  background: var(--bg3);
+  border-radius: 2vh;
+  border: 1px solid var(--bg5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.des_ftr_txt {
+  font-size: var(--fz_m4);
+  color: var(--tx);
+  opacity: 0.85;
+  margin: 2vh 0 4vh;
+  font-weight: 500;
+}
+
+.des_btn_lrg {
+  margin: auto;
+  padding: 2vh 4vw;
+  font-size: var(--fz_m5);
+  background: linear-gradient(135deg, var(--mco) 0%, var(--hv) 100%);
+  color: var(--txa);
+}
+
+.des_btn_lrg:hover {
+  transform: translateY(-0.5vh) scale(1.05);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* === 📱 RESPONSIVE === */
+@media (max-width: 1024px) {
+  .des_hro {
+    flex-direction: column;
+    text-align: center;
+    min-height: auto;
+  }
+  
+  .des_hro_img {
+    height: 300px;
+  }
+  
+  .des_cta {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .des_h1 {
+    font-size: var(--fz_x2);
+  }
+  
+  .des_sub {
+    font-size: var(--fz_m3);
+  }
+  
+  .des_grd {
+    grid-template-columns: 1fr;
+  }
+  
+  .des_tbl {
+    grid-template-columns: 1fr;
+  }
+  
+  .des_col_pro {
+    transform: scale(1);
+  }
+  
+  .des_hro_img {
+    height: 250px;
+  }
+  
+  .des_flt1, .des_flt2, .des_flt3 {
+    width: 120px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 460px) {
+  .des {
+    padding: 1.5vh 4vw;
+  }
+  
+  .des_hro {
+    padding: 3vh 4vw;
+  }
+  
+  .des_h1 {
+    font-size: var(--fz_x1);
+  }
+  
+  .des_btn {
+    padding: 1.5vh 4vw;
+    font-size: var(--fz_m2);
+  }
+  
+  .des_crd {
+    padding: 2vh 4vw;
+  }
+  
+  .des_col {
+    padding: 2.5vh 4vw;
+  }
+  
+  .des_hro_img {
+    height: 200px;
+  }
+}
+/* ========== EXTRASSSS CSSS EN LOADING PROCESS [END] ====== */
+/* ========== EXTRASSSS CSSS EN LOADING PROCESS [END] ====== */
+/* ========== EXTRASSSS CSSS EN LOADING PROCESS [END] ====== */
+
+/* === 📱 RESPONSIVE === */
+@media (max-width: 768px) {
+  .loc_grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .loc_acts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 460px) {
+  .loc {
+    padding: 1.5vh 0;
+  }
+  
+  .loc_card {
+    padding: 1.5vh 3vw;
+  }
+  
+  .loc_item {
+    padding: 1.2vh 3vw;
+  }
+  
+  .loc_btn {
+    padding: 1.2vh 3vw;
+  }
+  
+  .loc_json_data {
+    font-size: var(--fz_s3);
+  }
+}
+
+/* ...existing code... */
+
+
 </style>
   <link rel="icon" type="image/svg+xml" href="/smile.png" />
   <link rel="canonical" href="https://wtaype.github.io/wiiprime/" />
@@ -1787,23 +3241,20 @@ a {
           <a href="/oceania" class="winav_item" data-page="oceania">
             <i class="fas fa-umbrella-beach"></i> <span>Oceania</span>
           </a>
-          <a href="/local" class="winav_item" data-page="local">
-            <i class="fa-solid fa-location-dot"></i> <span>Local</span>
-          </a>
-          <a href="/labs" class="winav_item" data-page="labs">
+          <!-- <a href="/labs" class="winav_item" data-page="labs">
             <i class="fas fa-umbrella-beach"></i> <span>Labs</span>
-          </a>
+          </a> -->
         </nav>
 
       </div><!-- LADO IZQUIERDO: Logo + Navegación -->
       
       <div class="wiheader_right"> 
         <div id="wiTema">
-          <div class="tema mtha" data-ths="Cielo|#0EBEFF"></div>
+          <div class="tema" data-ths="Cielo|#0EBEFF"></div>
           <div class="tema" data-ths="Dulce|#FF5C69"></div>
           <div class="tema" data-ths="Paz|#29C72E"></div>
           <div class="tema" data-ths="Mora|#7000FF"></div>
-          <div class="tema" data-ths="Futuro|#21273B"></div>
+          <div class="tema mtha" data-ths="Futuro|#21273B"></div>
         </div>
         <div class="wiauth"></div> 
       </div> <!-- LADO DERECHO: Temas + Auth -->
@@ -1814,7 +3265,7 @@ a {
   </div>
 </body>
 <script>
-(()=>{const d=document,h=d.documentElement,w=d.querySelector('#wiTema');if(!w)return;const ts=[...w.querySelectorAll('.tema')],m=d.querySelector('meta[name="theme-color"]')||d.head.appendChild(Object.assign(d.createElement('meta'),{name:'theme-color'})),st=t=>{const[n,c]=t.dataset.ths.split('|');h.dataset.theme=n;m.content=c;localStorage.wiTema=t.dataset.ths;ts.forEach(x=>x.classList.toggle('mtha',x===t))};w.addEventListener('click',e=>e.target.matches('.tema')&&st(e.target),{passive:!0});const i=w.querySelector(`[data-ths="${localStorage.wiTema}"]`)||ts[0];i&&st(i)})();
+(()=>{const d=document,h=d.documentElement,w=d.querySelector('#wiTema');if(!w)return;const ts=[...w.querySelectorAll('.tema')],m=d.querySelector('meta[name="theme-color"]')||d.head.appendChild(Object.assign(d.createElement('meta'),{name:'theme-color'})),st=t=>{const[n,c]=t.dataset.ths.split('|');h.dataset.theme=n;m.content=c;localStorage.wiTema=t.dataset.ths;ts.forEach(x=>x.classList.toggle('mtha',x===t))};w.addEventListener('click',e=>e.target.matches('.tema')&&st(e.target),{passive:!0});const i=w.querySelector(`[data-ths="${localStorage.wiTema}"]`)||ts[4];i&&st(i)})();
 </script>
 <script type="module" src="./smile/main.js" defer></script> 
 </html>
