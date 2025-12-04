@@ -1,4 +1,5 @@
 import $ from 'jquery'; 
+import { Timestamp } from 'firebase/firestore';
 
 // ===  ⚡ CARGA INTELIGENTE v14 ===
 export const wiSmart = (() => {

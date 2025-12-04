@@ -7,8 +7,8 @@ const pages = ['hora', 'asia', 'europa', 'america', 'oceania', 'africa', 'labs']
 pages.forEach(pg => rutas.register(`/${pg}`, () => import(`./pages/${pg}.js`))); 
 
 // 🔐 Ruta privada con guard inteligente
-rutas.register('/smile', () => getls('wiSmile') ? (import('./pages/smile.js')) 
-  : (import('./pages/descubre.js')));
+rutas.register('/smile', () => getls('wiSmile') ? (import('./miweb/smile.js')) 
+  : (import('./miweb/descubre.js')));
 
 import('./header.js'); // ⚡ Cargar header DESPUÉS del registro
 rutas.init(); // 🚀 Inicializar UNA SOLA VEZ
