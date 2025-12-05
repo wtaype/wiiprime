@@ -1,5 +1,4 @@
 import $ from 'jquery'; 
-import { Timestamp } from 'firebase/firestore';
 
 // ===  ⚡ CARGA INTELIGENTE v14 ===
 export const wiSmart = (() => {
@@ -352,11 +351,11 @@ export const cerrarTodos = () => {
 // === [END] MODALES V10.4 ===
 
 // GUARDAR FECHAS BASE DE DATOS V10.1
-export const savebd = (fecha) => {
+export const savebd = (fecha, tms = null) => {
   const [año, mes, dia] = fecha.split('-').map(Number);
   const ahora = new Date();
   const fechaObj = new Date(año, mes - 1, dia, ahora.getHours(), ahora.getMinutes(), ahora.getSeconds());
-  return Timestamp.fromDate(fechaObj);
+  return tms ? tms.fromDate(fechaObj) : fechaObj.toISOString();
 };
 // OBTENER FECHAS BASE DE DATOS V10.1
 export const getbd = (tm) => {

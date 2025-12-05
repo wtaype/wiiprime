@@ -53,7 +53,7 @@ const subm=(nid,btn)=>{
   wiSpin(btn,true);
   const $mm=$('#mdNota'),ttl=$mm.find('.md-t').val().trim(),dsc=$mm.find('.md-d').val().trim(),fstr=$mm.find('.md-f').val(),hor=$mm.find('.md-h').val()||'00:00',cat=$mm.find('input[name="md-c"]:checked').val();
   if(!ttl||ttl.length<3||!fstr){wiSpin(btn,false);return Notificacion('Completa título y fecha','warning');}
-  const prev=uis.nts.find(nx=>nx.id===nid),ahora=Timestamp.now(),tsel=savebd(fstr);
+  const prev=uis.nts.find(nx=>nx.id===nid),ahora=Timestamp.now(),tsel=savebd(fstr, Timestamp);
   let cre,upd,fec;
   if(prev){cre=prev.creadoEn;upd=ahora;const prevISO=toISO(prev.fechaCreado);fec=prevISO===fstr?prev.fechaCreado:tsel;}
   else{cre=ahora;upd=ahora;fec=tsel;}
