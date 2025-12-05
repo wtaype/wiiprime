@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import './descubre.css';
 
 const crd = (ico, tit, des, clr) => `
   <div class="des_crd">

@@ -1,0 +1,47 @@
+/* ========== HORA PRINCIPAL CSS [START] ====== */
+.wihora_analogico{width:200px;height:200px;position:relative;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin:0 auto}
+.wihora_reloj_face{width:100%;height:100%;border-radius:50%;background:var(--bg1);border:3px solid var(--bg5);box-shadow:0 8px 32px rgba(0,0,0,.12),inset 0 2px 8px var(--bg1);position:relative;display:flex;align-items:center;justify-content:center}
+.wihora_reloj_center{position:absolute;width:14px;height:14px;background:var(--mco);border-radius:50%;box-shadow:0 0 12px var(--mco);z-index:10;animation:centerPulse 2s ease-in-out infinite}
+@keyframes centerPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.wihora_mark_hour{width:3px;height:12px;opacity:.6}
+.wihora_mark_minute{width:2px;height:6px;opacity:.3}
+.wihora_hand{position:absolute;bottom:50%;left:50%;transform-origin:bottom center;border-radius:4px;background:var(--mco);transition:transform .05s cubic-bezier(.4,0,.2,1)}
+.wihora_hand_hour{width:8px;height:60px;margin-left:-4px;opacity:.9}
+.wihora_hand_minute{width:6px;height:85px;margin-left:-3px;opacity:.85}
+.wihora_hand_second{width:3px;height:95px;margin-left:-1.5px;background:var(--hv);opacity:.8}
+.wihora_flag{width:7vh;height:4vh;object-fit:cover;border-radius:.8vh;box-shadow:0 4px 12px rgba(0,0,0,.12),inset 0 1px 0 var(--bg1);transition:all var(--tr_m);border:1px solid var(--bg5)}
+.wihora_card:hover .wihora_flag{transform:scale(1.05)}
+.wihora_location{flex:1;min-width:0}
+.wihora_ciudad{font-size:var(--fz_m5);font-weight:800;color:var(--tx);margin-bottom:.3vh;letter-spacing:-.03em;transition:color var(--tr_m)}
+.wihora_pais{font-size:var(--fz_m1);color:var(--tx);opacity:.75;font-weight:500;text-transform:uppercase;letter-spacing:.08em}
+.wihora_icon{width:3.5vh;height:3.5vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--bg1) 0%,transparent 100%);border-radius:50%;font-size:var(--fz_m4);box-shadow:0 4px 12px rgba(0,0,0,.1),inset 0 2px 4px var(--bg1);transition:all var(--tr_m);border:1px solid var(--bg5)}
+.wihora_card:hover .wihora_icon{transform:scale(1.1)}
+.wihora_icon .fa-sun{color:#ff9800;filter:drop-shadow(0 0 .5vh #ffa726);animation:sunPulse 2.5s ease-in-out infinite}
+.wihora_icon .fa-moon{color:#7e57c2;filter:drop-shadow(0 0 .5vh #9575cd);animation:moonGlow 3s ease-in-out infinite}
+@keyframes sunPulse{0%,100%{opacity:.9}50%{opacity:1;filter:drop-shadow(0 0 .8vh #ff9800)}}
+@keyframes moonGlow{0%,100%{opacity:.85}50%{opacity:1;filter:drop-shadow(0 0 1vh #7e57c2)}}
+.wihora_time{font-size:var(--fz_x4);font-weight:800;color:var(--bg2);font-family:var(--ff_R),'Courier New',monospace;text-align:left;margin-bottom:.8vh;letter-spacing:.05em;text-shadow:0 2px 4px rgba(0,0,0,.08),0 0 .8vh var(--bg5);transition:all var(--tr_m)}
+.wihora_card:hover .wihora_time{transform:scale(1.02)}
+.wihora_time.changing{animation:timeChange .4s ease}
+@keyframes timeChange{0%,100%{opacity:1}50%{opacity:.5;transform:scale(.98)}}
+.wihora_fecha{font-size:var(--fz_m2);color:var(--tx);font-weight:600;margin-bottom:1.5vh;opacity:.85}
+.wihora_info{display:grid;grid-template-columns:repeat(3,1fr);gap:1vh}
+.wihora_info_item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5vh;padding:1vh .5vw;background:var(--bg6);backdrop-filter:blur(10px);border-radius:1vh;border:1px solid var(--bg5);box-shadow:0 4px 12px rgba(0,0,0,.06),inset 0 1px 0 var(--bg1);transition:all var(--tr_m)}
+.wihora_info_item:hover{background:var(--bg1);transform:translateY(-.3vh);border-color:var(--mco)}
+.wihora_info_item i{font-size:var(--fz_m2);color:var(--mco)}
+.wihora_info_item span{font-size:var(--fz_m1);color:var(--tx);font-weight:700;text-align:center;line-height:1.2}
+.wihora_diferencia{display:flex;align-items:center;gap:.3vw}
+.wihora_diferencia i{font-size:var(--fz_m1)}
+.wihora_gmt,.wihora_estacion{white-space:nowrap}
+.wicontinente{width:100%;padding:2vh 2vw;animation:fadeInContent .8s ease-out}
+.wicont_header{margin-bottom:2.5vh;padding-bottom:1.5vh;border-bottom:2px solid var(--bg5);position:relative}
+.wicont_header::after{content:'';position:absolute;bottom:-2px;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent 0%,var(--mco) 50%,transparent 100%);opacity:.6;animation:shimmer 3s infinite}
+.wicont_title{font-size:var(--fz_m5);font-weight:800;background:linear-gradient(135deg,var(--mco) 0%,var(--tx) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.05em;margin-bottom:.5vh}
+.wicont_subtitle{font-size:var(--fz_m3);color:var(--bg2);opacity:.85;font-weight:500;margin-bottom:1.5vh}
+.wicont_controls{display:flex;gap:1.5vw;align-items:center;flex-wrap:wrap}
+.wicont_search{flex:1;min-width:250px;position:relative;display:flex;align-items:center;gap:.8vw;background:var(--bg1);backdrop-filter:blur(15px) saturate(180%);padding:.8vh 1.2vw;border-radius:1.2vh;border:1px solid var(--bg5);box-shadow:0 4px 16px rgba(0,0,0,.08);transition:all var(--tr_m)}
+.wicont_search:focus-within{box-shadow:0 6px 20px rgba(0,0,0,.12);border-color:var(--mco)}
+.wicont_search_icon{color:var(--mco);font-size:var(--fz_m3)}
+.wisearch_input{flex:1;border:none;background:transparent;color:var(--tx);font-size:var(--fz_m3);font-weight:500;outline:none}
+.wisearch_input::placeholder{color:var(--txe);opacity:.6}
+/* ========== HORA PRINCIPAL CSS [END] ====== */
