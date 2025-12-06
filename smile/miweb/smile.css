@@ -342,3 +342,8 @@
 .fc-event-title,.fc-event-time{
     display:none;
 }
+#mdNota .modalBody {background: var(--bg);}
+#mdNota input::placeholder,#mdNota i,#mdNota span{color:var(--bg2);}
+#mdNota input:focus{
+    background-color: var(--mco)!important;
+}

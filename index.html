@@ -143,6 +143,11 @@
   --bg5: rgba(25, 120, 215, 0.2);
   --bg6: rgba(204, 239, 255, 0.5);
 }
+.tema[data-ths^="Cielo"]{background:var(--Cielo);}
+.tema[data-ths^="Dulce"]{background:var(--Dulce);}
+.tema[data-ths^="Paz"]{background:var(--Paz);}
+.tema[data-ths^="Mora"]{background:var(--Mora);}
+.tema[data-ths^="Futuro"]{background:var(--Futuro);}
 /* ESTILOS GENERALES HEADER-FOOTER MAIN [START] */
 *, *::before, *::after{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
 *{font-family:var(--ff_P);scrollbar-width:thin;scrollbar-color:var(--mco) var(--bg);}
@@ -165,11 +170,6 @@ a{text-decoration:none;}
 .tema{width:3vh;height:2.9vh;border-radius:50%;cursor:pointer;transition:all var(--tr_f);border:2px solid transparent;position:relative;}
 .tema:hover{transform:scale(1.15);box-shadow:0 0 1vh rgba(0,0,0,0.3);}
 .tema.mtha{border-color:var(--F);box-shadow:0 0 1.5vh rgba(255,255,255,0.6), inset 0 0 0.5vh rgba(255,255,255,0.3);transform:scale(1.2);}
-.tema[data-ths^="Cielo"]{background:var(--Cielo);}
-.tema[data-ths^="Dulce"]{background:var(--Dulce);}
-.tema[data-ths^="Paz"]{background:var(--Paz);}
-.tema[data-ths^="Mora"]{background:var(--Mora);}
-.tema[data-ths^="Futuro"]{background:var(--Futuro);}
 .wibtn_auth{display:flex;align-items:center;gap:0.4vw;padding:0.8vh 1.2vw;background:var(--bg1);border:none;border-radius:0.8vh;color:var(--tx);font-size:var(--fz_m2);font-weight:500;cursor:pointer;transition:all var(--tr_f);}
 .wibtn_auth i{font-size:var(--fz_m3);}
 #wiTema:hover, .wibtn_auth:hover{transform:translateY(-0.2vh);transition:var(--tr_m);}
