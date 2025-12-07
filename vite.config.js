@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => ({
     minify: 'esbuild',
     sourcemap: false,
     rollupOptions: {
-      input: { main: resolve(__dirname, 'index.html') },
+      input: { main: resolve(__dirname, 'index.html'), terminos: resolve(__dirname, 'terminos.html')},
       output: {
         manualChunks: {
           vendor: ['jquery'],
