@@ -2,7 +2,7 @@ import $ from 'jquery';
 import { auth, db } from '../firebase/init.js';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, sendEmailVerification, sendPasswordResetEmail } from 'firebase/auth';
 import { setDoc, getDoc, doc, query, where, getDocs, collection, serverTimestamp } from 'firebase/firestore';
-import { wiTip, Mensaje, savels, wiSpin, abrirModal, cerrarModal } from './widev.js';
+import { wiTip, Mensaje, savels, getls, wiSpin, abrirModal, cerrarModal } from './widev.js';
 
 export function wiAuth() {
 const cfg = { db: 'smiles', rol: 'usuario' };
@@ -137,7 +137,7 @@ const eventos = () => {
       const [correo, usuario, nombre, apellidos, password] = ['regEmail', 'regUsuario', 'regNombre', 'regApellidos', 'regPassword'].map(id => $(`#${id}`).val().trim());
       const { user } = await createUserWithEmailAndPassword(auth, correo, password);
       await Promise.all([updateProfile(user, { displayName: usuario }), sendEmailVerification(user)]);
-      const widatos = { usuario, email: correo, nombre, apellidos, rol: cfg.rol, uid: user.uid, terminos: true};
+      const widatos = { usuario, email: correo, nombre, apellidos, rol: cfg.rol, uid: user.uid, terminos: true, tema:localStorage.wiTema};
       await setDoc(doc(db, cfg.db, usuario), { ...widatos, creacion: serverTimestamp() });
       savels('wiSmile', widatos, 450); Mensaje('¡Registro completado! ✅'); cerrarModal('registroModal'); // 💾 Registro y guardamos datos 
       (await import('./header.js')).personal(widatos); // Header personalizado
@@ -159,6 +159,7 @@ const eventos = () => {
       }
       await signInWithEmailAndPassword(auth, correo, password);
       const usuario = correo.includes('@') ? (await getDoc(doc(db, cfg.db, auth.currentUser.displayName))).data() : (await getDoc(doc(db, cfg.db, campo))).data();
+      if (usuario.tema) { localStorage.wiTema = usuario.tema; aplicarTema(usuario.tema); }
       savels('wiSmile', usuario, 450); cerrarModal('loginModal'); // 💾 Guardamos Auht
       (await import('./header.js')).personal(usuario); // Header personalizado
     } catch (error) {
@@ -198,6 +199,26 @@ $(document).off('click.wa', '.login,.registrar').on('click.wa', '.login,.registr
   evento.preventDefault();
   inyectar();
   setTimeout(() => abrirModal($(this).hasClass('login') ? 'loginModal' : 'registroModal'), 100);
+});
+
+// ACTUALIZANDO Y SINCRONIZANDO TEMAS
+function aplicarTema(tema) {
+  if (!tema) return;
+  const [nombre, color] = tema.split('|');
+  document.documentElement.dataset.theme = nombre;
+  $('meta[name="theme-color"]').attr('content', color);
+  $('.tema').removeClass('mtha').filter(`[data-ths="${tema}"]`).addClass('mtha');
+}
+
+// 🔄 SINCRONIZACIÓN DE TEMA
+$(document).off('click.wa', '.tema').on('click.wa', '.tema', async function() {
+const tema =  localStorage.wiTema, usuario = getls('wiSmile'), nombreTema = tema.split('|')[0];
+  if (usuario) {
+    try {
+      await setDoc(doc(db, cfg.db, usuario.usuario), { tema, actualizadoEn: serverTimestamp() }, { merge: true });
+      Mensaje(`Tema ${nombreTema} Guardado ✅`);
+    } catch (e){ console.error(e); }
+  }
 });
 
 } wiAuth();
