@@ -10,6 +10,7 @@ class WiRouter {
     this.contentContainer = '#wiMainContent';
     this.isNavigating = false;
     this.prefetchCache = new Set();
+    this.moduleCache = new Map(); // ✅ Cache de módulos cargados
   }
 
   register(path, module) {
@@ -23,19 +24,21 @@ class WiRouter {
     let normalizedPath = wiPath.clean(path);
     if (normalizedPath === '/') normalizedPath = this.defaultRoute;
 
-    const moduleLoader = this.ruta[normalizedPath];
-    if (!moduleLoader) {
-      console.warn(`Ruta no encontrada: ${normalizedPath}`);
-      Notificacion('Página no encontrada', 'error', 2000);
-      this.isNavigating = false;
-      return;
-    }
+    let moduleLoader = this.ruta[normalizedPath];
+    if (!moduleLoader) moduleLoader = () => import('./pages/404.js');
 
     try {
       this.updateActiveNav(normalizedPath);
 
-      // ✅ Cargar módulo (lazy o ya cargado)
-      const module = typeof moduleLoader === 'function' ? await moduleLoader() : moduleLoader;
+      let module;
+      if (this.moduleCache.has(normalizedPath)) {
+        module = this.moduleCache.get(normalizedPath); // 0ms - Instantáneo
+        console.log('⚡Desde cache: ' + normalizedPath);
+      } else {
+        module = typeof moduleLoader === 'function' ? await moduleLoader() : moduleLoader; // 80-150ms solo primera vez
+        this.moduleCache.set(normalizedPath, module); // Guardar para próximas veces
+        console.log('✅ Primera Vez: '+ normalizedPath); 
+      }
       
       const content = await module.render();
       await wiAnimate.fade(this.contentContainer, content);
@@ -51,8 +54,7 @@ class WiRouter {
       }
 
       this.currentRoute = normalizedPath;
-      console.log(`${normalizedPath}`);
-    } catch (error) {console.error('Error:', error); Notificacion('Error al cargar la página', 'error', 2000); } 
+    } catch (e) {console.error(e)} 
     finally {this.isNavigating = false;}
   }
 
@@ -68,10 +70,10 @@ class WiRouter {
     
     if (this.prefetchCache.has(normalizedPath) || typeof this.ruta[normalizedPath] !== 'function') return;
 
-    console.log(`${normalizedPath}`);
+    console.log(`⚡ Prefetch: ${normalizedPath}`);
     try {
       const module = await this.ruta[normalizedPath]();
-      this.ruta[normalizedPath] = module;
+      this.moduleCache.set(normalizedPath, module); // ✅ Guardar en cache
       this.prefetchCache.add(normalizedPath);
     } catch (e) {console.warn(`Prefetch error: ${normalizedPath}`); }
   }

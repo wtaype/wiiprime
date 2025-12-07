@@ -26,16 +26,17 @@ export const header = (() => {
 
   async function cargandoPersonal(wi) {
     personal(wi);
+//ACTUALIZAR CAMBIOS EN TIEMPO REAL
     const { auth, onAuthStateChanged } = await import('./wiauth.js');
     onAuthStateChanged(auth, user => {
       if (!user) return removels('wiSmile'), publico();
     });
   }
-
+//CERRAR SESSIÓN
   $(document).on('click', '.bt_salir', async () => {
     const { auth, signOut } = await import('./wiauth.js');
     await signOut(auth); removels('wiSmile wiciudades wifechas'); publico(); rutas.navigate('/');
-  }); //CERRAR SESSIÓN
+  }); 
 
 })();
 
