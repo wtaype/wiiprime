@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="Paz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Términos y Condiciones - WiiPrime</title>
+  <link rel="icon" href="/smile.png">
+  <meta name="theme-color" content="#29C72E">
+  <style>
+    @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css);
+
+/* ========== 🎨 VARIABLES Y CONFIGURACIÓN GLOBAL ====== */
+:root {
+  /* === TAMAÑOS DE FUENTE RESPONSIVOS === */
+  --fz_s1: clamp(0.625rem, 0.8vh, 0.7rem);
+  --fz_s2: clamp(0.675rem, 0.85vh, 0.75rem);
+  --fz_s3: clamp(0.725rem, 0.9vh, 0.8rem);
+  --fz_s4: clamp(0.775rem, 1vh, 0.85rem);
+  --fz_m: clamp(0.8rem, 1.05vh, 0.9rem);
+  --fz_m1: clamp(0.85rem, 1.1vh, 0.95rem);
+  --fz_m2: clamp(0.9rem, 1.15vh, 1rem);
+  --fz_m3: clamp(0.95rem, 1.2vh, 1.05rem);
+  --fz_m4: clamp(1rem, 1.3vh, 1.1rem);
+  --fz_m5: clamp(1.15rem, 1.5vh, 1.25rem);
+  --fz_l1: clamp(1.5rem, 2vh, 1.7rem);
+  --fz_l2: clamp(1.8rem, 2.3vh, 2rem);
+  --fz_x1: clamp(2.2rem, 3vh, 2.8rem);
+  --fz_x2: clamp(2.5rem, 3.6vh, 3.5rem);
+  --fz_x3: clamp(2.9rem, 5vh, 3.9rem);
+  --fz_x4: clamp(3.3rem, 5.9vh, 4.3rem);
+  --fz_y1: clamp(3rem, 14vh, 8rem);
+
+  /* === SOMBRAS Y EFECTOS === */
+  --bs_m: 0 0 0.3vh 0.1vh var(--F);
+  --bs_l: 0 0.4vh 0.8vh rgba(0,0,0,0.15);
+
+  /* === TRANSICIONES === */
+  --tr_s: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --tr_m: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --tr_f: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* === FUENTES === */
+  --ff_P: 'Poppins', 'Segoe UI', system-ui;
+  --ff_R: 'Rubik', 'Segoe UI', system-ui;
+
+  /* 🌅 GRADIENTES DÍA/NOCHE */
+  --gradient-dia: linear-gradient(135deg, #0EBEFF 0%, #29C72E 100%);
+  --gradient-noche: linear-gradient(135deg, #21273B 0%, #7000FF 100%);
+
+  /* === COLORES BASE === */
+  --F: #fff;
+  --0: #000;
+  --D: #ddd;
+  --G: #374151;
+  --success: #3cd741;
+  --error: #ff3849;
+  --warning: #ffa726;
+  --info: #00a8e6;
+  --Cielo: #0EBEFF;
+  --Dulce: #FF5C69;
+  --Paz: #29C72E;
+  --Mora: #7000FF;
+  --Futuro: #21273B;
+
+  /* :root[data-theme="Cielo"] */
+  --bg: #1d273f;
+  --wb: #2a385b;
+  --tx: #fff;
+  --txa: #00f3ff;
+  --txe: #3e496f;
+  --hv: #4d5a89;
+  --hva: #3e496f;
+  --mco: #3e496f;
+  --bg1: #ffffff26;
+  --bg2: #00f3ff;
+  --bg3: #2a385b;
+  --bg4: rgba(0, 243, 255, 0.1);
+  --bg5: rgba(0, 243, 255, 0.2);
+  --bg6: rgba(42, 56, 91, 0.5); 
+
+}
+
+:root[data-theme="Dulce"] {
+  --bg: #ffccd1;
+  --wb: #ffebed;
+  --tx: #000;
+  --txa: #FFF;
+  --txe: #000;
+  --hv: #ff7a85;
+  --hva: #ff3849;
+  --mco: #ff3849;
+  --bg1: #ffffff61;
+  --bg2: #ff3849;
+  --bg3: #ffebed;
+  --bg4: rgba(255, 56, 73, 0.1);
+  --bg5: rgba(255, 56, 73, 0.2);
+  --bg6: rgba(255, 204, 209, 0.5);
+}
+
+:root[data-theme="Paz"] {
+  --bg: #ccffce;
+  --wb: #ebffeb;
+  --tx: #000;
+  --txa: #FFF;
+  --txe: #000;
+  --hv: #3cd741;
+  --hva: #25b62a;
+  --mco: #25b62a;
+  --bg1: #ffffff42;
+  --bg2: #25b62a;
+  --bg3: #ebffeb;
+  --bg4: rgba(37, 182, 42, 0.1);
+  --bg5: rgba(37, 182, 42, 0.2);
+  --bg6: rgba(204, 255, 206, 0.5);
+}
+
+:root[data-theme="Mora"] {
+  --bg: #e4ccff;
+  --wb: #f4ebff;
+  --tx: #000;
+  --txa: #FFF;
+  --txe: #000;
+  --hv: #9442ff;
+  --hva: #5f00db;
+  --mco: #6a00f5;
+  --bg1: #ffffff61;
+  --bg2: #6a00f5;
+  --bg3: #f4ebff;
+  --bg4: rgba(106, 0, 245, 0.1);
+  --bg5: rgba(106, 0, 245, 0.2);
+  --bg6: rgba(228, 204, 255, 0.5);
+}
+
+:root[data-theme="Cielo"] {
+  --bg: #ccefff;
+  --wb: #e5f7ff;
+  --tx: #000;
+  --txa: #FFF;
+  --txe: #000;
+  --hv: #00a8e6;
+  --hva: #1873cd;
+  --mco: #1978d7;
+  --bg1: #ffffff26;
+  --bg2: #1978d7;
+  --bg3: #e5f7ff;
+  --bg4: rgba(25, 120, 215, 0.1);
+  --bg5: rgba(25, 120, 215, 0.2);
+  --bg6: rgba(204, 239, 255, 0.5);
+}
+.tema[data-ths^="Cielo"]{background:var(--Cielo);}
+.tema[data-ths^="Dulce"]{background:var(--Dulce);}
+.tema[data-ths^="Paz"]{background:var(--Paz);}
+.tema[data-ths^="Mora"]{background:var(--Mora);}
+.tema[data-ths^="Futuro"]{background:var(--Futuro);}
+/* ESTILOS GENERALES HEADER-FOOTER MAIN [START] */
+*, *::before, *::after{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+*{font-family:var(--ff_P);scrollbar-width:thin;scrollbar-color:var(--mco) var(--bg);}
+a{text-decoration:none;}
+.wicontainer{min-height:100vh;margin:0 auto;display:flex;flex-direction:column;transition:background var(--tr_m);background:var(--bg);}
+.wiheader{height:6vh;width:100%;display:flex;justify-content:space-between;align-items:center;padding:0 2vw;background:var(--bg4);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:var(--bs_l);border-bottom:1px solid var(--bg5);position:relative;z-index:100;}
+.wiheader_left{display:flex;align-items:center;gap:2vh;}
+.wilogo{display:flex;align-items:center;gap:0.3vh;font-size:var(--fz_m5);font-weight:700;color:var(--bg2);cursor:pointer;transition:all var(--tr_f);}
+.wilogo a{color:var(--bg2);}
+.wilogo i{font-size:var(--fz_l1);animation:rotate 4s linear infinite;}
+@keyframes rotate{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.wilogo:hover{transform:scale(1.05);filter:drop-shadow(0 0 0.5vh var(--mco));}
+.winav{display:flex;gap:.7vh;}
+.winav_item{display:flex;align-items:center;gap:0.4vw;padding:0.8vh 1.2vw;background:var(--bg1);border-radius:0.8vh;color:var(--tx);text-decoration:none;font-size:var(--fz_m2);font-weight:500;transition:all var(--tr_f);border:1px solid transparent;}
+.winav_item i{font-size:var(--fz_m3);}
+.winav_item:hover{background:var(--bg5);border-color:var(--mco);transform:translateY(-0.2vh);box-shadow:0 0.4vh 1vh rgba(0,0,0,0.1);}
+.winav_item.active{background:var(--mco);color:var(--txa);box-shadow:0 0.4vh 1.2vh rgba(0,0,0,0.15);}
+.wiheader_right{display:flex;align-items:center;gap:.5vh;}
+#wiTema{display:flex;gap:0.2vh;padding:0.5vh 0.8vw;background:var(--bg1);border-radius:0.8vh;}
+.tema{width:3vh;height:2.9vh;border-radius:50%;cursor:pointer;transition:all var(--tr_f);border:2px solid transparent;position:relative;}
+.tema:hover{transform:scale(1.15);box-shadow:0 0 1vh rgba(0,0,0,0.3);}
+.tema.mtha{border-color:var(--F);box-shadow:0 0 1.5vh rgba(255,255,255,0.6), inset 0 0 0.5vh rgba(255,255,255,0.3);transform:scale(1.2);}
+.wibtn_auth{display:flex;align-items:center;gap:0.4vw;padding:0.8vh 1.2vw;background:var(--bg1);border:none;border-radius:0.8vh;color:var(--tx);font-size:var(--fz_m2);font-weight:500;cursor:pointer;transition:all var(--tr_f);}
+.wibtn_auth i{font-size:var(--fz_m3);}
+#wiTema:hover, .wibtn_auth:hover{transform:translateY(-0.2vh);transition:var(--tr_m);}
+.wibtn_auth:hover{background:var(--mco);color:var(--txa);border-color:var(--mco);box-shadow:0 0.4vh 1vh rgba(0,0,0,0.15);}
+.wiauth{display:flex;gap:.5vh;min-width:13.9vw;}
+.sesion img{max-width:3vh;}
+.sesion{height:4.5vh;display:flex;align-items:center;gap:.8vh;cursor:pointer;padding-inline:1.5vh;background:var(--bg1);border-radius:1.2vh;}
+.sesion:hover{transform:translateY(-.2vh);transition:var(--tr_s);}
+.user-avatar{height:80%;box-shadow:var(--bs_m);border-radius:50%;}
+.bt_salir{background:var(--bg1);border-radius:1.2vh;border:none;padding-inline:2vh;cursor:pointer;}
+.bt_salir:hover{transform:translateY(-.2vh);transition:var(--tr_s);}
+.foo{width:100%;text-align:center;padding-block:1.5vh 1vh;background:var(--wb);border-radius:1vh 1vh 0 0;}
+.foo *{font-size:var(--fz_s2);margin-inline:.3vh;}
+.foo a{color:var(--bg2);}
+.foo i{color:var(--mco);}
+.abwc{background:var(--bg);top:0;width:99%;height:100%;padding:2vh 2vw;overflow:scroll;line-height:1.80;}
+.abwok{background:var(--mco);color:var(--txa);}
+.wimain{flex:1;width:100%;padding:2vh 2vw;overflow-y:auto;}
+@media (max-width: 1024px){
+.wiheader{height:7vh;padding:0 3vw;}
+.wilogo{font-size:var(--fz_m4);}
+.wilogo i{font-size:var(--fz_m5);}
+.winav{gap:1vh;}
+.winav_item{padding:0.8vh 1.5vw;font-size:var(--fz_m1);}
+.winav_item i{font-size:var(--fz_m2);}
+#wiTema{padding:0.6vh 1vw;gap:0.3vh;}
+.tema{width:3.5vh;height:3.4vh;}
+.wiauth{width:auto;min-width:100px;}
+.sesion{height:5vh;padding-inline:1.8vh;gap:1vh;}
+.sesion img{max-width:3.5vh;}
+.bt_salir{padding-inline:2.5vh;font-size:var(--fz_m1);}
+}
+@media (max-width: 768px){
+.wiheader{height:auto;min-height:10vh;flex-direction:column;padding:1.5vh 4vw;gap:1.5vh;}
+.wiheader_left, .wiheader_right{width:100%;justify-content:space-between;}
+.wilogo{font-size:var(--fz_m5);}
+.wilogo i{font-size:var(--fz_l1);}
+.winav{gap:0.8vh;flex-wrap:wrap;}
+.winav_item{padding:1vh 2vw;gap:0.6vw;}
+.winav_item span{display:none;}
+.winav_item i{font-size:var(--fz_m4);}
+#wiTema{padding:0.8vh 1.5vw;gap:0.5vh;}
+.tema{width:4vh;height:3.9vh;}
+.wiauth{width:auto;gap:.5vh;}
+.sesion{height:5.5vh;padding-inline:2vh;gap:1.2vh;}
+.sesion span, .bt_salir{font-size:var(--fz_m2);}
+.bt_salir{padding-inline:3vh;height:5.5vh;}
+.wimain, .wifooter{padding:2vh 4vw;}
+.wifooter{flex-direction:column;gap:2vh;}
+}
+@media (max-width: 564px){
+.wiheader{min-height:12vh;padding:1.5vh 5vw;gap:1.8vh;}
+.wiheader_left{flex-direction:column;align-items:flex-start;gap:1.5vh;}
+.wiheader_right{gap:2vh;}
+.wilogo{font-size:var(--fz_m5);width:100%;justify-content:center;}
+.wilogo i{font-size:var(--fz_l1);}
+.winav{width:100%;justify-content:space-around;gap:1vh;}
+.winav_item{flex:1;justify-content:center;padding:1.2vh 0;min-width:45px;}
+.winav_item i{font-size:var(--fz_m5);}
+#wiTema{flex:1;justify-content:space-around;padding:3vw 1vw;}
+.tema{width:4.5vh;height:4.5vh;}
+.wiauth{flex:1;justify-content:flex-end;}
+.sesion{height:6vh;padding-inline:2.5vh;gap:1.5vh;}
+.sesion img{max-width:4vh;}
+.sesion span, .bt_salir{font-size:var(--fz_m3);}
+.bt_salir{height:6vh;padding-inline:3.5vh;}
+.wimain, .wifooter{padding:2vh 5vw;}
+}
+@media (max-width: 460px){
+.wiheader{min-height:14vh;padding:2vh 6vw;gap:2vh;}
+.wiheader_left{gap:2vh;}
+.wilogo{font-size:var(--fz_l1);}
+.wilogo i{font-size:var(--fz_l2);}
+.winav{gap:1.2vh;}
+.winav_item{padding:1.5vh 0;border-radius:1.2vh;}
+.winav_item i{font-size:var(--fz_l1);}
+.winav_item:not(.active) i{color:var(--bg2);}
+#wiTema{gap:0;}
+.tema{width:3.5vh;height:3.5vh;}
+.sesion{height:6.5vh;padding-inline:3vw;gap:1vw;}
+.sesion img{max-width:4.5vh;}
+.sesion span, .bt_salir, .wibtn_format, .wiclock_ampm, .wilabel, .wibtn, .wirange_value{font-size:var(--fz_m4);}
+.bt_salir{height:6.5vh;padding-inline:4vw;}
+.bt_salir span{display:none;}
+.wimain{padding:2.5vh 1vw;}
+.foo{padding-block:2vh 1.5vh;}
+.foo *{font-size:var(--fz_m1);}
+}
+    
+    body{min-height:100vh;display:flex;flex-direction:column;opacity:0;animation:fadeIn .8s ease forwards;background:var(--bg)!important}
+    @keyframes fadeIn{to{opacity:1}}
+    .terminos_main{flex:1;max-width:90vw;width:100%;margin:8vh auto 4vh;padding:0 2vw}
+    .terminos_box{background:var(--wb);border-radius:2vh;padding:4vw;box-shadow:var(--bs_l);border:1px solid var(--bg5);backdrop-filter:blur(10px)}
+    .terminos_header{text-align:center;margin-bottom:4vh;padding-bottom:3vh;border-bottom:2px solid var(--mco);position:relative}
+    .terminos_header::after{content:'';position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:10vw;height:2px;background:var(--mco);box-shadow:0 0 2vh var(--mco)}
+    .terminos_header h1{font-size:clamp(2rem,4vw,3rem);color:var(--mco);margin-bottom:1vh;font-weight:700;text-shadow:0 0 3vh var(--bg5)}
+    .terminos_header h1 i{margin-right:1vw;animation:pulse 2s ease infinite}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+    .terminos_header .subtitle{font-size:clamp(.9rem,1.5vw,1.1rem);color:var(--tx);margin-top:1vh;opacity:.8}
+    .terminos_header .meta{display:flex;justify-content:center;gap:3vw;margin-top:2vh;font-size:clamp(.85rem,1.3vw,.95rem);color:var(--tx);flex-wrap:wrap;opacity:.9}
+    .terminos_header .meta span{display:flex;align-items:center;gap:.5vw;padding:1vh 2vw;background:var(--bg1);border-radius:1vh;transition:all .3s;border:1px solid var(--bg5)}
+    .terminos_header .meta span:hover{transform:translateY(-.5vh);box-shadow:0 .5vh 1vh var(--bg5);background:var(--bg4)}
+    .terminos_header .meta i{color:var(--mco)}
+    .terminos_content{animation:slideUp .6s ease .3s backwards}
+    @keyframes slideUp{from{opacity:0;transform:translateY(3vh)}to{opacity:1;transform:translateY(0)}}
+    .terminos_section{margin-bottom:3vh;padding:2.5vh 2vw;background:var(--bg1);border-radius:1.5vh;border-left:.5vw solid var(--mco);transition:all .4s cubic-bezier(.4,0,.2,1);opacity:0;transform:translateX(-2vw);animation:slideRight .5s ease forwards;border:1px solid var(--bg5)}
+    .terminos_section:nth-child(1){animation-delay:.1s}
+    .terminos_section:nth-child(2){animation-delay:.2s}
+    .terminos_section:nth-child(3){animation-delay:.3s}
+    .terminos_section:nth-child(4){animation-delay:.4s}
+    .terminos_section:nth-child(5){animation-delay:.5s}
+    .terminos_section:nth-child(6){animation-delay:.6s}
+    .terminos_section:nth-child(7){animation-delay:.7s}
+    .terminos_section:nth-child(8){animation-delay:.8s}
+    .terminos_section:nth-child(9){animation-delay:.9s}
+    .terminos_section:nth-child(10){animation-delay:1s}
+    @keyframes slideRight{to{opacity:1;transform:translateX(0)}}
+    .terminos_section:hover{transform:translateX(1vw) scale(1.02);box-shadow:0 1vh 3vw var(--bg5);border-left-width:1vw;background:var(--bg4)}    
+    .terminos_section h2{font-size:clamp(1.3rem,2.5vw,1.8rem);color:var(--mco);margin-bottom:1.5vh;display:flex;align-items:center;gap:1vw;font-weight:600}
+    .terminos_section h2 i{font-size:clamp(1.2rem,2vw,1.5rem);padding:1vh 1vw;background:var(--wb);border-radius:1vh;box-shadow:0 .5vh 1vw var(--bg5);border:1px solid var(--bg5)}    
+    .terminos_section p{color:var(--tx);font-size:clamp(.95rem,1.5vw,1.1rem);margin-bottom:1.5vh;line-height:1.8}
+    .terminos_section strong{color:var(--mco);font-weight:600}    
+    .terminos_section ul{list-style:none;padding-left:0;margin-top:1.5vh}
+    .terminos_section ul li{padding:1vh 0 1vh 3.5vw;position:relative;color:var(--tx);transition:all .3s;border-radius:.8vh}
+    .terminos_section ul li:hover{background:var(--bg4);padding-left:4vw;color:var(--mco);box-shadow:inset 4px 0 0 var(--mco)}
+    .terminos_section ul li::before{content:'\f00c';font-family:'Font Awesome 6 Free';font-weight:900;position:absolute;left:1vw;color:var(--mco);font-size:1.2rem;transition:transform .3s}
+    .terminos_section ul li:hover::before{transform:scale(1.3) rotate(360deg)}    
+    .terminos_alert{background:var(--bg4);border-left:.5vw solid var(--hv);padding:2vh 2vw;border-radius:1vh;margin:2vh 0;border:1px solid var(--bg5)}
+    .terminos_alert p{margin:0;font-size:clamp(.9rem,1.4vw,1rem);line-height:1.6}
+    .terminos_alert i{color:var(--hv);margin-right:1vw}    
+    .terminos_footer{text-align:center;padding:4vh 2vw;margin-top:5vh;border-top:2px solid var(--mco);font-size:clamp(.85rem,1.3vw,.95rem);color:var(--tx);position:relative;opacity:.9}
+    .terminos_footer::before{content:'';position:absolute;top:-2px;left:50%;transform:translateX(-50%);width:15vw;height:2px;background:linear-gradient(90deg,transparent,var(--mco),transparent)}
+    .terminos_footer p{margin-bottom:1.5vh}
+    .terminos_footer strong{color:var(--mco);font-weight:700}    
+    .btn_volver{display:inline-flex;align-items:center;gap:1vw;padding:1.5vh 3vw;background:linear-gradient(135deg,var(--mco),var(--hv));color:var(--txa);border:none;border-radius:1vh;font-weight:600;cursor:pointer;transition:all .4s cubic-bezier(.4,0,.2,1);margin-top:2vh;text-decoration:none;font-size:clamp(.9rem,1.5vw,1rem);box-shadow:0 .5vh 2vw var(--bg5)}
+    .btn_volver:hover{transform:translateY(-.8vh) scale(1.05);box-shadow:0 1.5vh 3vw var(--bg5)}
+    .btn_volver i{transition:transform .3s}
+    .btn_volver:hover i{transform:translateX(-.5vw)}    
+    @media (max-width:768px){
+      .terminos_main{margin:6vh auto 3vh;max-width:95vw}
+      .terminos_box{padding:3vh 3vw}
+      .terminos_section{padding:2vh 3vw}
+      .terminos_header .meta{gap:2vw}
+    }
+  </style>
+</head>
+<body>
+  <main class="terminos_main">
+    <div class="terminos_box">
+      <div class="terminos_header">
+        <h1><i class="fas fa-file-contract"></i> Privacidad & Términos - WiiPrime</h1>
+        <p class="subtitle">Última actualización: 7 de Diciembre, 2025</p>
+        <div class="meta">
+          <span><i class="fas fa-building"></i> WiiPrime</span>
+          <span><i class="fas fa-shield-check"></i> Versión 1.0.0</span>
+        </div>
+      </div>
+
+      <div class="terminos_content">
+        <div class="terminos_alert">
+          <p><i class="fas fa-info-circle"></i> <strong>IMPORTANTE:</strong> Al acceder, registrarse o utilizar cualquier servicio de WiiPrime, usted acepta expresamente estos Términos y Condiciones, así como nuestra Política de Privacidad. Si no está de acuerdo, debe cesar inmediatamente el uso de la plataforma.</p>
+        </div>
+
+        <div class="terminos_section">
+          <h2><i class="fas fa-handshake"></i> 1. Aceptación y Alcance de los Términos</h2>
+          <p>Estos Términos y Condiciones constituyen un acuerdo legal vinculante entre usted (el "Usuario") y <strong>WiiPrime</strong> (el "Servicio"). Al utilizar nuestra plataforma, usted declara:</p>
+          <ul>
+            <li>Haber leído, entendido y aceptado la totalidad de estos términos</li>
+            <li>Ser mayor de 13 años o contar con autorización parental verificable</li>
+            <li>Tener capacidad legal para contratar en su jurisdicción</li>
+            <li>Proporcionar información veraz, precisa y actualizada</li>
+            <li>Aceptar recibir notificaciones sobre cambios en el servicio</li>
+          </ul>
+        </div>
+
+        <div class="terminos_section">
+          <h2><i class="fas fa-cogs"></i> 2. Descripción del Servicio y Uso Permitido</h2>
+          <p><strong>WiiPrime</strong> es una plataforma web que proporciona herramientas para gestión de tiempo, calendario, recordatorios y productividad personal. El uso del servicio está sujeto a:</p>
+          <ul>
+            <li>Uso exclusivamente para fines personales, educativos o comerciales legítimos</li>
+            <li>Prohibición de actividades fraudulentas, maliciosas o que violen derechos de terceros</li>
+            <li>No distribuir malware, spam o contenido ilegal a través de la plataforma</li>
+            <li>No intentar acceder a sistemas, cuentas o datos de otros usuarios sin autorización</li>
+            <li>No realizar ingeniería inversa, descompilar o extraer código fuente del servicio</li>
+            <li>Respetar los límites de uso establecidos para evitar saturación del servicio</li>
+          </ul>
+        </div>
+
+        <div class="terminos_section">
+          <h2><i class="fas fa-shield-alt"></i> 3. Privacidad, Protección de Datos y Consentimiento</h2>
+          <p>La privacidad de sus datos es prioritaria. <strong>Al aceptar estos términos, usted otorga su consentimiento explícito para:</strong></p>
+          <ul>
+            <li>Recopilación de datos personales necesarios para el funcionamiento del servicio (nombre, email, preferencias)</li>
+            <li>Almacenamiento seguro de sus datos en servidores de Firebase (Google Cloud Platform)</li>
+            <li>Uso de cookies y tecnologías de seguimiento para mejorar la experiencia del usuario</li>
+            <li>Procesamiento de datos de uso para análisis estadísticos y mejoras del servicio</li>
+            <li>Compartir datos con proveedores de servicios esenciales (hosting, autenticación) bajo acuerdos de confidencialidad</li>
+            <li>Conservación de sus datos mientras mantenga su cuenta activa o según lo requiera la ley</li>
+          </ul>
+          <div class="terminos_alert">
+            <p><i class="fas fa-user-shield"></i> <strong>Sus derechos:</strong> Puede solicitar acceso, rectificación, portabilidad o eliminación de sus datos personales en cualquier momento contactándonos. No vendemos ni compartimos sus datos con terceros para fines publicitarios sin su consentimiento explícito.</p>
+          </div>
+        </div>
+
+        <div class="terminos_section">
+          <h2><i class="fas fa-user-lock"></i> 4. Cuentas de Usuario y Seguridad</h2>
+          <p>Para acceder a funcionalidades completas, debe crear una cuenta. Es su responsabilidad:</p>
+          <ul>
+            <li>Mantener la confidencialidad de sus credenciales de acceso (contraseña, tokens)</li>
+            <li>Notificar inmediatamente cualquier acceso no autorizado o brecha de seguridad</li>
+            <li>Actualizar su información de contacto para recibir notificaciones importantes</li>
+            <li>No compartir su cuenta con terceros ni permitir accesos múltiples simultáneos</li>
+            <li>Usar contraseñas seguras y únicas para su cuenta de WiiPrime</li>
+          </ul>
+          <p><strong>Suspensión de cuenta:</strong> Nos reservamos el derecho de suspender o eliminar cuentas que violen estos términos, sin previo aviso y sin responsabilidad de nuestra parte.</p>
+        </div>
+
+        <div class="terminos_section">
+          <h2><i class="fas fa-exclamation-triangle"></i> 5. Limitación de Responsabilidad y Exención de Garantías</h2>
+          <p>El servicio se proporciona <strong>"TAL CUAL"</strong> y <strong>"SEGÚN DISPONIBILIDAD"</strong>, sin garantías de ningún tipo, expresas o implícitas. WiiPrime no será responsable por:</p>
+          <ul>
+            <li>Pérdida de datos, ingresos o beneficios derivados del uso o imposibilidad de uso del servicio</li>
+            <li>Interrupciones temporales del servicio por mantenimiento, fallas técnicas o causas de fuerza mayor</li>
+            <li>Daños causados por virus, ataques cibernéticos o errores de terceros</li>
+            <li>Decisiones tomadas en base a la información proporcionada por el servicio</li>
+            <li>Contenido generado por otros usuarios o enlaces a sitios web de terceros</li>
+            <li>Incompatibilidad del servicio con hardware, software o navegadores específicos</li>
+          </ul>
+          <p><strong>Límite máximo de responsabilidad:</strong> En ningún caso nuestra responsabilidad excederá el monto pagado por el usuario en los últimos 12 meses (si aplica).</p>
+        </div>
+
+        <div class="terminos_section">
+          <h2><i class="fas fa-balance-scale"></i> 6. Propiedad Intelectual y Derechos de Autor</h2>
+          <p>Todo el contenido de WiiPrime (código, diseño, textos, logos, marcas, gráficos) es propiedad exclusiva de sus creadores y está protegido por leyes de propiedad intelectual.</p>
+          <ul>
+            <li>Queda prohibida la reproducción, distribución o modificación del código sin autorización escrita</li>
+            <li>Las marcas "WiiPrime" y logos asociados son propiedad registrada</li>
+            <li>El contenido que usted crea (eventos, notas, recordatorios) permanece bajo su propiedad</li>
+            <li>Nos otorga una licencia no exclusiva para almacenar y procesar su contenido únicamente para proporcionar el servicio</li>
+            <li>No reclamamos derechos sobre su contenido personal almacenado en la plataforma</li>
+          </ul>
+        </div>
+
+        <div class="terminos_section">
+          <h2><i class="fas fa-ban"></i> 7. Conducta Prohibida y Consecuencias</h2>
+          <p>Queda estrictamente prohibido utilizar WiiPrime para:</p>
+          <ul>
+            <li>Actividades ilegales, fraudulentas o que violen derechos de terceros</li>
+            <li>Envío masivo de mensajes no solicitados (spam) o contenido malicioso</li>
+            <li>Suplantar identidades o falsificar información de contacto</li>
+            <li>Explotar vulnerabilidades de seguridad o realizar ataques DoS/DDoS</li>
+            <li>Extraer datos de otros usuarios mediante scraping o técnicas automatizadas</li>
+          </ul>
+          <p><strong>Violaciones:</strong> Reportaremos actividades ilegales a las autoridades competentes y cooperaremos con investigaciones legales.</p>
+        </div>
+
+        <div class="terminos_section">
+          <h2><i class="fas fa-sync-alt"></i> 8. Modificaciones del Servicio y Términos</h2>
+          <p>Nos reservamos el derecho de modificar, suspender o discontinuar cualquier aspecto del servicio en cualquier momento, incluyendo:</p>
+          <ul>
+            <li>Funcionalidades, diseño o estructura de la plataforma</li>
+            <li>Estos Términos y Condiciones o la Política de Privacidad</li>
+            <li>Precios o planes de suscripción (si aplican en el futuro)</li>
+          </ul>
+          <p><strong>Notificaciones:</strong> Los cambios importantes se notificarán con al menos 15 días de anticipación mediante email o aviso en la plataforma. El uso continuado del servicio implica aceptación de los nuevos términos.</p>
+        </div>
+
+        <div class="terminos_section">
+          <h2><i class="fas fa-gavel"></i> 9. Ley Aplicable y Resolución de Disputas</h2>
+          <p>Estos términos se rigen por las leyes de <strong>Perú</strong>. Cualquier controversia será resuelta mediante:</p>
+          <ul>
+            <li>Negociación directa de buena fe como primer paso</li>
+            <li>Mediación o arbitraje si la negociación no prospera</li>
+            <li>Jurisdicción exclusiva de los tribunales de Lima, Perú como última instancia</li>
+          </ul>
+          <p><strong>Idioma:</strong> En caso de discrepancias entre versiones traducidas, prevalece la versión en español.</p>
+        </div>
+
+        <div class="terminos_section">
+          <h2><i class="fas fa-envelope"></i> 10. Contacto y Soporte</h2>
+          <p>Para consultas sobre estos Términos, solicitudes de datos personales o soporte técnico, puede contactarnos en:</p>
+          <ul>
+            <li><i class="fas fa-at"></i> Email: <strong>wilder.taype@hotmail.com</strong></li>
+            <li><i class="fab fa-github"></i> GitHub: <strong>github.com/wtaype/wiiprime</strong></li>
+            <li><i class="fas fa-globe"></i> Website: <strong>wiiprime.web.app</strong></li>
+          </ul>
+          <p>Tiempo de respuesta estimado: 24-48 horas laborables.</p>
+        </div>
+      </div>
+
+      <div class="terminos_footer">
+        <p><strong>Al crear una cuenta o usar WiiPrime, confirmas haber leído, entendido y aceptado estos Términos y Condiciones en su totalidad.</strong></p>
+        <p><strong>Versión 1.0.0</strong> - © 2024 WiiPrime. Todos los derechos reservados.</p>
+        <a href="/" class="btn_volver"><i class="fas fa-arrow-left"></i> Volver al inicio</a>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
