@@ -29,6 +29,10 @@ export const header = (() => {
     const [{ auth }, { onAuthStateChanged, signOut }] = await Promise.all([import('../firebase/init.js'), import('firebase/auth')]);
     onAuthStateChanged(auth, user => {if (!user) return removels('wiSmile'), publico();}); //Detecta si hay auth
 
-    $(document).on('click', '.bt_salir', async () => await signOut(auth) || (removels('wiSmile'), publico(), rutas.navigate('/')));
+    $(document)
+      .off('click.logout', '.bt_salir')
+      .on('click.logout', '.bt_salir', async () => {
+        await signOut(auth); removels('wiSmile wiciudades wifechas');  publico();  rutas.navigate('/');
+    }); //Cerrar sessión y Limpiar Cache
   }
 })();

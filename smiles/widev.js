@@ -286,9 +286,10 @@ export function getls(clave) {
   } catch(e) { console.error('egt:', e); localStorage.removeItem(clave); return null; }
 }
 
-// ELIMINANDO DE LOCAL v10.1
+// ELIMINANDO DE LOCAL v10.2
 export function removels(...claves) {
-  claves.forEach(clave => clave && typeof clave === 'string' && localStorage.removeItem(clave));
+  claves.flat().flatMap(c => typeof c === 'string' ? c.split(/[,\s]+/).filter(Boolean) : c)
+    .forEach(clave => localStorage.removeItem(clave));
 }
 
 // TOOLTIP V10.1
