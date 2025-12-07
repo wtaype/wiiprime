@@ -26,7 +26,7 @@ const htmlMod = {
     crearCampo('lock', 'password', 'regPassword1', 'Confirmar', true) +
     '<div class="grupo grupoCheck"><label>' +
       '<input type="checkbox" id="regTerminos" required>' +
-      '<span>Acepto los <a href="https://wiiprime.web.app/asia" target="_blank" rel="noopener noreferrer">términos y condiciones</a></span>' +
+      '<span>Acepto los <a href="/terminos.html" target="_blank" rel="noopener noreferrer">términos y condiciones</a></span>' +
     '</label></div>' +
     '<button type="button" id="Registrar" class="btnAuth inactivo">Registrarme</button>' +
     '<div class="links"><span class="conCuenta">Ya tengo cuenta</span></div>'
