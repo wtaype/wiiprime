@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import { rutas } from './rutas.js';
+import { auth, onAuthStateChanged, signOut } from './footer.js';
 import { wiSmart, getls, savels, removels, Mensaje } from './widev.js';
 wiSmart({js: [() => import('./wiauth.js')]});
 
@@ -24,15 +25,13 @@ export const header = (() => {
     $('.wiauth').html(`<button class="wibtn_auth registrar"><i class="fas fa-user-plus"></i><span>Registrar</span></button><button class="wibtn_auth login"><i class="fas fa-sign-in-alt"></i><span>Login</span></button>`);
   }
 
-  async function cargandoPersonal(wi) {
+  function cargandoPersonal(wi) {
     personal(wi);
-    const [{ auth }, { onAuthStateChanged, signOut }] = await Promise.all([import('../firebase/init.js'), import('firebase/auth')]);
-    onAuthStateChanged(auth, user => {if (!user) return removels('wiSmile'), publico();}); //Detecta si hay auth
-
-    $(document)
-      .off('click.logout', '.bt_salir')
-      .on('click.logout', '.bt_salir', async () => {
-        await signOut(auth); removels('wiSmile wiciudades wifechas');  publico();  rutas.navigate('/');
-    }); //Cerrar sessión y Limpiar Cache
+    onAuthStateChanged(auth, user => {
+      if (!user) return removels('wiSmile'), publico();
+    });
   }
+  $(document).on('click', '.bt_salir', async () => {
+    await signOut(auth); publico(); rutas.navigate('/'); removels('wiSmile wiciudades wifechas');
+  });
 })();

@@ -1,8 +1,12 @@
 import $ from 'jquery';
 import { wiSmart } from './widev.js';
+import { auth } from '../firebase/init.js';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import {app, lanzamiento, autor, link, version} from './wii.js';
 
+export { auth, onAuthStateChanged, signOut };
 export { footer };
+
 function footer(){
   const ahora = new Date();
   return `
