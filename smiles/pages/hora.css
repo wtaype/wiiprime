@@ -1,6 +1,5 @@
-/* ========== HORA PRINCIPAL CSS [START] ====== */
 .wihora {
-  padding: 3.5vh 0;
+  padding: 2vh 0;
   width: 100%;
   animation: fadeInContent 0.8s ease-out;
 }
@@ -56,20 +55,20 @@
 .wihora_subtitle {
   font-size: var(--fz_m5);
   font-weight: 600;
-  opacity: 0.7;
-  background: linear-gradient(135deg, var(--tx) 0%, var(--txe) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--bg2);
+  opacity: 0.85;
+  margin-top: 0.5vh;
 }
 
 .wihora_controls {
   display: flex;
   gap: 0.8vh;
   background: var(--bg1);
+  backdrop-filter: blur(15px);
   padding: 0.5vh;
   border-radius: 1vh;
   border: 1px solid var(--bg5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .wibtn_format {
@@ -93,33 +92,31 @@
 
 .wibtn_format:hover {
   background: var(--bg5);
+  transform: translateY(-0.2vh);
 }
 
 .wibtn_format.active {
   background: var(--mco);
   color: var(--txa);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .wihora_grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2vh;
-}
-
-.wihora_grid > * {
-  flex: 45%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5vh;
 }
 
 .wihora_card {
   position: relative;
   width: 100%;
-  min-height: 260px;
+  min-height: 340px;
   border-radius: 2vh;
   padding: 2.5vh 2vw;
   overflow: hidden;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(25px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0;
   animation: cardSlideIn 0.8s ease-out forwards;
@@ -127,6 +124,8 @@
 
 .wihora_card:nth-child(1) { animation-delay: 0.1s; }
 .wihora_card:nth-child(2) { animation-delay: 0.2s; }
+.wihora_card:nth-child(3) { animation-delay: 0.3s; }
+.wihora_card:nth-child(4) { animation-delay: 0.4s; }
 
 @keyframes cardSlideIn {
   from {
@@ -147,8 +146,18 @@
 .wihora_card.es-dia::before {
   content: '';
   position: absolute;
-  inset: 0;
-  z-index: 0;
+  top: -30%;
+  right: -15%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(255, 200, 0, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+  animation: sunGlow 4s ease-in-out infinite;
+}
+
+@keyframes sunGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.15); }
 }
 
 .wihora_card.es-dia .wihora_ciudad,
@@ -167,16 +176,17 @@
 .wihora_card.es-dia .wihora_reloj_face {
   background: rgba(255, 255, 255, 0.6);
   border-color: rgba(255, 200, 0, 0.5);
-  box-shadow: 0 4px 20px rgba(255, 200, 0, 0.3);
+  box-shadow: 0 6px 24px rgba(255, 200, 0, 0.35);
 }
 
 .wihora_card.es-dia .wihora_hand {
   background: #ff6b00;
+  box-shadow: 0 2px 8px rgba(255, 107, 0, 0.4);
 }
 
 .wihora_card.es-dia .wihora_reloj_center {
   background: #ff6b00;
-  box-shadow: 0 0 15px #ff6b00;
+  box-shadow: 0 0 20px #ff6b00, 0 0 40px rgba(255, 107, 0, 0.3);
 }
 
 .wihora_card.es-dia .wihora_info_item {
@@ -196,16 +206,25 @@
 .wihora_card.es-noche::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 80% 20%, rgba(147, 112, 219, 0.3) 0%, transparent 60%);
-  z-index: 0;
+  top: 10%;
+  right: 10%;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(147, 112, 219, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+  animation: moonGlow 3s ease-in-out infinite;
+}
+
+@keyframes moonGlow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.9; }
 }
 
 .wihora_card.es-noche .wihora_ciudad,
 .wihora_card.es-noche .wihora_time,
 .wihora_card.es-noche .wihora_info_item span {
   color: #fff;
-  text-shadow: 0 0 10px rgba(147, 112, 219, 0.6);
+  text-shadow: 0 0 12px rgba(147, 112, 219, 0.6);
 }
 
 .wihora_card.es-noche .wihora_pais,
@@ -217,16 +236,17 @@
 .wihora_card.es-noche .wihora_reloj_face {
   background: rgba(42, 56, 91, 0.6);
   border-color: rgba(147, 112, 219, 0.5);
-  box-shadow: 0 4px 20px rgba(100, 80, 200, 0.3);
+  box-shadow: 0 6px 24px rgba(100, 80, 200, 0.35);
 }
 
 .wihora_card.es-noche .wihora_hand {
   background: #9370db;
+  box-shadow: 0 2px 8px rgba(147, 112, 219, 0.5);
 }
 
 .wihora_card.es-noche .wihora_reloj_center {
   background: #9370db;
-  box-shadow: 0 0 15px #9370db;
+  box-shadow: 0 0 20px #9370db, 0 0 40px rgba(147, 112, 219, 0.3);
 }
 
 .wihora_card.es-noche .wihora_info_item {
@@ -239,7 +259,7 @@
 }
 
 .wihora_card:hover {
-  transform: translateY(-5px) scale(1.02);
+  transform: translateY(-0.6vh) scale(1.01);
 }
 
 .wihora_card.es-dia:hover {
@@ -255,25 +275,46 @@
 .wihora_card_content {
   display: flex;
   align-items: center;
-  gap: 1.5vw;
+  gap: 2vw;
   position: relative;
   z-index: 1;
 }
 
 .wihora_analogico {
-  width: 120px;
-  height: 120px;
+  width: 180px;
+  height: 180px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+.wihora_analogico::before {
+  content: '';
+  position: absolute;
+  inset: -15px;
+  background: radial-gradient(circle, var(--bg5) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 50%;
+}
+
+.wihora_card:hover .wihora_analogico::before {
+  opacity: 0.5;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 0.7; }
 }
 
 .wihora_reloj_face {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 2px solid;
+  border: 4px solid;
   position: relative;
   display: flex;
   align-items: center;
@@ -283,8 +324,8 @@
 
 .wihora_reloj_center {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   z-index: 10;
   animation: centerPulse 2s ease-in-out infinite;
@@ -292,7 +333,7 @@
 
 @keyframes centerPulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
+  50% { transform: scale(1.3); }
 }
 
 .wihora_reloj_marks {
@@ -305,22 +346,28 @@
 .wihora_mark {
   position: absolute;
   background: currentColor;
-  opacity: 0.4;
+  opacity: 0.5;
   border-radius: 2px;
   top: 50%;
   left: 50%;
   transform-origin: center;
+  transition: all 0.3s ease;
 }
 
-.wihora_mark_hour {
-  width: 2px;
-  height: 8px;
+.wihora_card:hover .wihora_mark {
   opacity: 0.7;
 }
 
+.wihora_mark_hour {
+  width: 4px;
+  height: 12px;
+  opacity: 0.8;
+}
+
 .wihora_mark_minute {
-  width: 1px;
-  height: 4px;
+  width: 2px;
+  height: 6px;
+  opacity: 0.4;
 }
 
 .wihora_hand {
@@ -328,50 +375,58 @@
   bottom: 50%;
   left: 50%;
   transform-origin: bottom center;
-  border-radius: 3px;
+  border-radius: 4px;
   transition: transform 0.05s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .wihora_hand_hour {
-  width: 5px;
-  height: 30px;
-  margin-left: -2.5px;
+  width: 8px;
+  height: 50px;
+  margin-left: -4px;
 }
 
 .wihora_hand_minute {
-  width: 4px;
-  height: 42px;
-  margin-left: -2px;
+  width: 6px;
+  height: 75px;
+  margin-left: -3px;
 }
 
 .wihora_hand_second {
-  width: 2px;
-  height: 48px;
-  margin-left: -1px;
-  opacity: 0.8;
+  width: 3px;
+  height: 85px;
+  margin-left: -1.5px;
+  opacity: 0.85;
 }
 
 .wihora_digital_section {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.8vh;
+  gap: 1vh;
 }
 
 .wihora_header_info {
   display: flex;
   align-items: center;
-  gap: 0.8vw;
-  padding-bottom: 0.6vh;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  gap: 1vw;
+  padding-bottom: 1vh;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  margin-bottom: 0.5vh;
 }
 
 .wihora_flag {
-  width: 3.5vh;
-  height: 2.2vh;
+  width: 5vh;
+  height: 3vh;
   object-fit: cover;
-  border-radius: 3px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 0.5vh;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all var(--tr_m);
+}
+
+.wihora_card:hover .wihora_flag {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
 }
 
 .wihora_location {
@@ -379,37 +434,52 @@
 }
 
 .wihora_ciudad {
-  font-size: var(--fz_m4);
+  font-size: var(--fz_m5);
   font-weight: 800;
-  margin-bottom: 0.1vh;
-  letter-spacing: -0.02em;
+  margin-bottom: 0.3vh;
+  letter-spacing: -0.03em;
+  transition: all var(--tr_m);
+}
+
+.wihora_card:hover .wihora_ciudad {
+  transform: translateX(0.3vw);
 }
 
 .wihora_pais {
-  font-size: var(--fz_s4);
-  font-weight: 500;
+  font-size: var(--fz_m1);
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
 }
 
 .wihora_icon {
-  width: 2.5vh;
-  height: 2.5vh;
+  width: 3.5vh;
+  height: 3.5vh;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  font-size: var(--fz_m2);
+  font-size: var(--fz_m4);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all var(--tr_m);
+}
+
+.wihora_card:hover .wihora_icon {
+  transform: scale(1.15) rotate(15deg);
 }
 
 .wihora_icon .fa-sun {
   color: #ff6b00;
+  filter: drop-shadow(0 0 8px #ffa726);
   animation: sunRotate 20s linear infinite;
 }
 
 .wihora_icon .fa-moon {
   color: #9370db;
-  animation: moonGlow 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 8px #b39ddb);
+  animation: moonFloat 3s ease-in-out infinite;
 }
 
 @keyframes sunRotate {
@@ -417,18 +487,23 @@
   to { transform: rotate(360deg); }
 }
 
-@keyframes moonGlow {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 1; }
+@keyframes moonFloat {
+  0%, 100% { opacity: 0.8; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-2px); }
 }
 
 .wihora_time {
-  font-size: var(--fz_x4);
+  font-size: var(--fz_x3);
   font-weight: 800;
   font-family: var(--ff_R), monospace;
   letter-spacing: 0.05em;
-  margin: 0.3vh 0;
+  margin: 0.8vh 0;
   line-height: 1;
+  transition: all var(--tr_m);
+}
+
+.wihora_card:hover .wihora_time {
+  transform: scale(1.02);
 }
 
 .wihora_time.changing {
@@ -436,48 +511,57 @@
 }
 
 @keyframes timeChange {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; transform: scale(0.98); }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.98); }
 }
 
 .wihora_fecha {
-  font-size: var(--fz_s4);
-  font-weight: 500;
-  margin-bottom: 0.8vh;
+  font-size: var(--fz_m2);
+  font-weight: 600;
+  margin-bottom: 1vh;
 }
 
 .wihora_info {
-  display: flex;
-  gap: 0.4vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.8vh;
 }
 
 .wihora_info_item {
-  flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 0.3vw;
-  padding: 0.5vh 0.4vw;
+  justify-content: center;
+  gap: 0.4vh;
+  padding: 0.8vh 0.6vw;
   backdrop-filter: blur(10px);
-  border-radius: 0.5vh;
+  border-radius: 0.8vh;
   border: 1px solid;
-  transition: all 0.3s ease;
+  transition: all var(--tr_m);
   font-size: var(--fz_s3);
 }
 
 .wihora_info_item:hover {
-  transform: translateY(-2px);
+  transform: translateY(-0.3vh);
 }
 
 .wihora_info_item i {
-  font-size: var(--fz_s4);
-  min-width: 10px;
+  font-size: var(--fz_m2);
+  min-width: 14px;
   text-align: center;
+  transition: all var(--tr_f);
+}
+
+.wihora_info_item:hover i {
+  transform: scale(1.2);
 }
 
 .wihora_info_item span {
-  font-weight: 600;
-  line-height: 1;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
   white-space: nowrap;
+  font-size: var(--fz_s3);
 }
 
 .wihora_diferencia {
@@ -487,73 +571,79 @@
 }
 
 .wihora_diferencia i {
-  font-size: var(--fz_m1);
+  font-size: var(--fz_s4);
 }
 
 .wihora_gmt, .wihora_estacion {
   white-space: nowrap;
 }
 
-@media (max-width: 1024px) {
-  .wihora_grid {
-    flex-direction: column;
-  }
-  
-  .wihora_grid > * {
-    flex: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-
-  .wihora_card_content {
-    flex-direction: column;
-    padding: 2.5vh 2vw;
-  }
-  
+@media (max-width: 1200px) {
   .wihora_analogico {
-    width: 180px;
-    height: 180px;
-    margin: 0 auto;
+    width: 160px;
+    height: 160px;
   }
   
-  .wihora_hand_hour { height: 55px; }
-  .wihora_hand_minute { height: 80px; }
-  .wihora_hand_second { height: 90px; }
+  .wihora_hand_hour { height: 45px; }
+  .wihora_hand_minute { height: 65px; }
+  .wihora_hand_second { height: 75px; }
   
-  .wihora_digital_section {
-    width: 100%;
-    text-align: center;
-  }
-  
-  .wihora_header_info {
-    justify-content: center;
+  .wihora_card {
+    min-height: 320px;
   }
 }
 
-@media (max-width: 768px) {
-  .wihora_header { 
-    flex-direction: column; 
-    gap: 2vh; 
-    text-align: center; 
+@media (max-width: 1024px) {
+  .wihora_grid {
+    grid-template-columns: 1fr;
+    max-width: 700px;
+    margin: 0 auto;
   }
 
-  .wihora_title { font-size: var(--fz_l1); }
-  .wihora_controls { width: 100%; justify-content: center; }
-
-  .wihora_card_content {
-    flex-direction: column;
-    text-align: center;
+  .wihora_card {
+    min-height: 300px;
   }
-  
+
   .wihora_analogico {
-    width: 170px;
-    height: 170px;
-    margin: 0 auto 1.5vh;
+    width: 180px;
+    height: 180px;
   }
   
   .wihora_hand_hour { height: 50px; }
   .wihora_hand_minute { height: 75px; }
   .wihora_hand_second { height: 85px; }
+}
+
+@media (max-width: 768px) {
+  .wihora_header {
+    flex-direction: column;
+    gap: 2vh;
+    text-align: center;
+  }
+
+  .wihora_title { font-size: var(--fz_l1); }
+  .wihora_controls { width: 100%; justify-content: center; }
+
+  .wihora_card {
+    padding: 2.5vh 4vw;
+    min-height: auto;
+  }
+
+  .wihora_card_content {
+    flex-direction: column;
+    text-align: center;
+    gap: 2vh;
+  }
+  
+  .wihora_analogico {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+  }
+  
+  .wihora_hand_hour { height: 60px; }
+  .wihora_hand_minute { height: 85px; }
+  .wihora_hand_second { height: 95px; }
   
   .wihora_header_info {
     justify-content: center;
@@ -562,109 +652,99 @@
   .wihora_time {
     font-size: var(--fz_x1);
   }
-  
-  .wihora_info {
-    flex-direction: column;
-  }
 }
 
 @media (max-width: 564px) {
-  .wihora_title, .wihora_ciudad { font-size: var(--fz_m5); }
-  .wihora_card { padding: 3vh 5vw; }
+  .wihora_title { font-size: var(--fz_m5); }
+  
+  .wihora_card { 
+    padding: 3vh 5vw; 
+  }
 
   .wihora_analogico {
-    width: 160px;
-    height: 160px;
+    width: 180px;
+    height: 180px;
   }
   
-  .wihora_hand_hour { height: 48px; }
-  .wihora_hand_minute { height: 70px; }
-  .wihora_hand_second { height: 80px; }
-  
-  .wihora_card_content {
-    padding: 3vh 4vw;
-  }
+  .wihora_hand_hour { height: 55px; }
+  .wihora_hand_minute { height: 75px; }
+  .wihora_hand_second { height: 85px; }
 
-  .wihora_flag { width: 10vh; height: 5.5vh; }
-  .wihora_pais { font-size: var(--fz_m1); }
+  .wihora_flag { width: 6vh; height: 3.5vh; }
+  .wihora_ciudad { font-size: var(--fz_m4); }
+  .wihora_pais { font-size: var(--fz_s4); }
   .wihora_time { font-size: var(--fz_l2); }
-  .wihora_fecha { font-size: var(--fz_m2); }
-  .wihora_info { 
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 1.2vh; 
+  .wihora_fecha { font-size: var(--fz_m1); }
+  
+  .wihora_info {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1vh;
   }
-  .wihora_info_item { padding: 1.8vh 2vw; }
 }
 
 @media (max-width: 460px) {
-  .wihora_title, .wihora_ciudad { font-size: var(--fz_l1); }
-  .wihora_controls { padding: 1vh 1.5vh; }
-  .wibtn_format { padding: 1.2vh 3vw; font-size: var(--fz_m4); }
+  .wihora_title { font-size: var(--fz_l1); }
+  .wihora_controls { padding: 1vh; }
+  .wibtn_format { padding: 1vh 3vw; font-size: var(--fz_m3); }
 
-  .wihora_grid {
-    gap: 2vh;
-  }
-  
   .wihora_card {
-    padding: 2vh 3vw;
-    min-height: auto;
+    padding: 3vh 6vw;
+    border-radius: 2vh;
   }
-
-  .wihora_card { 
-    padding: 3.5vh 6vw; 
-    border-radius: 2vh; 
-  }
-  .wihora_card_header { gap: 2vw; margin-bottom: 3vh; }
   
   .wihora_analogico {
-    width: 150px;
-    height: 150px;
+    width: 170px;
+    height: 170px;
   }
   
-  .wihora_hand_hour { height: 45px; }
-  .wihora_hand_minute { height: 65px; }
-  .wihora_hand_second { height: 75px; }
+  .wihora_reloj_center {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .wihora_hand_hour { 
+    width: 7px;
+    height: 50px; 
+    margin-left: -3.5px;
+  }
+  .wihora_hand_minute { 
+    width: 5px;
+    height: 70px;
+    margin-left: -2.5px;
+  }
+  .wihora_hand_second { 
+    width: 3px;
+    height: 80px;
+    margin-left: -1.5px;
+  }
 
-  .wihora_flag { 
-    width: 12vh; 
-    height: 6.5vh; 
-    border-radius: 1.2vh; 
+  .wihora_flag { width: 7vh; height: 4vh; }
+  .wihora_ciudad { font-size: var(--fz_m5); }
+  .wihora_icon { width: 4vh; height: 4vh; font-size: var(--fz_m5); }
+  .wihora_time { font-size: var(--fz_x1); }
+  .wihora_fecha { font-size: var(--fz_m2); }
+  
+  .wihora_info {
+    grid-template-columns: 1fr;
+    gap: 1.2vh;
   }
-  .wihora_pais { font-size: var(--fz_m2); }
-  .wihora_icon { 
-    width: 5vh; 
-    height: 5vh; 
-    font-size: var(--fz_l1); 
+  .wihora_info_item { 
+    padding: 1.2vh 3vw; 
+    font-size: var(--fz_m1);
   }
-  .wihora_time { 
-    font-size: var(--fz_x1); 
-    margin-bottom: 2vh; 
-  }
-  .wihora_fecha { 
-    font-size: var(--fz_m3); 
-    margin-bottom: 3vh; 
-  }
-  .wihora_info { 
-    grid-template-columns: 1fr; 
-    gap: 1.5vh; 
-  }
-  .wihora_info_item { padding: 2.5vh 4vw; }
-  .wihora_info_item i { font-size: var(--fz_m5); }
-  .wihora_info_item span { font-size: var(--fz_m3); }
-    
-  .wihora_info_item {
-    font-size: var(--fz_s4);
+  .wihora_info_item span {
+    font-size: var(--fz_m1);
   }
 }
 
 @media (max-width: 360px) {
-  .wihora_analogico { 
-    width: 140px; 
-    height: 140px; 
+  .wihora_analogico {
+    width: 160px;
+    height: 160px;
   }
-  .wihora_hand_hour { height: 40px; }
-  .wihora_hand_minute { height: 60px; }
-  .wihora_hand_second { height: 70px; }
+  .wihora_hand_hour { height: 45px; }
+  .wihora_hand_minute { height: 65px; }
+  .wihora_hand_second { height: 75px; }
   .wihora_reloj_center { width: 12px; height: 12px; }
+  .wihora_time { font-size: var(--fz_l1); }
 }
-/* ========== HORA PRINCIPAL CSS [START] ====== */

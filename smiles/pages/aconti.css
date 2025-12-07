@@ -1,4 +1,3 @@
-/* ========== CONTINENTES CSS [START] ====== */
 .wicontinente {
   width: 100%;
   padding: 2vh 2vw;
@@ -444,6 +443,7 @@
 }
 
 .wicont_compact_content {
+  display: flex;
   flex-direction: row;
   align-items: center;
   gap: 1vw;
@@ -453,15 +453,77 @@
   width: 130px;
   height: 130px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .wicont_analogico_small .wihora_reloj_face {
-  border-width: 2px;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  background: var(--bg1);
+  border-color: var(--bg5);
 }
 
 .wicont_analogico_small .wihora_reloj_center {
+  position: absolute;
   width: 10px;
   height: 10px;
+  border-radius: 50%;
+  background: var(--mco);
+  z-index: 10;
+  animation: centerPulse 2s ease-in-out infinite;
+  box-shadow: 0 0 10px var(--mco);
+}
+
+@keyframes centerPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.wicont_analogico_small .wihora_reloj_marks {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.wicont_analogico_small .wihora_mark {
+  position: absolute;
+  background: var(--tx);
+  opacity: 0.4;
+  border-radius: 2px;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+}
+
+.wicont_analogico_small .wihora_mark_hour {
+  width: 2px;
+  height: 8px;
+  opacity: 0.7;
+}
+
+.wicont_analogico_small .wihora_mark_minute {
+  width: 1px;
+  height: 4px;
+}
+
+.wicont_analogico_small .wihora_hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom center;
+  border-radius: 3px;
+  background: var(--mco);
+  transition: transform 0.05s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .wicont_analogico_small .wihora_hand_hour {
@@ -480,16 +542,7 @@
   width: 2px;
   height: 70px;
   margin-left: -1px;
-}
-
-.wicont_analogico_small .wihora_mark_hour {
-  width: 2px;
-  height: 8px;
-}
-
-.wicont_analogico_small .wihora_mark_minute {
-  width: 1px;
-  height: 4px;
+  opacity: 0.8;
 }
 
 .wicont_digital_compact {
@@ -500,55 +553,129 @@
 }
 
 .wicont_digital_compact .wihora_header_info {
+  display: flex;
+  align-items: center;
+  gap: 0.8vw;
+  padding-bottom: 0.6vh;
+  border-bottom: 1px solid var(--bg5);
   margin-bottom: 0.5vh;
 }
 
 .wicont_digital_compact .wihora_flag {
   width: 5vh;
   height: 3vh;
+  object-fit: cover;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.wicont_digital_compact .wihora_location {
+  flex: 1;
 }
 
 .wicont_digital_compact .wihora_ciudad {
   font-size: var(--fz_m3);
+  font-weight: 800;
+  color: var(--tx);
   margin-bottom: 0.2vh;
+  letter-spacing: -0.02em;
 }
 
 .wicont_digital_compact .wihora_pais {
   font-size: var(--fz_s4);
+  font-weight: 500;
+  color: var(--tx);
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .wicont_digital_compact .wihora_icon {
   width: 2.5vh;
   height: 2.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
   font-size: var(--fz_m1);
+}
+
+.wicont_digital_compact .wihora_icon .fa-sun {
+  color: #ff6b00;
+  animation: sunRotate 20s linear infinite;
+}
+
+.wicont_digital_compact .wihora_icon .fa-moon {
+  color: #9370db;
+  animation: moonGlow 3s ease-in-out infinite;
+}
+
+@keyframes sunRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes moonGlow {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
 }
 
 .wicont_digital_compact .wihora_time {
   font-size: var(--fz_x2);
+  font-weight: 800;
+  color: var(--tx);
+  font-family: var(--ff_R), monospace;
+  letter-spacing: 0.05em;
   margin-bottom: 0.5vh;
   text-align: left;
+  line-height: 1;
 }
 
 .wicont_digital_compact .wihora_fecha {
   font-size: var(--fz_s4);
+  font-weight: 500;
+  color: var(--tx);
+  opacity: 0.7;
   margin-bottom: 0.8vh;
   text-align: left;
 }
 
 .wicont_digital_compact .wihora_info {
+  display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.6vh;
 }
 
 .wicont_digital_compact .wihora_info_item {
+  display: flex;
+  align-items: center;
+  gap: 0.3vw;
   padding: 0.6vh 0.4vw;
+  background: var(--bg1);
+  backdrop-filter: blur(10px);
+  border-radius: 0.5vh;
+  border: 1px solid var(--bg5);
+  transition: all 0.3s ease;
+  font-size: var(--fz_s3);
+}
+
+.wicont_digital_compact .wihora_info_item:hover {
+  transform: translateY(-2px);
+  border-color: var(--mco);
 }
 
 .wicont_digital_compact .wihora_info_item i {
   font-size: var(--fz_s4);
+  color: var(--mco);
+  min-width: 10px;
+  text-align: center;
 }
 
 .wicont_digital_compact .wihora_info_item span {
+  font-weight: 600;
+  color: var(--tx);
+  line-height: 1;
+  white-space: nowrap;
   font-size: var(--fz_s3);
 }
 
@@ -718,4 +845,3 @@
     font-size: var(--fz_m5);
   }
 }
-/* ========== CONTINENTES CSS [START] ====== */
