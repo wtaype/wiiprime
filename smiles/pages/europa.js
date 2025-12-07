@@ -1,3 +1,4 @@
+import './aconti.css';
 import $ from 'jquery';
 import { wiCiudades, infoCiudad, wiFlag, esNoche, buscarCiudad } from '../widev.js';
 
