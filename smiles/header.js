@@ -1,8 +1,7 @@
 import $ from 'jquery';
 import { rutas } from './rutas.js';
-import { auth, onAuthStateChanged, signOut } from './footer.js';
 import { wiSmart, getls, savels, removels, Mensaje } from './widev.js';
-wiSmart({js: [() => import('./wiauth.js')]});
+wiSmart({ js: [() => import('./wiauth.js')] });
 
 export function personal(wi) {
   Mensaje?.('Bienvenido '+wi.nombre);
@@ -24,13 +23,19 @@ export const header = (() => {
   function publico() {
     $('.wiauth').html(`<button class="wibtn_auth registrar"><i class="fas fa-user-plus"></i><span>Registrar</span></button><button class="wibtn_auth login"><i class="fas fa-sign-in-alt"></i><span>Login</span></button>`);
   }
-  function cargandoPersonal(wi) {
+
+  async function cargandoPersonal(wi) {
     personal(wi);
+    const { auth, onAuthStateChanged } = await import('./wiauth.js');
     onAuthStateChanged(auth, user => {
       if (!user) return removels('wiSmile'), publico();
     });
   }
+
   $(document).on('click', '.bt_salir', async () => {
-    await signOut(auth); publico(); rutas.navigate('/'); removels('wiSmile wiciudades wifechas');
-  }); //CERRAR SESSIÓN 
+    const { auth, signOut } = await import('./wiauth.js');
+    await signOut(auth); removels('wiSmile wiciudades wifechas'); publico(); rutas.navigate('/');
+  }); //CERRAR SESSIÓN
+
 })();
+

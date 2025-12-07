@@ -2,7 +2,7 @@ import $ from 'jquery';
 import { rutas } from './rutas.js';
 import { wiSmart, getls, Mensaje } from './widev.js'; 
 
-// 🎯 REGISTRAR TODAS LAS RUTAS (públicas + privada)
+// 🎯 REGISTRAR TODAS LAS RUTAS
 const pages = ['hora', 'asia', 'europa', 'america', 'oceania', 'africa', 'labs'];
 pages.forEach(pg => rutas.register(`/${pg}`, () => import(`./pages/${pg}.js`))); 
 
@@ -10,7 +10,11 @@ pages.forEach(pg => rutas.register(`/${pg}`, () => import(`./pages/${pg}.js`)));
 rutas.register('/smile', () => getls('wiSmile') ? (import('./smile/smile.js')) 
   : (import('./smile/descubre.js')));
 
-import('./header.js'); // ⚡ Cargar header DESPUÉS del registro
-rutas.init(); // 🚀 Inicializar UNA SOLA VEZ
+// 🚀 Inicializar rutas PRIMERO (crítico para LCP)
+rutas.init();
 
-wiSmart({js: [() => import('./footer.js')]});
+// ⚡ Cargar recursos secundarios en paralelo después del init
+Promise.all([
+  import('./header.js'),
+  wiSmart({js: [() => import('./footer.js')]})
+]);

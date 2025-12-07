@@ -1,9 +1,10 @@
 import $ from 'jquery';
 import { auth, db } from '../firebase/init.js';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, sendEmailVerification, sendPasswordResetEmail } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, sendEmailVerification, sendPasswordResetEmail, onAuthStateChanged, signOut } from 'firebase/auth';
 import { setDoc, getDoc, doc, query, where, getDocs, collection, serverTimestamp } from 'firebase/firestore';
 import { wiTip, Mensaje, savels, getls, wiSpin, abrirModal, cerrarModal } from './widev.js';
 
+export { auth, onAuthStateChanged, signOut };
 export function wiAuth() {
 const cfg = { db: 'smiles', rol: 'smile' };
 
