@@ -24,7 +24,6 @@ export const header = (() => {
   function publico() {
     $('.wiauth').html(`<button class="wibtn_auth registrar"><i class="fas fa-user-plus"></i><span>Registrar</span></button><button class="wibtn_auth login"><i class="fas fa-sign-in-alt"></i><span>Login</span></button>`);
   }
-
   function cargandoPersonal(wi) {
     personal(wi);
     onAuthStateChanged(auth, user => {
@@ -33,5 +32,5 @@ export const header = (() => {
   }
   $(document).on('click', '.bt_salir', async () => {
     await signOut(auth); publico(); rutas.navigate('/'); removels('wiSmile wiciudades wifechas');
-  });
+  }); //CERRAR SESSIÓN 
 })();
