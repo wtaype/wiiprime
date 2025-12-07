@@ -5,7 +5,7 @@ import { setDoc, getDoc, doc, query, where, getDocs, collection, serverTimestamp
 import { wiTip, Mensaje, savels, getls, wiSpin, abrirModal, cerrarModal } from './widev.js';
 
 export function wiAuth() {
-const cfg = { db: 'smiles', rol: 'usuario' };
+const cfg = { db: 'smiles', rol: 'smile' };
 
 const crearModal = (id, titulo, campos) => `<div id="${id}" class="wiModal authMod"><div class="modalBody"><button class="modalX">&times;</button><div class="modalMain"><div class="logo"><img src="./smile.png"></div><h2>${titulo}</h2><form id="${id.replace('Modal','Form')}">${campos}</form></div></div></div>`;
 
@@ -138,7 +138,7 @@ const eventos = () => {
       const { user } = await createUserWithEmailAndPassword(auth, correo, password);
       await Promise.all([updateProfile(user, { displayName: usuario }), sendEmailVerification(user)]);
       const widatos = { usuario, email: correo, nombre, apellidos, rol: cfg.rol, uid: user.uid, terminos: true, tema:localStorage.wiTema};
-      await setDoc(doc(db, cfg.db, usuario), { ...widatos, creacion: serverTimestamp() });
+      await setDoc(doc(db, cfg.db, usuario), { ...widatos, creado: serverTimestamp() });
       savels('wiSmile', widatos, 450); Mensaje('¡Registro completado! ✅'); cerrarModal('registroModal'); // 💾 Registro y guardamos datos 
       (await import('./header.js')).personal(widatos); // Header personalizado
     } catch (error) {
@@ -215,7 +215,7 @@ $(document).off('click.wa', '.tema').on('click.wa', '.tema', async function() {
 const tema =  localStorage.wiTema, usuario = getls('wiSmile'), nombreTema = tema.split('|')[0];
   if (usuario) {
     try {
-      await setDoc(doc(db, cfg.db, usuario.usuario), { tema, actualizadoEn: serverTimestamp() }, { merge: true });
+      await setDoc(doc(db, cfg.db, usuario.usuario), { tema, actualizado: serverTimestamp() }, { merge: true });
       Mensaje(`Tema ${nombreTema} Guardado ✅`);
     } catch (e){ console.error(e); }
   }
