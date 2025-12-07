@@ -137,7 +137,7 @@ const eventos = () => {
       const [correo, usuario, nombre, apellidos, password] = ['regEmail', 'regUsuario', 'regNombre', 'regApellidos', 'regPassword'].map(id => $(`#${id}`).val().trim());
       const { user } = await createUserWithEmailAndPassword(auth, correo, password);
       await Promise.all([updateProfile(user, { displayName: usuario }), sendEmailVerification(user)]);
-      const widatos = { usuario, email: correo, nombre, apellidos, rol: cfg.rol, uid: user.uid };
+      const widatos = { usuario, email: correo, nombre, apellidos, rol: cfg.rol, uid: user.uid, terminos: true};
       await setDoc(doc(db, cfg.db, usuario), { ...widatos, creacion: serverTimestamp() });
       savels('wiSmile', widatos, 450); Mensaje('¡Registro completado! ✅'); cerrarModal('registroModal'); // 💾 Registro y guardamos datos 
       (await import('./header.js')).personal(widatos); // Header personalizado

@@ -259,7 +259,7 @@ a{text-decoration:none;}
 .foo *{font-size:var(--fz_m1);}
 }
 </style>
-<style>@import url(/smile/pages/hora.css);@import url(/smile/pages/aconti.css);</style>
+<style>@import url(/smiles/pages/hora.css);@import url(/smiles/pages/aconti.css);</style>
   <link rel="icon" type="image/svg+xml" href="/smile.png" />
   <link rel="canonical" href="https://wtaype.github.io/wiiprime/" />
   <meta name="description" content="WiiPrime - Consulta la hora mundial en tiempo real. América, Asia, Europa, África y Oceanía. Zonas horarias actualizadas." />
@@ -314,5 +314,5 @@ a{text-decoration:none;}
 <script>
 (()=>{const d=document,h=d.documentElement,w=d.querySelector('#wiTema');if(!w)return;const ts=[...w.querySelectorAll('.tema')],m=d.querySelector('meta[name="theme-color"]')||d.head.appendChild(Object.assign(d.createElement('meta'),{name:'theme-color'})),st=t=>{const[n,c]=t.dataset.ths.split('|');h.dataset.theme=n;m.content=c;localStorage.wiTema=t.dataset.ths;ts.forEach(x=>x.classList.toggle('mtha',x===t))};w.addEventListener('click',e=>e.target.matches('.tema')&&st(e.target),{passive:!0});const i=w.querySelector(`[data-ths="${localStorage.wiTema}"]`)||ts[4];i&&st(i)})();
 </script>
-<script type="module" src="./smile/main.js" defer></script> 
+<script type="module" src="./smiles/main.js" defer></script> 
 </html>
