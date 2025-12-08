@@ -178,20 +178,38 @@ export const buscarCiudad = (termino, continente = null) => {
 
 // === PATH VELOCIDAD V10.1 ===
 export const wiPath = {
-  clean(p) {
-    const b = import.meta?.env?.BASE_URL || '/';
-    // ✅ Recuperar ruta guardada por 404.html
-    const saved = sessionStorage.ghPath;
-    if (saved) {
+  clean(pth) {
+    const bas = (import.meta?.env?.BASE_URL || '/').replace(/\/+$/, '/');
+    const raw = pth || location.pathname;
+    
+    // 🔥 Recuperar ruta guardada por 404.html
+    const sav = sessionStorage.ghPath;
+    if (sav) {
       sessionStorage.removeItem('ghPath');
-      return saved.replace(b, '/') || '/';
+      // Limpiar cualquier variante: /wiiprime/smile o /wiiprime/v34/smile -> /smile
+      return sav.replace(/^\/wiiprime(\/v\d+)?/, '') || '/';
     }
-    return b !== '/' && p.startsWith(b) ? p.slice(b.length - 1) || '/' : p || '/';
+    
+    // 🎯 Detectar GitHub Pages dinámicamente (con o sin tag)
+    const ghMatch = raw.match(/^\/wiiprime(\/v\d+)?(\/.*)?$/);
+    if (ghMatch) {
+      const [, tag, ruta] = ghMatch;
+      // Retornar solo la ruta limpia: /smile, /hora, etc.
+      return ruta || '/';
+    }
+    
+    // ✅ Caso normal con BASE_URL configurado (Firebase o local)
+    return bas !== '/' && raw.startsWith(bas) ? raw.slice(bas.length - 1) || '/' : raw || '/';
   },
-  update(p, t = '', dr = '/') {history.pushState({ path: p }, t, p === dr ? '/' : p); t && (document.title = t)},
+  
+  update(pth, ttl = '', def = '/') {
+    history.pushState({ path: pth }, ttl, pth === def ? '/' : pth);
+    ttl && (document.title = ttl);
+  },
+  
   params: () => Object.fromEntries(new URLSearchParams(location.search)),
-  setParams(p) {const u = new URL(location); Object.entries(p).forEach(([k, v]) => u.searchParams.set(k, v)); history.pushState({}, '', u)},
-  get current() {return this.clean(location.pathname)}
+  setParams(prm) { const url = new URL(location); Object.entries(prm).forEach(([key, val]) => url.searchParams.set(key, val)); history.pushState({}, '', url); },
+  get current() { return this.clean(location.pathname); }
 };
 
 // === ANIMACIÓN CARGA V10.1 ===
