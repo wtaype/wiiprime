@@ -178,7 +178,16 @@ export const buscarCiudad = (termino, continente = null) => {
 
 // === PATH VELOCIDAD V10.1 ===
 export const wiPath = {
-  clean(p) {const b = import.meta?.env?.BASE_URL || '/'; return b !== '/' && p.startsWith(b) ? p.slice(b.length - 1) || '/' : p || '/'},
+  clean(p) {
+    const b = import.meta?.env?.BASE_URL || '/';
+    // ✅ Recuperar ruta guardada por 404.html
+    const saved = sessionStorage.ghPath;
+    if (saved) {
+      sessionStorage.removeItem('ghPath');
+      return saved.replace(b, '/') || '/';
+    }
+    return b !== '/' && p.startsWith(b) ? p.slice(b.length - 1) || '/' : p || '/';
+  },
   update(p, t = '', dr = '/') {history.pushState({ path: p }, t, p === dr ? '/' : p); t && (document.title = t)},
   params: () => Object.fromEntries(new URLSearchParams(location.search)),
   setParams(p) {const u = new URL(location); Object.entries(p).forEach(([k, v]) => u.searchParams.set(k, v)); history.pushState({}, '', u)},
