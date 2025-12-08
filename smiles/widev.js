@@ -176,40 +176,13 @@ export const buscarCiudad = (termino, continente = null) => {
   return fue.filter(c => c.ciudad.toLowerCase().includes(bus) || c.pais.toLowerCase().includes(bus));
 };
 
-// === PATH VELOCIDAD V10.1 ===
+// === PATH VELOCIDAD V10.2 ===
 export const wiPath = {
-  clean(pth) {
-    const bas = (import.meta?.env?.BASE_URL || '/').replace(/\/+$/, '/');
-    const raw = pth || location.pathname;
-    
-    // 🔥 Recuperar ruta guardada por 404.html
-    const sav = sessionStorage.ghPath;
-    if (sav) {
-      sessionStorage.removeItem('ghPath');
-      // Limpiar cualquier variante: /wiiprime/smile o /wiiprime/v34/smile -> /smile
-      return sav.replace(/^\/wiiprime(\/v\d+)?/, '') || '/';
-    }
-    
-    // 🎯 Detectar GitHub Pages dinámicamente (con o sin tag)
-    const ghMatch = raw.match(/^\/wiiprime(\/v\d+)?(\/.*)?$/);
-    if (ghMatch) {
-      const [, tag, ruta] = ghMatch;
-      // Retornar solo la ruta limpia: /smile, /hora, etc.
-      return ruta || '/';
-    }
-    
-    // ✅ Caso normal con BASE_URL configurado (Firebase o local)
-    return bas !== '/' && raw.startsWith(bas) ? raw.slice(bas.length - 1) || '/' : raw || '/';
-  },
-  
-  update(pth, ttl = '', def = '/') {
-    history.pushState({ path: pth }, ttl, pth === def ? '/' : pth);
-    ttl && (document.title = ttl);
-  },
-  
+  clean(pth) {const bas = import.meta?.env?.BASE_URL || '/'; const sav = sessionStorage.ghPath; if (sav) {sessionStorage.removeItem('ghPath'); return sav.replace(/^\/wiiprime(\/v\d+)?/, '') || '/';} return bas !== '/' && pth?.startsWith(bas) ? pth.slice(bas.length - 1) || '/' : pth || '/';},
+  update(pth, ttl = '', def = '/') {history.pushState({ path: pth }, ttl, pth === def ? '/' : pth); ttl && (document.title = ttl);},
   params: () => Object.fromEntries(new URLSearchParams(location.search)),
-  setParams(prm) { const url = new URL(location); Object.entries(prm).forEach(([key, val]) => url.searchParams.set(key, val)); history.pushState({}, '', url); },
-  get current() { return this.clean(location.pathname); }
+  setParams(prm) {const url = new URL(location); Object.entries(prm).forEach(([key, val]) => url.searchParams.set(key, val)); history.pushState({}, '', url);},
+  get current() {return this.clean(location.pathname);}
 };
 
 // === ANIMACIÓN CARGA V10.1 ===
