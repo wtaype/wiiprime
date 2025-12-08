@@ -178,37 +178,11 @@ export const buscarCiudad = (termino, continente = null) => {
 
 // === PATH VELOCIDAD V10.1 ===
 export const wiPath = {
-  clean(pth) {
-    const bas = (import.meta?.env?.BASE_URL || '/').replace(/\/+$/, '/');
-    const raw = pth || location.pathname;
-    
-    // 🔥 Detectar rutas de GitHub Pages dinámicamente
-    // Ejemplos: /wiiprime/smile, /wiiprime/v34/smile
-    const ghMatch = raw.match(/^\/wiiprime(\/v\d+)?(\/.*)?$/);
-    if (ghMatch) {
-      const [, tag, ruta] = ghMatch;
-      // Si hay tag y BASE_URL lo incluye, extraer ruta limpia
-      if (tag && bas.includes(tag)) return ruta || '/';
-      // Si es main (/wiiprime/) extraer ruta limpia
-      if (!tag && bas === '/wiiprime/') return ruta || '/';
-      // Fallback: remover /wiiprime/vXX o /wiiprime
-      return (ruta || '/');
-    }
-    
-    // Caso normal con BASE_URL configurado
-    return bas !== '/' && raw.startsWith(bas) ? raw.slice(bas.length - 1) || '/' : raw || '/';
-  },
-  
-  update(pth, ttl = '', def = '/') { 
-    const bas = import.meta?.env?.BASE_URL || '/';
-    const url = bas !== '/' ? bas.replace(/\/$/, '') + pth : pth;
-    history.pushState({ path: pth }, ttl, url === (bas !== '/' ? bas.slice(0, -1) : '') + def ? bas || '/' : url); 
-    ttl && (document.title = ttl); 
-  },
-  
+  clean(p) {const b = import.meta?.env?.BASE_URL || '/'; return b !== '/' && p.startsWith(b) ? p.slice(b.length - 1) || '/' : p || '/'},
+  update(p, t = '', dr = '/') {history.pushState({ path: p }, t, p === dr ? '/' : p); t && (document.title = t)},
   params: () => Object.fromEntries(new URLSearchParams(location.search)),
-  setParams(prm) { const url = new URL(location); Object.entries(prm).forEach(([key, val]) => url.searchParams.set(key, val)); history.pushState({}, '', url); },
-  get current() { return this.clean(); }
+  setParams(p) {const u = new URL(location); Object.entries(p).forEach(([k, v]) => u.searchParams.set(k, v)); history.pushState({}, '', u)},
+  get current() {return this.clean(location.pathname)}
 };
 
 // === ANIMACIÓN CARGA V10.1 ===
