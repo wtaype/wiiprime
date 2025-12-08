@@ -176,25 +176,39 @@ export const buscarCiudad = (termino, continente = null) => {
   return fue.filter(c => c.ciudad.toLowerCase().includes(bus) || c.pais.toLowerCase().includes(bus));
 };
 
-// === PATH VELOCIDAD V10.1 ===
+// === PATH VELOCIDAD V10.2 ===
 export const wiPath = {
   clean(pth) {
     const bas = (import.meta?.env?.BASE_URL || '/').replace(/\/+$/, '/');
     const sav = sessionStorage.ghPath;
+    
+    // 🔥 Si hay ruta guardada por 404.html (F5 en GitHub Pages)
     if (sav) { 
-      sessionStorage.removeItem('ghPath'); 
-      const cln = sav.startsWith(bas) ? sav.slice(bas.length - 1) || '/' : sav || '/';
-      return cln;
+      sessionStorage.removeItem('ghPath');
+      // Limpiar la ruta: /wiiprime/v34/smile -> /smile
+      return sav.startsWith(bas) ? sav.slice(bas.length - 1) || '/' : sav.replace(/^\/wiiprime(\/v\d+)?/, '') || '/';
     }
+    
+    // Ruta normal
     const nrm = pth || location.pathname;
+    
+    // Si no hay BASE_URL en build, detectar dinámicamente
+    if (bas === '/' && nrm.startsWith('/wiiprime/')) {
+      // Detectar si es tag: /wiiprime/v34/smile -> /smile
+      return nrm.replace(/^\/wiiprime(\/v\d+)?/, '') || '/';
+    }
+    
+    // Caso normal con BASE_URL configurado
     return bas !== '/' && nrm.startsWith(bas) ? nrm.slice(bas.length - 1) || '/' : nrm || '/';
   },
+  
   update(pth, ttl = '', def = '/') { 
     const bas = import.meta?.env?.BASE_URL || '/';
     const url = bas !== '/' ? bas.replace(/\/$/, '') + pth : pth;
     history.pushState({ path: pth }, ttl, url === (bas !== '/' ? bas.slice(0, -1) : '') + def ? bas || '/' : url); 
     ttl && (document.title = ttl); 
   },
+  
   params: () => Object.fromEntries(new URLSearchParams(location.search)),
   setParams(prm) { const url = new URL(location); Object.entries(prm).forEach(([key, val]) => url.searchParams.set(key, val)); history.pushState({}, '', url); },
   get current() { return this.clean(); }
