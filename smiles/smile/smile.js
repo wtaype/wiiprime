@@ -1,7 +1,7 @@
 import './smile.css';
 import $ from 'jquery';
 import { wiIp, savels, getls } from '../widev.js';
-import { modTiempos } from './witimes.js';
+import { modTiempos } from './wifechas.js';
 import { modCalendario } from './wicalendar.js';
 import { wiUpdate } from './wiupdate.js';
 

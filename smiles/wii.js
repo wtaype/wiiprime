@@ -6,15 +6,15 @@ export let app = 'WiiPrime'
 export let lanzamiento = 2024;
 export let autor = '@wilder.taype';
 export let link = 'https://wtaype.github.io/';
-export let version = 'v32';
+export let version = 'v33';
 
 /** ACTUALIZACIÓN PRINCIPAL ONE DEV [START](1)
-git add . ; git commit -m "Actualizacion Principal v32.10.10" ; git push origin main
+git add . ; git commit -m "Actualizacion Principal v33.10.10" ; git push origin main
 
 // Actualizar main luego esto, pero si es mucho, solo esto.(2)
-git tag v32 -m "Version v32" ; git push origin v32
+git tag v33 -m "Version v33" ; git push origin v33
 
 // En caso de emergencia, para actualizar el Tag existente. (3)
-git tag -d v32 ; git tag v32 -m "Version v32 actualizada" ; git push origin v32 --force
+git tag -d v33 ; git tag v33 -m "Version v33 actualizada" ; git push origin v33 --force
  ACTUALIZACION TAG[END] */ 
 

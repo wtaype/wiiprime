@@ -353,7 +353,9 @@
   transform-origin: center;
   transition: all 0.3s ease;
 }
-
+.es-noche .wihora_mark{
+  background: var(--F);
+}
 .wihora_card:hover .wihora_mark {
   opacity: 0.7;
 }

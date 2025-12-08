@@ -497,12 +497,14 @@
 
 .wicont_analogico_small .wihora_mark {
   position: absolute;
-  background: var(--tx);
   opacity: 0.4;
   border-radius: 2px;
   top: 50%;
   left: 50%;
   transform-origin: center;
+}
+.es-noche .wihora_mark{
+  background: var(--F);
 }
 
 .wicont_analogico_small .wihora_mark_hour {
