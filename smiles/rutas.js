@@ -29,7 +29,6 @@ class WiRouter {
     try {
       this.updateActiveNav(normalizedPath);
 
-      // ✅ Cargar módulo (lazy o ya cargado)
       const module = typeof moduleLoader === 'function' ? await moduleLoader() : moduleLoader;
       
       const content = await module.render();
