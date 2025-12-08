@@ -179,19 +179,50 @@ export const buscarCiudad = (termino, continente = null) => {
 // === PATH VELOCIDAD V10.1 ===
 export const wiPath = {
   clean(p) {
-    const b = import.meta?.env?.BASE_URL || '/';
-    // ✅ Recuperar ruta guardada por 404.html
-    const saved = sessionStorage.ghPath;
+    // BASE_URL configurado por Vite (ej: /wiiprime/ o /wiiprime/v34/)
+    const b = (import.meta?.env?.BASE_URL || '/').replace(/\/+$/, '/');
+
+    // 🧠 Soporte para GitHub Pages SPA:
+    // si 404.html guardó la ruta original, la usamos una sola vez
+    const saved = sessionStorage.getItem('ghPath');
     if (saved) {
       sessionStorage.removeItem('ghPath');
-      return saved.replace(b, '/') || '/';
+      // ej: saved = /wiiprime/v34/smile  ->  /smile
+      return saved.startsWith(b)
+        ? saved.slice(b.length - 1) || '/'
+        : saved || '/';
     }
-    return b !== '/' && p.startsWith(b) ? p.slice(b.length - 1) || '/' : p || '/';
+
+    // Normalizar parámetro
+    p = p || '/';
+
+    // Ejemplos:
+    //  BASE_URL = /wiiprime/       , p = /wiiprime/smile  -> /smile
+    //  BASE_URL = /wiiprime/v34/   , p = /wiiprime/v34/smile -> /smile
+    if (b !== '/' && p.startsWith(b)) {
+      return p.slice(b.length - 1) || '/';
+    }
+
+    return p;
   },
-  update(p, t = '', dr = '/') {history.pushState({ path: p }, t, p === dr ? '/' : p); t && (document.title = t)},
+
+  update(p, t = '', dr = '/') {
+    // Mantener navegación relativa al origen (GitHub Pages o Firebase)
+    history.pushState({ path: p }, t, p === dr ? '/' : p);
+    if (t) document.title = t;
+  },
+
   params: () => Object.fromEntries(new URLSearchParams(location.search)),
-  setParams(p) {const u = new URL(location); Object.entries(p).forEach(([k, v]) => u.searchParams.set(k, v)); history.pushState({}, '', u)},
-  get current() {return this.clean(location.pathname)}
+
+  setParams(p) {
+    const u = new URL(location);
+    Object.entries(p).forEach(([k, v]) => u.searchParams.set(k, v));
+    history.pushState({}, '', u);
+  },
+
+  get current() {
+    return this.clean(location.pathname);
+  }
 };
 
 // === ANIMACIÓN CARGA V10.1 ===
