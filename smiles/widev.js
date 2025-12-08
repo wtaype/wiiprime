@@ -176,7 +176,7 @@ export const buscarCiudad = (termino, continente = null) => {
   return fue.filter(c => c.ciudad.toLowerCase().includes(bus) || c.pais.toLowerCase().includes(bus));
 };
 
-// === PATH VELOCIDAD V10.2 ===
+// === PATH VELOCIDAD V10.2 
 export const wiPath = {
   clean(pth) {const bas = import.meta?.env?.BASE_URL || '/'; const sav = sessionStorage.ghPath; if (sav) {sessionStorage.removeItem('ghPath'); return sav.replace(/^\/wiiprime(\/v\d+)?/, '') || '/';} return bas !== '/' && pth?.startsWith(bas) ? pth.slice(bas.length - 1) || '/' : pth || '/';},
   update(pth, ttl = '', def = '/') {history.pushState({ path: pth }, ttl, pth === def ? '/' : pth); ttl && (document.title = ttl);},
@@ -185,7 +185,7 @@ export const wiPath = {
   get current() {return this.clean(location.pathname);}
 };
 
-// === ANIMACIÓN CARGA V10.1 ===
+// === ANIMACIÓN CARGA V10.1 
 export const wiAnimate = {
   async fade(s, c, d = 150) {const $e = $(s); await $e.animate({ opacity: 0 }, d).promise(); $e.html(c); await $e.animate({ opacity: 1 }, d).promise()},
   async slide(s, sh = null) {const $e = $(s); if (sh === null) sh = !$e.is(':visible'); return sh ? $e.slideDown().promise() : $e.slideUp().promise()},
