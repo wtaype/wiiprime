@@ -10,7 +10,6 @@ class WiRouter {
     this.contentContainer = '#wiMainContent';
     this.isNavigating = false;
     this.prefetchCache = new Set();
-    this.moduleCache = new Map(); // ✅ Cache de módulos cargados
   }
 
   register(path, module) {
@@ -30,15 +29,8 @@ class WiRouter {
     try {
       this.updateActiveNav(normalizedPath);
 
-      let module;
-      if (this.moduleCache.has(normalizedPath)) {
-        module = this.moduleCache.get(normalizedPath); // 0ms - Instantáneo
-        console.log('⚡Desde cache: ' + normalizedPath);
-      } else {
-        module = typeof moduleLoader === 'function' ? await moduleLoader() : moduleLoader; // 80-150ms solo primera vez
-        this.moduleCache.set(normalizedPath, module); // Guardar para próximas veces
-        console.log('✅ Primera Vez: '+ normalizedPath); 
-      }
+      // ✅ Cargar módulo (lazy o ya cargado)
+      const module = typeof moduleLoader === 'function' ? await moduleLoader() : moduleLoader;
       
       const content = await module.render();
       await wiAnimate.fade(this.contentContainer, content);
@@ -54,7 +46,8 @@ class WiRouter {
       }
 
       this.currentRoute = normalizedPath;
-    } catch (e) {console.error(e)} 
+      console.log(`${normalizedPath}`);
+    } catch (error) {console.error('Error:', error); Notificacion('Error al cargar la página', 'error', 2000); } 
     finally {this.isNavigating = false;}
   }
 
@@ -70,10 +63,10 @@ class WiRouter {
     
     if (this.prefetchCache.has(normalizedPath) || typeof this.ruta[normalizedPath] !== 'function') return;
 
-    console.log(`⚡ Prefetch: ${normalizedPath}`);
+    console.log(`${normalizedPath}`);
     try {
       const module = await this.ruta[normalizedPath]();
-      this.moduleCache.set(normalizedPath, module); // ✅ Guardar en cache
+      this.ruta[normalizedPath] = module;
       this.prefetchCache.add(normalizedPath);
     } catch (e) {console.warn(`Prefetch error: ${normalizedPath}`); }
   }
