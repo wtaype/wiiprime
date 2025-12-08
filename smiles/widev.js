@@ -176,30 +176,27 @@ export const buscarCiudad = (termino, continente = null) => {
   return fue.filter(c => c.ciudad.toLowerCase().includes(bus) || c.pais.toLowerCase().includes(bus));
 };
 
-// === PATH VELOCIDAD V10.2 ===
+// === PATH VELOCIDAD V10.1 ===
 export const wiPath = {
   clean(pth) {
     const bas = (import.meta?.env?.BASE_URL || '/').replace(/\/+$/, '/');
-    const sav = sessionStorage.ghPath;
+    const raw = pth || location.pathname;
     
-    // 🔥 Si hay ruta guardada por 404.html (F5 en GitHub Pages)
-    if (sav) { 
-      sessionStorage.removeItem('ghPath');
-      // Limpiar la ruta: /wiiprime/v34/smile -> /smile
-      return sav.startsWith(bas) ? sav.slice(bas.length - 1) || '/' : sav.replace(/^\/wiiprime(\/v\d+)?/, '') || '/';
-    }
-    
-    // Ruta normal
-    const nrm = pth || location.pathname;
-    
-    // Si no hay BASE_URL en build, detectar dinámicamente
-    if (bas === '/' && nrm.startsWith('/wiiprime/')) {
-      // Detectar si es tag: /wiiprime/v34/smile -> /smile
-      return nrm.replace(/^\/wiiprime(\/v\d+)?/, '') || '/';
+    // 🔥 Detectar rutas de GitHub Pages dinámicamente
+    // Ejemplos: /wiiprime/smile, /wiiprime/v34/smile
+    const ghMatch = raw.match(/^\/wiiprime(\/v\d+)?(\/.*)?$/);
+    if (ghMatch) {
+      const [, tag, ruta] = ghMatch;
+      // Si hay tag y BASE_URL lo incluye, extraer ruta limpia
+      if (tag && bas.includes(tag)) return ruta || '/';
+      // Si es main (/wiiprime/) extraer ruta limpia
+      if (!tag && bas === '/wiiprime/') return ruta || '/';
+      // Fallback: remover /wiiprime/vXX o /wiiprime
+      return (ruta || '/');
     }
     
     // Caso normal con BASE_URL configurado
-    return bas !== '/' && nrm.startsWith(bas) ? nrm.slice(bas.length - 1) || '/' : nrm || '/';
+    return bas !== '/' && raw.startsWith(bas) ? raw.slice(bas.length - 1) || '/' : raw || '/';
   },
   
   update(pth, ttl = '', def = '/') { 
