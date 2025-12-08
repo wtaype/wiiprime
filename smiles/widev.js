@@ -229,16 +229,15 @@ export const formatoHora = (() => {
   };
 })();
 
-// CARGANDO V10.1
-export const wiSpin = (btn, act = true, txt = '') => {
-  const $btn = $(btn);
-  if (act) {
-    const texto = txt || $btn.text().trim();
-    $btn.data('txt', texto).prop('disabled', true).html(`${texto} <i class="fas fa-spinner fa-spin"></i>`);
-  } else {
-    $btn.prop('disabled', false).text($btn.data('txt') || txt || 'Continuar');
-  }
-};
+// CARGANDO V10.2
+export const wiSpin = (() => {
+  const cache = new WeakMap();
+  return (btn, act = true, txt = '', t = 3000) => {
+    const $btn = $(btn);
+    if (act) cache.set(btn, {html: $btn.html(), disabled: $btn.prop('disabled'), t: setTimeout(() => wiSpin(btn, false), t)}), $btn.prop('disabled', true).html(`${txt} <i class="fas fa-spinner fa-spin"></i>`);
+    else (s => (clearTimeout(s?.t), s && $btn.prop('disabled', s.disabled).html(s.html), cache.delete(btn)))(cache.get(btn));
+  };
+})();
 
 // SALUDO DE BIENVENIDA V10.1
 export const Saludar = () => {
@@ -311,24 +310,23 @@ export function wiTip(elm, txt, tipo = 'top', tiempo = 1800) {
 
 // SISTEMA IP V10.1
 export const wiIp = (geo) => {
-  const cch = getls('wiIp');
-  if (cch) return typeof geo === 'function' ? geo(cch) : geo === 'ciudad' ? `${cch.city}, ${cch.country}` : cch[geo];
   return $.getJSON('https://ipinfo.io/json?token=3868948e170a74', data => {
     const ua = navigator.userAgent;
     const [lat, lng] = (data.loc || '0,0').split(',').map(Number);
     const ipData = {
       ip: data.ip, city: data.city, region: data.region, country: data.country, postal: data.postal, lat, lng,
-      browser: /Edg/i.test(ua) ? 'Edge' : /Chrome/i.test(ua) ? 'Chrome' : /Firefox/i.test(ua) ? 'Firefox' : /Safari/i.test(ua) && !/Chrome/i.test(ua) ? 'Safari' : /Opera|OPR/i.test(ua) ? 'Opera' : 'Otro',
-      os: /Windows/i.test(ua) ? 'Windows' : /Android/i.test(ua) ? 'Android' : /iPhone|iPad/i.test(ua) ? 'iOS' : /Mac/i.test(ua) ? 'macOS' : /Linux/i.test(ua) ? 'Linux' : 'Otro',
+      browser: /Edg/i.test(ua) ? 'Edge' : /Chrome/i.test(ua) ? 'Chrome' : /Firefox/i.test(ua) ? 'Firefox' : /Safari/i.test(ua) && !/Chrome/i.test(ua) ? 'Safari' : 'Otro',
+      os: /Windows/i.test(ua) ? 'Windows' : /Android/i.test(ua) ? 'Android' : /iPhone|iPad/i.test(ua) ? 'iOS' : /Mac/i.test(ua) ? 'macOS' : 'Linux',
       device: /Mobile|Android|iPhone|iPad/i.test(ua) ? 'Móvil' : /Tablet|iPad/i.test(ua) ? 'Tablet' : 'Escritorio',
-      screen: `${screen.width}×${screen.height}`, viewport: `${innerWidth}×${innerHeight}`,
-      language: navigator.language, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      time: new Date().toLocaleString('es-ES'), utcOffset: new Date().getTimezoneOffset() / -60,
+      screen: `${screen.width}×${screen.height}`,
+      language: navigator.language,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      utcOffset: new Date().getTimezoneOffset() / -60,
       online: navigator.onLine
     };
-    savels('wiIp', ipData, 24);
+    
     return typeof geo === 'function' ? geo(ipData) : geo === 'ciudad' ? `${ipData.city}, ${ipData.country}` : ipData[geo];
-  }).fail(() => cch?.[geo] || null);
+  }).fail(() => null);
 };
 
 // === MODALES V10.4 ===

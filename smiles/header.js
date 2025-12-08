@@ -6,9 +6,6 @@ wiSmart({ js: [() => import('./wiauth.js')] });
 export function personal(wi) {
   Mensaje?.('Bienvenido '+wi.nombre);
   $('.wiauth').html(`
-    <a href="/local" class="winav_item" data-page="smile">
-      <i class="fa-solid fa-location-dot"></i> <span>Mi Dashboard </span>
-    </a>
     <div class="sesion">
       <img src="${wi.imagen||'./smile.png'}" alt="${wi.nombre}"><span>${wi.nombre}</span>
     </div>
@@ -35,7 +32,7 @@ export const header = (() => {
 //CERRAR SESSIÓN
   $(document).on('click', '.bt_salir', async () => {
     const { auth, signOut } = await import('./wiauth.js');
-    await signOut(auth); removels('wiSmile wiciudades wifechas'); publico(); rutas.navigate('/');
+    await signOut(auth); removels('wiSmile wiciudades wifechas smileIP'); publico(); rutas.navigate('/');
   }); 
 
 })();
