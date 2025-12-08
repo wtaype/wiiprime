@@ -178,51 +178,26 @@ export const buscarCiudad = (termino, continente = null) => {
 
 // === PATH VELOCIDAD V10.1 ===
 export const wiPath = {
-  clean(p) {
-    // BASE_URL configurado por Vite (ej: /wiiprime/ o /wiiprime/v34/)
-    const b = (import.meta?.env?.BASE_URL || '/').replace(/\/+$/, '/');
-
-    // 🧠 Soporte para GitHub Pages SPA:
-    // si 404.html guardó la ruta original, la usamos una sola vez
-    const saved = sessionStorage.getItem('ghPath');
-    if (saved) {
-      sessionStorage.removeItem('ghPath');
-      // ej: saved = /wiiprime/v34/smile  ->  /smile
-      return saved.startsWith(b)
-        ? saved.slice(b.length - 1) || '/'
-        : saved || '/';
+  clean(pth) {
+    const bas = (import.meta?.env?.BASE_URL || '/').replace(/\/+$/, '/');
+    const sav = sessionStorage.ghPath;
+    if (sav) { 
+      sessionStorage.removeItem('ghPath'); 
+      const cln = sav.startsWith(bas) ? sav.slice(bas.length - 1) || '/' : sav || '/';
+      return cln;
     }
-
-    // Normalizar parámetro
-    p = p || '/';
-
-    // Ejemplos:
-    //  BASE_URL = /wiiprime/       , p = /wiiprime/smile  -> /smile
-    //  BASE_URL = /wiiprime/v34/   , p = /wiiprime/v34/smile -> /smile
-    if (b !== '/' && p.startsWith(b)) {
-      return p.slice(b.length - 1) || '/';
-    }
-
-    return p;
+    const nrm = pth || location.pathname;
+    return bas !== '/' && nrm.startsWith(bas) ? nrm.slice(bas.length - 1) || '/' : nrm || '/';
   },
-
-  update(p, t = '', dr = '/') {
-    // Mantener navegación relativa al origen (GitHub Pages o Firebase)
-    history.pushState({ path: p }, t, p === dr ? '/' : p);
-    if (t) document.title = t;
+  update(pth, ttl = '', def = '/') { 
+    const bas = import.meta?.env?.BASE_URL || '/';
+    const url = bas !== '/' ? bas.replace(/\/$/, '') + pth : pth;
+    history.pushState({ path: pth }, ttl, url === (bas !== '/' ? bas.slice(0, -1) : '') + def ? bas || '/' : url); 
+    ttl && (document.title = ttl); 
   },
-
   params: () => Object.fromEntries(new URLSearchParams(location.search)),
-
-  setParams(p) {
-    const u = new URL(location);
-    Object.entries(p).forEach(([k, v]) => u.searchParams.set(k, v));
-    history.pushState({}, '', u);
-  },
-
-  get current() {
-    return this.clean(location.pathname);
-  }
+  setParams(prm) { const url = new URL(location); Object.entries(prm).forEach(([key, val]) => url.searchParams.set(key, val)); history.pushState({}, '', url); },
+  get current() { return this.clean(); }
 };
 
 // === ANIMACIÓN CARGA V10.1 ===
