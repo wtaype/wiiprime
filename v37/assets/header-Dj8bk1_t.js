@@ -1,0 +1,7 @@
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/wiauth-lxC5RfF4.js","assets/main-Bo98c0s3.js","assets/vendor-B2AETYxa.js","assets/init-SyVNM3Ej.js","assets/firebase-DXmy2lv8.js"])))=>i.map(i=>d[i]);
+import{M as _,$ as o,r as l,g,_ as r,h as u,j as p}from"./main-Bo98c0s3.js";import"./vendor-B2AETYxa.js";p({js:[()=>r(()=>import("./wiauth-lxC5RfF4.js"),__vite__mapDeps([0,1,2,3,4]))]});function h(a){_?.("Bienvenido "+a.nombre),o(".wiauth").html(`
+    <div class="sesion">
+      <img src="${a.imagen||"./smile.png"}" alt="${a.nombre}"><span>${a.nombre}</span>
+    </div>
+    <button class="bt_salir"><i class="fas fa-sign-out-alt"></i> <span> Salir </span></button>
+  `),l.navigate("/smile")}const w=(()=>{let a=g("wiSmile");a?c(a):s();function s(){o(".wiauth").html('<button class="wibtn_auth registrar"><i class="fas fa-user-plus"></i><span>Registrar</span></button><button class="wibtn_auth login"><i class="fas fa-sign-in-alt"></i><span>Login</span></button>')}async function c(i){h(i);const{auth:n,onAuthStateChanged:e}=await r(async()=>{const{auth:t,onAuthStateChanged:m}=await import("./wiauth-lxC5RfF4.js");return{auth:t,onAuthStateChanged:m}},__vite__mapDeps([0,1,2,3,4]));e(n,t=>{if(!t)return u("wiSmile"),s()})}o(document).on("click",".bt_salir",async()=>{const{auth:i,signOut:n}=await r(async()=>{const{auth:e,signOut:t}=await import("./wiauth-lxC5RfF4.js");return{auth:e,signOut:t}},__vite__mapDeps([0,1,2,3,4]));await n(i),u("wiSmile wiciudades wifechas smileIP"),s(),l.navigate("/")})})();export{w as header,h as personal};
