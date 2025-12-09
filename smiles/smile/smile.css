@@ -185,7 +185,6 @@
 }
 
 .whDropdown_item:hover {
-  background: rgba(255, 255, 255, 0.1);
   transform: translateX(4px);
 }
 
@@ -264,7 +263,133 @@
 .wi_grid.whLista {
   grid-template-columns: 1fr;
 }
+.wi_grid:not(.whLista) .wihora_analogico {
+  display: none;
+}
+.wi_grid:not(.whLista){
+  display: flex;
+}
+/* === BOTONES DE ACCIÓN === */
+.wihora_actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--bg1);
+}
 
+.wihora_btn {
+  flex: 1;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--bg1);
+  color: var(--tx);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.wihora_btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.wihora_delete:hover { background: var(--error); color: var(--F); }
+.wihora_cloud[data-estado="success"] { color: var(--success); }
+.wihora_cloud[data-estado="offline"] { color: var(--offline); }
+.wihora_cloud[data-estado="success"]:hover { background: var(--success); color: var(--F); }
+
+.whDropdown_empty {
+  padding: 1rem;
+  text-align: center;
+  color: var(--tx);
+  opacity: 0.7;
+}
+
+.whDropdown_add {
+  margin-left: auto;
+  color: var(--mco);
+  font-size: 1.2rem;
+}
+
+/* === ESTADOS DE RELOJ === */
+.wihora_card {
+  position: relative;
+}
+
+.wihora_estados {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.wihora_cloud,
+.wihora_delete {
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  color: var(--tx);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.wihora_cloud:hover,
+.wihora_delete:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.wihora_cloud[data-id=""] {
+  color: var(--offline);
+}
+
+.wihora_cloud[data-id=""]:hover {
+  background: var(--offline);
+  color: var(--F);
+}
+
+.wihora_cloud:not([data-id=""]) {
+  color: var(--success);
+}
+
+.wihora_cloud:not([data-id=""]):hover {
+  background: var(--success);
+  color: var(--F);
+}
+
+.wihora_delete {
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.wihora_card:hover .wihora_delete {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: all;
+}
+
+.wihora_delete:hover {
+  background: var(--error);
+  color: var(--F);
+}
+
+.wihora_cloud i,
+.wihora_delete i {
+  font-size: 0.95rem;
+}
 
 /* === ESTILOS DE CALENDARIO === */
 .wiMeses {
@@ -286,11 +411,9 @@
 
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
-  .miweb { padding: 1.5rem; }
   .mhead { flex-direction: column; padding: 1.5rem; gap: 1rem; }
   .mh1 { font-size: clamp(1.3rem, 5vw, 1.8rem); margin-bottom: 0.75rem; }
   .wfresh { width: 100%; justify-content: center; }
   .mibody { grid-template-columns: 1fr; gap: 1.25rem; }
-  .wiHoras, .wiMeses { padding: 1.5rem; }
 }
 
