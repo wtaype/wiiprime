@@ -5,7 +5,6 @@ import { wiHoras } from './wihoras.js';
 import { actualizado } from './wiupdate.js';
 import { wiIp, savels, getls, Saludar, wiSpin } from '../widev.js';
 
-
 export let smile = getls('wiSmile'); // Obtener datos del usuario
 export const render = async () => {
   return `
