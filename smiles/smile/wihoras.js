@@ -3,7 +3,7 @@ import { smile } from './smile.js';
 import { getls, savels, wiIp, wiCiudades, infoCiudad, Notificacion, wiSpin } from '../widev.js';
 import { iniciarBuscador, iniciarRelojes, formatoHoras, mdVistas, relojAnalogico, relojDigital, fechaTexto, infoPaises, infoDatos } from '../widevs.js';
 import { db } from '../../firebase/init.js';
-import { collection, doc, setDoc, getDocs, deleteDoc, serverTimestamp } from 'firebase/firestore';
+import { collection, doc, setDoc, getDocs, deleteDoc, serverTimestamp, query, where } from 'firebase/firestore';
 
 export const wiHoras = async () => {
   //[START] RELOJ PRINCIPAL DEL USUARIO V10.1
@@ -94,7 +94,9 @@ export const wiHoras = async () => {
     </div>`;
 
   const cached = getls('wiHoras'); // Cache Primero 
-  const relojes = cached || await getDocs(collection(db, 'wiHoras')).then(snap => {
+  const relojes = cached || await getDocs(
+    query(collection(db, 'wiHoras'), where('email', '==', smile.email))
+  ).then(snap => {
     const data = snap.docs.map(doc => doc.data()).sort((a, b) => a.orden - b.orden);
     savels('wiHoras', data, 450); return data;
   });
