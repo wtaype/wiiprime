@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import { wiFlag, infoCiudad, esNoche, wiCiudades } from './widev.js';
+import { wiFlag, infoCiudad, esNoche, wiCiudades } from '../widev.js';
 
 // DIFERENCIAS DE HORAS V10.1
 export function difHora(ciudad, dat, zonaReferencia = null) {

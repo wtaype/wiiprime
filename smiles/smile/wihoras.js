@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { smile } from './smile.js';
 import { getls, savels, wiIp, wiCiudades, infoCiudad, Notificacion, wiSpin } from '../widev.js';
-import { iniciarBuscador, iniciarRelojes, formatoHoras, mdVistas, relojAnalogico, relojDigital, fechaTexto, infoPaises, infoDatos } from '../widevs.js';
+import { iniciarBuscador, iniciarRelojes, formatoHoras, mdVistas, relojAnalogico, relojDigital, fechaTexto, infoPaises, infoDatos } from './devhoras.js';
 import { db } from '../../firebase/init.js';
 import { collection, doc, setDoc, getDocs, deleteDoc, serverTimestamp, query, where } from 'firebase/firestore';
 
@@ -110,7 +110,7 @@ export const wiHoras = async () => {
   // Agregar desde buscador
   $(document).on('agregar-ciudad', '.whDropdown_item', function(e, ciudad) {
     const nuevoReloj = miReloj({ ...ciudad, id: null, orden: 0 }, gps.timezone);
-    $('.wi_grid').prepend(nuevoReloj);
+    $('.wi_grid').append(nuevoReloj);
     iniciarRelojes();
   });
 

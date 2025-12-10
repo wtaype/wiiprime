@@ -157,7 +157,7 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: var(--glass-bg);
+  background: var(--F);
   backdrop-filter: blur(20px);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -267,7 +267,7 @@
   display: none;
 }
 .wi_grid:not(.whLista){
-  display: flex;
+  display: grid;
 }
 /* === BOTONES DE ACCIÓN === */
 .wihora_actions {
@@ -333,7 +333,7 @@
   height: 36px;
   border: none;
   border-radius: 8px;
-  background: var(--glass-bg);
+  background: var(--F);
   backdrop-filter: blur(10px);
   color: var(--tx);
   cursor: pointer;
@@ -391,24 +391,6 @@
   font-size: 0.95rem;
 }
 
-/* === ESTILOS DE CALENDARIO === */
-.wiMeses {
-  background: var(--F);
-  border-radius: 12px;
-  padding: 1.75rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-  border: 2px solid var(--bg1);
-  opacity: 0;
-  animation: fadeIn 0.4s ease-out 0.5s forwards;
-}
-
-.wiMeses:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-  border-color: var(--mco);
-}
-
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
   .mhead { flex-direction: column; padding: 1.5rem; gap: 1rem; }
@@ -417,3 +399,636 @@
   .mibody { grid-template-columns: 1fr; gap: 1.25rem; }
 }
 
+/* === [START] ESTILOS DE CALENDARIO V2.0 === */
+
+/* === CONTENEDOR PRINCIPAL === */
+.wiMeses {
+  transition: all 0.3s ease;
+  opacity: 0;
+  animation: fadeIn 0.4s ease-out 0.5s forwards;
+}
+
+.wiMeses:hover {
+  transform: translateY(-4px);
+}
+
+.wm_card {
+  backdrop-filter: blur(20px);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+.wmPrincipal .wm_card{background: var(--F);}
+.wmPrincipal .wm_card:hover{
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* === HEADER === */
+.wm_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--bg1);
+}
+
+.wm_header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--tx);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.wm_header h3 i {
+  color: var(--mco);
+  font-size: 1.3rem;
+}
+
+.wm_header .btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--mco);
+  color: var(--F);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.wm_header .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--mco-rgb), 0.3);
+}
+
+/* === FULLCALENDAR PERSONALIZADO === */
+#calendar {
+  margin-top: 1rem;
+}
+
+.fc {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--tx);
+}
+
+/* === BOTONES DEL CALENDARIO === */
+.fc .fc-button {
+  background: transparent;
+  border: none;
+  color: var(--tx);
+  padding: 0.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.fc .fc-button:hover {
+  background: var(--bg1);
+  color: var(--mco);
+}
+
+.fc .fc-button-active {
+  background: var(--mco) !important;
+  color: var(--F) !important;
+}
+
+.fc .fc-prev-button,
+.fc .fc-next-button {
+  font-size: 1.2rem;
+}
+
+.fc .fc-today-button {
+  background: var(--mco);
+  color: var(--F);
+  padding: 0.5rem 1rem;
+}
+
+.fc .fc-today-button:hover {
+  background: var(--hv);
+}
+
+/* === DÍAS DEL CALENDARIO === */
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border-color: var(--bg1);
+}
+
+.fc .fc-daygrid-day {
+  transition: all 0.2s ease;
+}
+
+.fc .fc-daygrid-day:hover {
+  background: var(--bg1);
+  cursor: pointer;
+}
+
+.fc .fc-daygrid-day-number {
+  color: var(--tx);
+  padding: 0.5rem;
+  font-weight: 500;
+}
+
+.fc .fc-day-today {
+  background: rgba(var(--mco-rgb), 0.1) !important;
+}
+
+.fc .fc-day-today .fc-daygrid-day-number {
+  color: var(--mco);
+  font-weight: 700;
+}
+
+/* === EVENTOS COMO PUNTOS === */
+.fc-event {
+  border: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 2px !important;
+  overflow: visible !important;
+}
+
+.fc-event-title {
+  display: none !important;
+}
+
+.fc-event-main {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  margin: 0 auto !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.fc-event:hover .fc-event-main {
+  transform: scale(1.3) !important;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* === TABLA DE NOTAS === */
+.wm_tabla_container {
+  overflow-x: auto;
+  margin-top: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.wm_tabla {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--F);
+}
+
+.wm_tabla thead {
+  background: linear-gradient(135deg, var(--mco) 0%, var(--hv) 100%);
+  color: var(--F);
+}
+
+.wm_tabla th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.wm_tabla th:first-child {
+  border-radius: 8px 0 0 0;
+  text-align: center;
+  width: 60px;
+}
+
+.wm_tabla th:last-child {
+  border-radius: 0 8px 0 0;
+  text-align: center;
+  width: 140px;
+}
+
+.wm_tabla tbody tr {
+  border-bottom: 1px solid var(--bg1);
+  transition: all 0.2s ease;
+}
+
+.wm_tabla tbody tr:hover {
+  background: var(--bg1);
+}
+
+.wm_tabla tbody tr:last-child {
+  border-bottom: none;
+}
+
+.wm_tabla td {
+  padding: 1rem;
+  color: var(--tx);
+  font-size: 0.9rem;
+}
+
+.wm_tabla td:first-child {
+  text-align: center;
+  font-weight: 700;
+  color: var(--mco);
+  font-size: 1rem;
+}
+
+/* === DESCRIPCIÓN EN TABLA === */
+.wm_desc_corta {
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* === CATEGORÍA EN TABLA === */
+.wm_cat_badge {
+  display: inline-block;
+  padding: 0.4rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--F);
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+
+/* === ACCIONES EN TABLA === */
+.wm_acciones {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.wm_btn_accion {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: var(--bg1);
+  color: var(--tx);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.wm_btn_accion:hover {
+  transform: translateY(-2px);
+}
+
+.wm_btn_ver:hover {
+  background: var(--info);
+  color: var(--F);
+}
+
+.wm_btn_editar:hover {
+  background: var(--mco);
+  color: var(--F);
+}
+
+.wm_btn_eliminar:hover {
+  background: var(--error);
+  color: var(--F);
+}
+
+/* === ESTADO VACÍO === */
+.wm_empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--tx);
+  opacity: 0.6;
+}
+
+.wm_empty i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: var(--mco);
+  opacity: 0.5;
+}
+
+.wm_empty p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* === MODALES === */
+#mdNota .modalBody {
+  max-width: 600px;
+  background: var(--F);
+  border-radius: 16px;
+  padding: 0;
+  overflow: hidden;
+}
+
+#mdNota .modal_hd {
+  background: linear-gradient(135deg, var(--mco) 0%, var(--hv) 100%);
+  padding: 1.5rem 2rem;
+  color: var(--F);
+}
+
+#mdNota .modal_hd h3 {
+  margin: 0;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+#mdNota .modal_body {
+  padding: 2rem;
+}
+
+#mdNota .form_grp {
+  margin-bottom: 1.5rem;
+}
+
+#mdNota .form_grp label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--tx);
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+#mdNota .form_grp label i {
+  color: var(--mco);
+}
+
+#mdNota .form_grp input,
+#mdNota .form_grp textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--bg1);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: var(--bg);
+  color: var(--tx);
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+#mdNota .form_grp input:disabled,
+#mdNota .form_grp textarea:disabled {
+  background: var(--bg1);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+#mdNota .form_grp input:focus,
+#mdNota .form_grp textarea:focus {
+  outline: none;
+  border-color: var(--mco);
+  box-shadow: 0 0 0 3px rgba(var(--mco-rgb), 0.1);
+}
+
+#mdNota .form_grp textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+#mdNota .char_count {
+  display: block;
+  text-align: right;
+  font-size: 0.85rem;
+  color: var(--tx);
+  opacity: 0.6;
+  margin-top: 0.25rem;
+}
+
+/* === FILA DE FORMULARIO === */
+#mdNota .form_row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* === GRID DE CATEGORÍAS === */
+#mdNota .cat_grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+#mdNota .cat_opt {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 2px solid var(--bg1);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: var(--bg);
+}
+
+#mdNota .cat_opt:hover {
+  border-color: var(--mco);
+  transform: translateY(-2px);
+}
+
+#mdNota .cat_opt.active {
+  border-color: var(--mco);
+  background: rgba(var(--mco-rgb), 0.1);
+}
+
+#mdNota .cat_opt.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+#mdNota .cat_opt input {
+  display: none;
+}
+
+#mdNota .cat_ico {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#mdNota .cat_txt {
+  font-weight: 600;
+  color: var(--tx);
+  text-transform: capitalize;
+  font-size: 0.9rem;
+}
+
+/* === FOOTER DEL MODAL === */
+#mdNota .modal_ftr {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  background: var(--bg1);
+  border-top: 1px solid var(--border);
+}
+
+#mdNota .btn_sec,
+#mdNota .btn_pri {
+  flex: 1;
+  padding: 0.875rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+#mdNota .btn_sec {
+  background: var(--bg2);
+  color: var(--tx);
+}
+
+#mdNota .btn_sec:hover {
+  background: var(--bg3);
+  transform: translateY(-2px);
+}
+
+#mdNota .btn_pri {
+  background: var(--mco);
+  color: var(--F);
+}
+
+#mdNota .btn_pri:hover {
+  background: var(--hv);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(var(--mco-rgb), 0.3);
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .wiMeses {
+    padding: 1.25rem;
+  }
+
+  .wm_card {
+    padding: 1rem;
+  }
+
+  .wm_header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .wm_header .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Tabla → Cards en móvil */
+  .wm_tabla_container {
+    overflow-x: visible;
+  }
+
+  .wm_tabla,
+  .wm_tabla thead,
+  .wm_tabla tbody,
+  .wm_tabla tr,
+  .wm_tabla td {
+    display: block;
+  }
+
+  .wm_tabla thead {
+    display: none;
+  }
+
+  .wm_tabla tbody tr {
+    margin-bottom: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    background: var(--F);
+  }
+
+  .wm_tabla td {
+    padding: 0.5rem 0;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .wm_tabla td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: var(--mco);
+  }
+
+  .wm_tabla td:first-child::before {
+    content: '#';
+  }
+
+  .wm_acciones {
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  #mdNota .form_row {
+    grid-template-columns: 1fr;
+  }
+
+  #mdNota .cat_grid {
+    grid-template-columns: 1fr;
+  }
+
+  #mdNota .modal_ftr {
+    flex-direction: column;
+  }
+}
+/* === PUNTITOS DE EVENTOS EN CALENDARIO V6.0 === */
+.fc-event {
+  cursor: pointer !important;
+}
+
+.fc-event-title {
+  display: none !important;
+}
+
+.fc-event-main {
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  margin: 2px auto !important;
+  padding: 0 !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25) !important;
+  transition: all 0.25s ease !important;
+}
+
+.fc-event:hover .fc-event-main {
+  transform: scale(1.5) !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4) !important;
+}
+
+.fc-daygrid-event {
+  border: none !important;
+  background: transparent !important;
+}
+
+
+/* === [END] ESTILOS DE CALENDARIO V2.0 === */
