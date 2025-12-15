@@ -419,7 +419,7 @@
   border: 1px solid var(--border);
   transition: all 0.3s ease;
 }
-.wmPrincipal .wm_card{background: var(--F);}
+.wmPrincipal .wm_card{background: var(--bg8);}
 .wmPrincipal .wm_card:hover{
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
@@ -468,115 +468,6 @@
 .wm_header .btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(var(--mco-rgb), 0.3);
-}
-
-/* === FULLCALENDAR PERSONALIZADO === */
-#calendar {
-  margin-top: 1rem;
-}
-
-.fc {
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.fc .fc-toolbar-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--tx);
-}
-
-/* === BOTONES DEL CALENDARIO === */
-.fc .fc-button {
-  background: transparent;
-  border: none;
-  color: var(--tx);
-  padding: 0.5rem;
-  border-radius: 6px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.fc .fc-button:hover {
-  background: var(--bg1);
-  color: var(--mco);
-}
-
-.fc .fc-button-active {
-  background: var(--mco) !important;
-  color: var(--F) !important;
-}
-
-.fc .fc-prev-button,
-.fc .fc-next-button {
-  font-size: 1.2rem;
-}
-
-.fc .fc-today-button {
-  background: var(--mco);
-  color: var(--F);
-  padding: 0.5rem 1rem;
-}
-
-.fc .fc-today-button:hover {
-  background: var(--hv);
-}
-
-/* === DÍAS DEL CALENDARIO === */
-.fc-theme-standard td,
-.fc-theme-standard th {
-  border-color: var(--bg1);
-}
-
-.fc .fc-daygrid-day {
-  transition: all 0.2s ease;
-}
-
-.fc .fc-daygrid-day:hover {
-  background: var(--bg1);
-  cursor: pointer;
-}
-
-.fc .fc-daygrid-day-number {
-  color: var(--tx);
-  padding: 0.5rem;
-  font-weight: 500;
-}
-
-.fc .fc-day-today {
-  background: rgba(var(--mco-rgb), 0.1) !important;
-}
-
-.fc .fc-day-today .fc-daygrid-day-number {
-  color: var(--mco);
-  font-weight: 700;
-}
-
-/* === EVENTOS COMO PUNTOS === */
-.fc-event {
-  border: none !important;
-  background: transparent !important;
-  padding: 0 !important;
-  margin: 2px !important;
-  overflow: visible !important;
-}
-
-.fc-event-title {
-  display: none !important;
-}
-
-.fc-event-main {
-  width: 8px !important;
-  height: 8px !important;
-  border-radius: 50% !important;
-  margin: 0 auto !important;
-  transition: all 0.2s ease !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
-}
-
-.fc-event:hover .fc-event-main {
-  transform: scale(1.3) !important;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* === TABLA DE NOTAS === */
@@ -920,115 +811,41 @@
   box-shadow: 0 4px 12px rgba(var(--mco-rgb), 0.3);
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 768px) {
-  .wiMeses {
-    padding: 1.25rem;
-  }
 
-  .wm_card {
-    padding: 1rem;
-  }
-
-  .wm_header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
-  .wm_header .btn {
-    width: 100%;
-    justify-content: center;
-  }
-
-  /* Tabla → Cards en móvil */
-  .wm_tabla_container {
-    overflow-x: visible;
-  }
-
-  .wm_tabla,
-  .wm_tabla thead,
-  .wm_tabla tbody,
-  .wm_tabla tr,
-  .wm_tabla td {
-    display: block;
-  }
-
-  .wm_tabla thead {
-    display: none;
-  }
-
-  .wm_tabla tbody tr {
-    margin-bottom: 1rem;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1rem;
-    background: var(--F);
-  }
-
-  .wm_tabla td {
-    padding: 0.5rem 0;
-    border: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .wm_tabla td::before {
-    content: attr(data-label);
-    font-weight: 700;
-    color: var(--mco);
-  }
-
-  .wm_tabla td:first-child::before {
-    content: '#';
-  }
-
-  .wm_acciones {
-    justify-content: flex-end;
-    width: 100%;
-  }
-
-  #mdNota .form_row {
-    grid-template-columns: 1fr;
-  }
-
-  #mdNota .cat_grid {
-    grid-template-columns: 1fr;
-  }
-
-  #mdNota .modal_ftr {
-    flex-direction: column;
-  }
-}
-/* === PUNTITOS DE EVENTOS EN CALENDARIO V6.0 === */
-.fc-event {
-  cursor: pointer !important;
+/* === DÍAS CAPITALIZADOS Y CENTRADOS === */
+.fc .fc-button-primary:focus{box-shadow: none;}
+.fc-theme-standard .fc-scrollgrid,.fc-theme-standard td,.fc-theme-standard th{border: none!important}
+.fc .fc-daygrid-body-natural .fc-daygrid-day-events, .fc-daygrid-day-events{margin-bottom: 0em;min-height: 0em;}
+.fc .fc-daygrid-day-number {
+  text-align: center;
+  padding: 2.5vh ;
+  width: 100%;
+  color: var(--tx);
 }
 
-.fc-event-title {
-  display: none !important;
+#calendar thead,.fc .fc-button-primary, .fc .fc-daygrid-day.fc-day-today, .fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-number { 
+  background: var(--mco);
+  color: var(--txa);
+  font-weight: 600;
+  border:none
+} 
+.fc .fc-button-primary:disabled{background: var(--mco); opacity:.7;}
+.fc .fc-button-primary:hover{
+  font-weight: 700;
+  background: var(--mco);
+  transform: scale(1.03);
+  transition: .3s ease-in-out;
 }
 
-.fc-event-main {
-  width: 10px !important;
-  height: 10px !important;
-  border-radius: 50% !important;
-  margin: 2px auto !important;
-  padding: 0 !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25) !important;
-  transition: all 0.25s ease !important;
+.fc .fc-col-header-cell-cushion {
+  width: 100%;
+  padding: 1vh;
+  text-transform: capitalize;
+}#calendar td{
+  box-shadow: inset 0.25vh 0.25vh 0.2vh var(--bg);
 }
-
-.fc-event:hover .fc-event-main {
-  transform: scale(1.5) !important;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4) !important;
-}
-
-.fc-daygrid-event {
-  border: none !important;
-  background: transparent !important;
+#calendar tbody{
+  box-shadow: inset 0 0 0.2vh 0.3vh var(--bg);
 }
 
 
-/* === [END] ESTILOS DE CALENDARIO V2.0 === */

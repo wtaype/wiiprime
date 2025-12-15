@@ -380,6 +380,22 @@ export const wicopy = (txt, elm = null, msg = '¡Copiado!') => {
   }
 };
 
+// FECHA CON FIREBASE + CACHE V11.1
+export const wiDate = (tm) => ({
+  save: val => {
+    if (!val) return null;
+    if (val.length === 10) val = `${val}T${new Date().toTimeString().split(' ')[0]}`;
+    return tm.fromDate(new Date(val));
+  },
+  get: (val, fmt) => {
+    const fec = val?.toDate?.() || (val?.seconds && new Date(val.seconds * 1000)) || (typeof val === 'number' && new Date(val * 1000));
+    if (!fec) return '';
+    if (fmt === 'full') return new Date(fec - fec.getTimezoneOffset() * 6e4).toISOString().slice(0, 16);
+    if (fmt === 'local') return fec.toLocaleDateString();
+    return fec.toISOString().split('T')[0];
+  }
+});
+
 // === [START] FUNCIONES GENIALES V10.1 ===
 export const Mayu = (ltr) => ltr.toUpperCase();
 export const Capi = (ltr) => ltr[0].toUpperCase() + ltr.slice(1);
