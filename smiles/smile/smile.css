@@ -391,13 +391,7 @@
   font-size: 0.95rem;
 }
 
-/* === RESPONSIVE === */
-@media (max-width: 768px) {
-  .mhead { flex-direction: column; padding: 1.5rem; gap: 1rem; }
-  .mh1 { font-size: clamp(1.3rem, 5vw, 1.8rem); margin-bottom: 0.75rem; }
-  .wfresh { width: 100%; justify-content: center; }
-  .mibody { grid-template-columns: 1fr; gap: 1.25rem; }
-}
+
 
 /* === [START] ESTILOS DE CALENDARIO V2.0 === */
 
@@ -870,3 +864,47 @@
 
 
 
+/* === 📱 RESPONSIVE === */
+@media(max-width:1024px){
+  .wtm_lay,.wi_grid{grid-template-columns:1fr}
+  .wi_grid{grid-template-columns:repeat(2,1fr)}
+  .wm_card{padding:1rem}
+  .wm_header{margin-bottom:1rem;padding-bottom:.75rem}
+  .wm_tabla_container{overflow-x:auto;margin-top:.75rem}
+  .wm_tabla th,.wm_tabla td{font-size:.8rem;padding:.6rem}
+  .wm_header h3{font-size:1.1rem}
+  .wm_header .btn{padding:.5rem 1rem;font-size:.85rem}
+}
+
+@media(max-width:768px){
+  .mhead{flex-direction:column;align-items:stretch}
+  .whHeader{flex-direction:column;align-items:stretch}
+  .whBuscar_input{min-width:100%}
+  .wi_main_cnt{flex-direction:column;gap:2vh}
+  .wi_analogico{width:180px;height:180px}
+  .wi_analogico .wi_hand_hr{height:55px}
+  .wi_analogico .wi_hand_min{height:80px}
+  .wi_analogico .wi_hand_sec{height:90px}
+  .wi_grid{grid-template-columns:1fr}
+  .wi_ip_info,.form_row,.cat_grid{grid-template-columns:1fr}
+}
+
+@media(max-width:460px){
+  .mh1{font-size:1.5rem}
+  .wi_hd h2{font-size:var(--fz_m5)}
+  .wi_analogico{width:160px;height:160px}
+  .wi_analogico .wi_hand_hr{height:50px}
+  .wi_analogico .wi_hand_min{height:75px}
+  .wi_analogico .wi_hand_sec{height:85px}
+  .wi_time{font-size:var(--fz_x2)}
+  .wi_ip_info{grid-template-columns:1fr}
+  .wm_header{flex-direction:column;gap:.5rem}
+  .wm_header .btn{width:100%;padding:.6rem}
+  .wm_card{padding:.75rem}
+  #mdNota .modalBody{max-width:95vw;margin:.5rem}
+  #mdNota .modal_hd{padding:1rem 1.5rem}
+  #mdNota .modal_body{padding:1.5rem}
+  #mdNota .modal_ftr{flex-direction:column;padding:1rem 1.5rem}
+  .fc .fc-toolbar{flex-direction:column;gap:.5rem}
+  .fc .fc-toolbar-chunk{width:100%;text-align:center}
+}

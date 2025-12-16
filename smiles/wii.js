@@ -9,7 +9,7 @@ export let link = 'https://wtaype.github.io/';
 export let version = 'v42';
 
 /** ACTUALIZACIÓN PRINCIPAL ONE DEV [START](1)
-git add . ; git commit -m "Actualizacion Principal v42.10.10" ; git push origin main
+git add . ; git commit -m "Actualizacion Principal v42.10.11" ; git push origin main
 
 // Actualizar main luego esto, pero si es mucho, solo esto.(2)
 git tag v42 -m "Version v42" ; git push origin v42
