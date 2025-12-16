@@ -380,7 +380,7 @@ export const wicopy = (txt, elm = null, msg = '¡Copiado!') => {
   }
 };
 
-// FECHA CON FIREBASE + CACHE V11.1
+// FECHA CON FIREBASE + CACHE V12
 export const wiDate = (tm) => ({
   save: val => {
     if (!val) return null;
@@ -388,11 +388,13 @@ export const wiDate = (tm) => ({
     return tm.fromDate(new Date(val));
   },
   get: (val, fmt) => {
-    const fec = val?.toDate?.() || (val?.seconds && new Date(val.seconds * 1000)) || (typeof val === 'number' && new Date(val * 1000));
+    const sec = val?.seconds ?? (val?.type?.includes?.('timestamp') ? val.seconds : null);
+    const fec = val?.toDate?.() || (sec && new Date(sec * 1000)) || (typeof val === 'number' && new Date(val * 1000));
     if (!fec) return '';
-    if (fmt === 'full') return new Date(fec - fec.getTimezoneOffset() * 6e4).toISOString().slice(0, 16);
+    const ajustada = new Date(fec - fec.getTimezoneOffset() * 6e4);
+    if (fmt === 'full') return ajustada.toISOString().slice(0, 16);
     if (fmt === 'local') return fec.toLocaleDateString();
-    return fec.toISOString().split('T')[0];
+    return ajustada.toISOString().split('T')[0];
   }
 });
 

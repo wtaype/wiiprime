@@ -413,13 +413,12 @@
 }
 
 .wm_card {
-  backdrop-filter: blur(20px);
   border-radius: 12px;
   padding: 1.5rem;
-  border: 1px solid var(--border);
-  transition: all 0.3s ease;
+  background: var(--F);
+  margin-bottom: 1.5vh;
 }
-.wmPrincipal .wm_card{background: var(--bg8);}
+.wm_card, .wm_tabla{background: var(--bg8);}
 .wmPrincipal .wm_card:hover{
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
@@ -481,9 +480,8 @@
 .wm_tabla {
   width: 100%;
   border-collapse: collapse;
-  background: var(--F);
+  box-shadow: inset 0.25vh 0.25vh 0.2vh var(--bg);
 }
-
 .wm_tabla thead {
   background: linear-gradient(135deg, var(--mco) 0%, var(--hv) 100%);
   color: var(--F);
@@ -843,9 +841,32 @@
   text-transform: capitalize;
 }#calendar td{
   box-shadow: inset 0.25vh 0.25vh 0.2vh var(--bg);
+  cursor: pointer;
 }
 #calendar tbody{
   box-shadow: inset 0 0 0.2vh 0.3vh var(--bg);
 }
+/* === EVENTOS DEL CALENDARIO === */
+.fc .fc-daygrid-day-frame {
+  position: relative;
+}
+
+.fc .fc-event {
+  position: absolute;
+  top: -7.5vh;
+  right: 0;
+  transition: all 0.3s ease;
+}
+
+.fc .fc-event:hover {
+  transform: scale(1.05);
+  box-shadow: none;
+}
+
+.fc .fc-event-title {
+  display: none;
+}
+.fc-toolbar-title{text-transform: uppercase;}
+
 
 
