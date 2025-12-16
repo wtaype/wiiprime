@@ -1,0 +1,1 @@
+import{n as a,p as i,r as p}from"./firebase-Bx39EDaX.js";const s={apiKey:"AIzaSyAw1I8I84eHjOk69UoAaM74k3OUAJMlET8",authDomain:"wiiprime.firebaseapp.com",projectId:"wiiprime",storageBucket:"wiiprime.firebasestorage.app",messagingSenderId:"560186875326",appId:"1:560186875326:web:1e8d7104fc7e53878b2def"},e=p(s),r=a(e),o=i(e);export{r as a,o as d};
