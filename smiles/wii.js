@@ -11,7 +11,7 @@ export let version = 'v42';
 /** ACTUALIZACIÓN PRINCIPAL ONE DEV [START](1)
 git add . ; git commit -m "Actualizacion Principal v42.10.11" ; git push origin main
 
-// Actualizar main luego esto, pero si es mucho, solo esto..(2)
+// Actualizar main luego esto, pero si es mucho, solo esto.(2)
 git tag v42 -m "Version v42" ; git push origin v42
 
 // En caso de emergencia, para actualizar el Tag existente. (3)
