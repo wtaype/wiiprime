@@ -32,7 +32,7 @@ export const header = (() => {
 //CERRAR SESSIÓN
   $(document).on('click', '.bt_salir', async () => {
     const { auth, signOut } = await import('./wiauth.js');
-    await signOut(auth); removels('wiSmile wiciudades wifechas smileIP wiHoras'); publico(); rutas.navigate('/'); location.reload();
+    await signOut(auth); removels('wiSmile wiciudades wifechas smileIP wiHoras wiNotas'); publico(); rutas.navigate('/'); location.reload();
   }); 
 
 })();
